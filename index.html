@@ -8,12 +8,21 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="js/xonomy.js"></script>
     <script type="text/javascript" src="js/docSpec.js"></script>
-    <link type="text/css" rel="stylesheet" href="/xonomy/xonomy.css" />
+    <link rel="icon" type="image/x-icon" href="style/images/favicon.png">
+    <link type="text/css" rel="stylesheet" href="style/xonomy.css">
+    <link type="text/css" rel="stylesheet" href="style/style.css">
 </head>
 
 <body onload="docSpecInit('xml-editor')">
-    <div id="xml-editor"></div>
-    <button onclick="submit()">Submit!</button>
+    <div id="flex-nav"></div>
+    <div id="flex-container">
+        <div id="xml-file-menu"></div>
+        <div id="xml-wrap-editor">
+            <div id="xml-editor"></div>
+        </div>
+        <div id="xml-temp"></div>
+    </div>
+    <div id="flex-footer"> <button onclick="submit()">Submit!</button></div>
 </body>
 
 </html>
