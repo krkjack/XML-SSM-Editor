@@ -8,3 +8,6 @@ Opracowanie edytora umożliwiającego tworzenie modelu danych wykorzystywanych d
 - Edytor powinien umożliwiać tworzenie elementów tego modelu takich jak Komponent (systemElement), Zdarzenie (Event), Działanie (Activity) i dane telemetryczne (reportingData) w sposób graficzny
 - Edytor powinien tworzyć plik XML zgodny ze standardem
 - Edytor powinien wizualizować tworzony plik w postaci graficznej np. diagram lub drzewo
+
+## Third Party
+- [Xonomy](https://github.com/michmech/xonomy)
