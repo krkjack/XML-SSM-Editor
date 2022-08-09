@@ -13,14 +13,19 @@
     <link type="text/css" rel="stylesheet" href="style/style.css">
 </head>
 
-<body onload="docSpecInit('xml-editor')">
-    <div id="flex-nav"></div>
+<body onload="docSpecInit('xonomy')">
+    <div id="flex-nav">TUTAJ POWSTANIE MENU</div>
     <div id="flex-container">
-        <div id="xml-file-menu"></div>
-        <div id="xml-wrap-editor">
-            <div id="xml-editor"></div>
+        <div id="file-menu"></div>
+        <div id="wrap-editor">
+            <div class="xonomy" id="xonomy"></div>
         </div>
-        <div id="xml-temp"></div>
+        <div id="side-panel">
+            <button id="element-button" onclick="Xonomy.newElementChild('xonomy'+Xonomy.lastIDNum,'<SystemElement/>')">SystemElement</button>
+            <button id="element-button" onclick="Xonomy.newElementChild('xonomy1','<Activity/>')">Activity</button>
+            <button id="element-button" onclick="Xonomy.newElementChild('xonomy1','<ReportingData/>')">ReportingData</button>
+            <button id="element-button" onclick="Xonomy.newElementChild('xonomy1','<Event/>')">Event</button>
+        </div>
     </div>
     <div id="flex-footer"><button onclick="submit()">Submit!</button></div>
 </body>

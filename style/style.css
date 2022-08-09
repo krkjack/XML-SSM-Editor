@@ -18,7 +18,7 @@
     align-content: space-around;
 }
 
-#xml-file-menu {
+#file-menu {
     display: block;
     flex-grow: 1;
     flex-shrink: 1;
@@ -29,7 +29,7 @@
     background-color: rgb(69, 64, 100);
 }
 
-#xml-wrap-editor {
+#wrap-editor {
     display: block;
     flex-grow: 1;
     flex-shrink: 1;
@@ -38,8 +38,9 @@
     order: 0;
 }
 
-#xml-temp {
-    display: block;
+#side-panel {
+    display: flex;
+    flex-direction: column;
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 20%;
