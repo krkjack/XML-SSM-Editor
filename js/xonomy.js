@@ -37,7 +37,8 @@ Xonomy.isNamespaceDeclaration=function(attributeName) {
 	if(attributeName.length>=6 && attributeName.substring(0, 6)=="xmlns:") ret=true;
 	return ret;
 };
-Xonomy.namespaces={}; //eg. "xmlns:mbm": "http://lexonista.com"
+Xonomy.namespaces={"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+}; //eg. "xmlns:mbm": "http://lexonista.com"
 
 Xonomy.xml2js=function(xml, jsParent) {
 	if(typeof(xml)=="string") xml=$.parseXML(xml);
@@ -513,7 +514,7 @@ Xonomy.render=function(data, editor, docSpec) { //renders the contents of an edi
 	}
 
 	if(docSpec.allowModeSwitching){
-		$("<div class='modeSwitcher'><span class='nerd'></span><span class='laic'></span></div>").appendTo($(editor)).on("click", function(e){
+		$("<div class='modeSwitcher'><span class='nerd'></span><span class='laic'></span></div>").prependTo($(editor)).on("click", function(e){
 			if(Xonomy.mode=="nerd") { Xonomy.setMode("laic"); } else { Xonomy.setMode("nerd"); }
 			if(docSpec.onModeSwitch) docSpec.onModeSwitch(Xonomy.mode);
 		});

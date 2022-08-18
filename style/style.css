@@ -9,7 +9,7 @@
 }
 
 #flex-container {
-    height: 85vh;
+    /* height: 85vh; */
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
