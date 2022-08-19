@@ -63,7 +63,7 @@ function docSpecInit(editorDivId) {
                 }
             },
             "SystemElement": {
-                backgroundColour: "#d6d6ff",
+                backgroundColour: "#E2803A",
                 menu: [{
                         caption: "Add @space_sys_obj_name=\"obj_name\"",
                         action: Xonomy.newAttribute,
@@ -86,10 +86,6 @@ function docSpecInit(editorDivId) {
                             return jsElement.hasAttribute("sys_elmt_absolute_name");
                         }
                     },
-                    {
-                        caption: "Delete this <SystemElement>",
-                        action: Xonomy.deleteElement
-                    }, 
 					{
                         caption: "Append an <Activity>",
                         action: Xonomy.newElementChild,
@@ -113,6 +109,10 @@ function docSpecInit(editorDivId) {
                         caption: "New <SystemElement> after this",
                         action: Xonomy.newElementAfter,
                         actionParameter: "<SystemElement/>"
+                    },
+                    {
+                        caption: "Delete this <SystemElement>",
+                        action: Xonomy.deleteElement
                     }
                 ],
                 canDropTo: ["ssm"],
@@ -162,6 +162,10 @@ function docSpecInit(editorDivId) {
                         caption: "Append an <act_arg>",
                         action: Xonomy.newElementChild,
                         actionParameter: "<act_arg/>"
+                    },
+                    {
+                        caption: "Delete this <Activity>",
+                        action: Xonomy.deleteElement
                     }
                 ],
                     canDropTo: ["SystemElement"],
@@ -204,8 +208,13 @@ function docSpecInit(editorDivId) {
                                 value: "descr"
                             },
                             hideIf: function (jsElement) {
-                                return jsElement.hasAttribute("act_descr");
-                            }
+                                return jsElement.hasAttribute("act_arg_descr");
+                            },
+
+                        },
+                        {
+                            caption: "Delete this <act_arg>",
+                            action: Xonomy.deleteElement
                         }
                     ],
                         canDropTo: ["Activity"],

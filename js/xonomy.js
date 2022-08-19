@@ -1021,8 +1021,8 @@ Xonomy.showBubble=function($anchor) {
 	}
 };
 
-Xonomy.askString=function(defaultString, askerParameter, jsMe) {
-	var width=($("body").width()*.5)-75
+Xonomy.askString=function(defaultString, askerParameter, jsMe, test) {
+	var width=($("xonomy").width()*.5)-75
 	var html="";
 	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
 		html+="<input name='val' class='textbox focusme' style='width: "+width+"px;' value='"+Xonomy.xmlEscape(defaultString)+"' onkeyup='Xonomy.notKeyUp=true'/>";
@@ -1031,7 +1031,7 @@ Xonomy.askString=function(defaultString, askerParameter, jsMe) {
 	return html;
 };
 Xonomy.askLongString=function(defaultString, askerParameter, jsMe) {
-	var width=($("body").width()*.5)-75
+	var width=($("xonomy").width()*.5)-75
 	var html="";
 	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
 		html+="<textarea name='val' class='textbox focusme' spellcheck='false' style='width: "+width+"px; height: 150px;'>"+Xonomy.xmlEscape(defaultString)+"</textarea>";
