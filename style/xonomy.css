@@ -384,7 +384,7 @@
 #xonomyBubble.laic { display: none; position: absolute; z-index: 20; min-width: 100px; }
 #xonomyBubble.laic > div.inside { box-shadow: 0px 0px 5px #99cbff; border: 1px solid #333333; background-color: #dddddd; border-radius: 2px; margin-top: 8px; }
 #xonomyBubble.laic > div.inside > #xonomyBubbleContent { font-family: Verdana, sans-serif; font-size: 0.75rem; color: #666666; margin: 0px; padding: 10px; background-color: #ffffff; border-radius: 2px; }
-#xonomyBubble.laic span.punc { display: none; }
+#xonomyBubble.laic span.punc { display: inherit; }
 
 /*When the pop-up box functions as menu or picker*/
 #xonomyBubble.laic #xonomyBubbleContent div.menu { margin: -10px; max-height: 250px; overflow-y: auto; white-space: nowrap; }
@@ -440,7 +440,7 @@
 .xonomy.nerd div.modeSwitcher span.nerd {background-color: #fbeb93; }
 .xonomy.laic div.modeSwitcher span.laic {background-color: #fbeb93; }
 
-.xonomy div.layby { position: fixed; bottom: 0px; top: 0px; right: 0px; padding: 10px 10px 0px 10px; background-color: #fffef4; z-index: 12; border-left: 3px solid #cccccc; z-index: 9}
+.xonomy div.layby { position: fixed; bottom: 0px; top: 0px; right: 0px; padding: 10px 10px 0px 10px; background-color: #fffef4; z-index: 13; border-left: 3px solid #cccccc;}
 .xonomy div.layby.closed { width: 0px; padding: 5px 10px 0px 5px; cursor: pointer; }
 .xonomy div.layby.closed:hover {background-color: #f9f6dc;}
 .xonomy div.layby span.button {display: inline-block; width: 30px; height: 30px; background-position: center center; background-repeat: no-repeat; background-color: #ffffff; border: 1px solid #cccccc; cursor: pointer;}

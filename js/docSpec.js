@@ -63,7 +63,7 @@ function docSpecInit(editorDivId) {
                 }
             },
             "SystemElement": {
-                backgroundColour: "#E2803A",
+                backgroundColour: "#ccffff",
                 menu: [{
                         caption: "Add @space_sys_obj_name=\"obj_name\"",
                         action: Xonomy.newAttribute,
@@ -136,6 +136,7 @@ function docSpecInit(editorDivId) {
                 }
             },
             "Activity": {
+                backgroundColour: "#f3f5a3",
                 menu: [{
                         caption: "Add @space_sys_obj_name=\"obj_name\"",
                         action: Xonomy.newAttribute,
@@ -256,6 +257,7 @@ function docSpecInit(editorDivId) {
                         }
                     },
             "ReportingData": {
+                backgroundColour: "#ccffcc",
                 menu: [{
                         caption: "Add @space_sys_obj_name=\"obj_name\"",
                         action: Xonomy.newAttribute,
@@ -279,7 +281,7 @@ function docSpecInit(editorDivId) {
                         }
                     },
                     {
-                        caption: "Add @rd_units =\"units\"",
+                        caption: "Add @rd_units=\"units\"",
                         action: Xonomy.newAttribute,
                         actionParameter: {
                             name: "rd_units",
@@ -340,11 +342,20 @@ function docSpecInit(editorDivId) {
                                 action: Xonomy.deleteAttribute
                             }
                         ]
+                    },
+                    "rd_units": {
+                        asker: Xonomy.askString,
+                        menu: [{
+                                caption: "Delete this @rd_units",
+                                action: Xonomy.deleteAttribute
+                            }
+                        ]
                     }
                 }
 				
             },
             "Event": {
+                backgroundColour: "#d8d8ff",
                 menu: [{
                         caption: "Add @space_sys_obj_name=\"name\"",
                         action: Xonomy.newAttribute,
