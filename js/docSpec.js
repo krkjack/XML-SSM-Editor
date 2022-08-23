@@ -1,7 +1,7 @@
 function docSpecInit(editorDivId) {
     var docSpec = {
         allowModeSwitching: true,
-        allowLayby: true,
+        allowLayby: false,
         laybyMessage: "This is your temporary lay-by for document fragments. You can drag and drop any XML elements here.",
         onchange: function () {
             console.log("I been changed now!")

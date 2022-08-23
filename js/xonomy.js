@@ -1571,6 +1571,12 @@ Xonomy.dragOut=function(ev) {
 		$(".xonomy .activeDropper").removeClass("activeDropper");
 	}
 };
+
+Xonomy.getClonedNodeSSM=function(){ // only predefined
+	var nodeclone = document.getElementById("ssm-systemelement").cloneNode(true);
+	return nodeclone;
+}
+
 Xonomy.drop=function(ev) {
 	ev.preventDefault();
 	var node=document.getElementById(Xonomy.draggingID); //the thing we are moving
@@ -1579,9 +1585,16 @@ Xonomy.drop=function(ev) {
 		$(".xonomy .layby > .content").append(node);
 		$(node).fadeIn(function(){ Xonomy.changed(); });
 	} else {
-		$(node).hide();
-		$(ev.target.parentNode).replaceWith(node);
-		$(node).fadeIn(function(){ Xonomy.changed(); });
+		if($(node).hasClass("ssm")) { // if predefined ssm element we create its clone and add to document
+			$(ev.target.parentNode).replaceWith(Xonomy.getClonedNodeSSM());
+			//$("#modalSystemElement").modal('show'); // open modal window with form to create new ssm element
+			$(node).fadeIn(function(){ Xonomy.changed(); });
+		}
+		else {
+			$(node).hide();
+			$(ev.target.parentNode).replaceWith(node);
+			$(node).fadeIn(function(){ Xonomy.changed(); });
+		}
 	}
 	Xonomy.openCloseLayby();
 	Xonomy.recomputeLayby();
