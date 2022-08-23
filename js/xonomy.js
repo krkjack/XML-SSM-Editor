@@ -974,7 +974,7 @@ Xonomy.showBubble=function($anchor) {
 			top = (offset.top + height) + "px";
 		} else if (screenHeight - offset.top + 5 + bubbleHeight > 0) {
 			// 5px above for some padding. Anchor using bottom so animation opens upwards.
-			bottom = (screenHeight - offset.top + 5) + "px";
+			bottom = (screenHeight - offset.top - 5) + "px";
 		} else {
 			// neither downwards nor upwards is enough space => center the bubble
 			top = (screenHeight - bubbleHeight)/2 + "px";

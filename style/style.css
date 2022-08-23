@@ -46,8 +46,29 @@
     flex-basis: 20%;
     align-self: auto;
     order: 0;
-
     background-color: rgb(154, 223, 128);
+}
+
+.systemelement {
+    color: #315696;
+	background-color: #ccffff;
+    border-color: #9affff;
+}
+
+.activity {
+    color: #315696;
+	background-color: #f3f5a3;
+    border-color: #eef17e;
+}
+.reportingdata {
+    color: #315696;
+	background-color: #ccffcc;
+    border-color: #9eff9e
+}
+.event {
+    color: #315696;
+	background-color: #d8d8ff;
+    border-color: #a9a9ff;
 }
 
 #flex-footer {
