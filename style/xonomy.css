@@ -141,7 +141,7 @@
 .xonomy.nerd .dragging * { color: #cccccc !important; }
 .xonomy.nerd .dragging .draghandle { opacity: 0.5; }
 .xonomy.nerd .elementDropper { display: block; margin-top: 0px; margin-bottom: 0px; height: 0px; position: relative; }
-.xonomy.nerd .elementDropper > .inside { display: block; height: 9px; width: 9px; border: 1px solid #ffffff; background-color: #dddddd; position: absolute; top: -8px; left: -6px; z-index: 10; }
+.xonomy.nerd .elementDropper > .inside { display: block; height: 15px; width: 15px; border: 1px solid #ffffff; border-radius: 5px; background-color: #00cc00; position: absolute; top: -8px; left: -9px; z-index: 10; }
 .xonomy.nerd .elementDropper:first-child > .inside { top: -1px;  }
 .xonomy.nerd .elementDropper:only-child > .inside { top: -5px;  }
 .xonomy.nerd .activeDropper > .inside { background-color: #888888; }
@@ -153,7 +153,7 @@
 .xonomy.nerd .hasInlineMenu > .children > .textnode .char > .selector > .inside { position: absolute; left: 0px; right: 0px; bottom: -2px; top: -3px; background-color: transparent; }
 .xonomy.nerd .hasInlineMenu > .children > .textnode .char > .selector > .inside:hover { background-color: #cccccc; left: -1px; right: -1px; }
 .xonomy.nerd .element > .children > .textnode .char.on { background-color: #ffff99; }
-.xonomy.nerd .element > .children > .textnode .char.on > .selector { position: absolute; left: 0px; right: 0px; z-index: 2; background-color: #00cc00; xbackground-color: #669acc; height: 3px; bottom: -3px; }
+.xonomy.nerd .element > .children > .textnode .char.on > .selector { position: absolute; left: 0px; right: 0px; z-index: 2; background-color: #00cc00; background-color: #669acc; height: 3px; bottom: -3px; }
 .xonomy.nerd .element > .children > .textnode .char.on > .selector > .inside { position: absolute; left: 0px; right: 0px; top: -2px; bottom: -1px; background-color: transparent; }
 .xonomy.nerd span.space { font-weight: bold; color: #00cc00; }
 
@@ -338,7 +338,7 @@
 .xonomy.laic .dragging * { color: #cccccc !important; }
 .xonomy.laic .dragging .draghandle { opacity: 0.5; }
 .xonomy.laic .elementDropper { display: block; margin-top: 0px; margin-bottom: 0px; height: 0px; position: relative; }
-.xonomy.laic .elementDropper > .inside { display: block; height: 9px; width: 9px; border: 1px solid #ffffff; background-color: #6fbb93; position: absolute; top: -5px; left: -12px; z-index: 10; }
+.xonomy.laic .elementDropper > .inside { display: block; height: 15px; width: 15px; border: 1px solid #ffffff; border-radius: 5px; background-color: #00cc00; position: absolute; top: -5px; left: -15px; z-index: 10; }
 .xonomy.laic .elementDropper:first-child > .inside { top: -4px;  }
 .xonomy.laic .elementDropper:only-child > .inside { top: -5px;  }
 .xonomy.laic .activeDropper > .inside { background-color: #888888; }
