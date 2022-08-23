@@ -49,6 +49,12 @@
     background-color: rgb(154, 223, 128);
 }
 
+.side-panel-right {
+    -ms-flex: 0 0 8.333333%;
+    flex: 0 0 15.333333%;
+    max-width: 15.333333%;
+}
+
 .systemelement {
     color: #315696;
 	background-color: #ccffff;
