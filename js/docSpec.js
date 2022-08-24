@@ -115,7 +115,7 @@ function docSpecInit(editorDivId) {
                         action: Xonomy.deleteElement
                     }
                 ],
-                canDropTo: ["ssm","SystemElement"],
+                canDropTo: ["ssm", "SystemElement"],
                 attributes: {
                     "space_sys_obj_name": {
                         asker: Xonomy.askString,
@@ -408,7 +408,7 @@ function docSpecInit(editorDivId) {
     }
     //var xmlTemplate = "<ssm><Api base-url='http://192.168.1.214:8080'/><SystemElement label='one'/><SystemElement label='two'/></ssm>";
     var xmlTemplate = "<ssm xmlns='ase5_SSM'><Api base-url='http://192.168.1.214:8080'/><SystemElement space_sys_obj_name='sut-robot' sys_elmt_absolute_name='sut-robot'><Activity  space_sys_obj_name='moveForward' act_descr='moveForward'><act_arg space_sys_obj_name='distance' act_arg_descr='distance' act_arg_dataType='Real'/></Activity><Activity space_sys_obj_name='moveBackwards' act_descr='moveBackwards'><act_arg space_sys_obj_name='distance' act_arg_descr='distance' act_arg_dataType='Real'/></Activity><Activity space_sys_obj_name='rotateClockwise' act_descr='rotateClockwise'><act_arg space_sys_obj_name='degrees' act_arg_descr='degrees' act_arg_dataType='SignedInteger'/></Activity><Activity space_sys_obj_name='rotateCounterclockwise' act_descr='rotateCounterclockwise'><act_arg space_sys_obj_name='degrees' act_arg_descr='degrees' act_arg_dataType='SignedInteger'/></Activity><Activity space_sys_obj_name='reset' act_descr='reset'/><Activity space_sys_obj_name='stop' act_descr='stop'/><ReportingData space_sys_obj_name='distanceFront' rd_descr='distanceFront' rd_dataType='Real'/><ReportingData space_sys_obj_name='distanceDriven' rd_descr='distanceDriven' rd_dataType='Real'/><ReportingData space_sys_obj_name='movementStatus' rd_descr='movementStatus' rd_dataType='Boolean'/><ReportingData space_sys_obj_name='gyroscopeX' rd_descr='gyroscopeX' rd_dataType='Real'/><ReportingData space_sys_obj_name='gyroscopeY' rd_descr='gyroscopeY' rd_dataType='Real'/><ReportingData space_sys_obj_name='gyroscopeZ' rd_descr='gyroscopeZ' rd_dataType='Real'/><Event space_sys_obj_name='noAnswer' event_descr='The connection to the SUT has been lost.'/><Event space_sys_obj_name='obstacleFound' event_descr='An obstacle has been detected on the defined path.'/><Event space_sys_obj_name='noPathLimit' event_descr='The location of the robot cant be defined. No objects in sight.'/></SystemElement></ssm>"
-    //var xmlTemplate ="<ssm><SystemElement space_sys_obj_name='' sys_elmt_absolute_name=''></SystemElement></ssm>"
+    //var xmlTemplate ="<ssm xmlns='ase5_SSM'><Api base-url='http://192.168.1.214:8080'/><SystemElement space_sys_obj_name='' sys_elmt_absolute_name=''><Activity></Activity><Event/><ReportingData/></SystemElement></ssm>"
     var editorDiv = document.getElementById(editorDivId);
     Xonomy.render(xmlTemplate, editorDiv, docSpec);
 }

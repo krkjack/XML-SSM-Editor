@@ -1475,6 +1475,9 @@ Xonomy.insertDropTargets=function(htmlID){
 	$element.addClass("dragging");
 	var elementName=$element.attr("data-name");
 	var elSpec=Xonomy.docSpec.elements[elementName];
+	// allow to add child elements even if the children is empty
+	$(".xonomy .children").append("<div class='elementDropper' ondragover='Xonomy.dragOver(event)' ondragleave='Xonomy.dragOut(event)' ondrop='Xonomy.drop(event)'><div class='inside'></div></div>")
+	//
 	$(".xonomy .children:visible").append("<div class='elementDropper' ondragover='Xonomy.dragOver(event)' ondragleave='Xonomy.dragOut(event)' ondrop='Xonomy.drop(event)'><div class='inside'></div></div>")
 	$(".xonomy .children:visible > .element").before("<div class='elementDropper' ondragover='Xonomy.dragOver(event)' ondragleave='Xonomy.dragOut(event)' ondrop='Xonomy.drop(event)'><div class='inside'></div></div>")
 	$(".xonomy .children:visible > .text").before("<div class='elementDropper' ondragover='Xonomy.dragOver(event)' ondragleave='Xonomy.dragOut(event)' ondrop='Xonomy.drop(event)'><div class='inside'></div></div>")

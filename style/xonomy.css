@@ -223,7 +223,7 @@
 .xonomy.laic * { position: relative; }
 .xonomy.laic .element .punc { display: none; }
 .xonomy.laic .element { display: block; margin: 5px 0px; padding: 5px 0px 0px 0px; }
-.xonomy.laic .element > .children { padding-left: 40px; }
+.xonomy.laic .element > .children { padding-left: 40px; border-left: 1px dotted #cccccc; }
 .xonomy.laic .element > .children > .textnode { display: block; margin: 10px 0px 0px 0px; }
 .xonomy.laic .element.oneliner > .children > .textnode { margin-top: 0px; }
 .xonomy.laic .element > .children > .textnode > .value { display: inline-block; font-family: monospace; background-color: #ffffff; padding: 4px 0px; border-bottom: 1px solid #999999; cursor: pointer; min-width: 2em; }
@@ -248,7 +248,7 @@
 .xonomy.laic .element.oneliner.hasInlineMenu > .children > .textnode {  }
 .xonomy.laic .element.oneliner.hasInlineMenu > .children > .textnode > .value {  }
 
-.xonomy.laic .element .connector { position: absolute; top: -0.5em;}
+.xonomy.laic .element .connector { position: absolute; top: -0.5em;border-top: 1px dotted #b6b6b6;}
 .xonomy.laic .element.oneliner .connector { position: relative; top: 0px;}
 
 /*Plus-minus collapsor*/
