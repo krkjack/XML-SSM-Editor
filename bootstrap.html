@@ -8,7 +8,7 @@
     <title>XML-SSM Editor</title>
     <meta name="author" content="Krystian Jackowski">
     <meta name="description" content="Graficzny edytor XML oparty o model SSM (System Space Model).">
-    
+
     <script type="text/javascript" src="js/xonomy.js"></script>
     <script type="text/javascript" src="js/docSpec.js"></script>
     <link rel="icon" type="image/x-icon" href="style/images/favicon.png">
@@ -24,7 +24,8 @@
                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                         <span class="navbar-toggler-icon"></span>
-                    </button> <a class="navbar-brand">SSM XML Editor</a>
+                    </button>
+                    <a class="navbar-brand">SSM XML Editor</a>
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="navbar-nav">
                             <!-- <li class="nav-item active"> -->
@@ -33,27 +34,33 @@
                             <!-- <li class="nav-item"> -->
                             <!-- <a class="nav-link" href="#">Link</a> -->
                             <!-- </li> -->
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_File" data-toggle="dropdown">File</a>
+                            <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_File" data-toggle="dropdown">File</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_File">
-                                    <a class="dropdown-item" href="#">Load file (.xml)</a> <a class="dropdown-item" href="#">Save file</a> <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider">
-                                    </div> <a class="dropdown-item" href="#">Separated link</a>
+                                    <a class="dropdown-item" href="#">Load file (.xml)</a>
+                                    <a class="dropdown-item" href="#">Save file</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_Edit" data-toggle="dropdown">Edit</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_Edit">
-                                    <a class="dropdown-item" href="#">Clear</a> <a class="dropdown-item" href="#">Another temp item</a> <a class="dropdown-item" href="#">Something else here</a>
-                                    <div class="dropdown-divider">
-                                    </div> <a class="dropdown-item" href="#">Separated link</a>
+                                    <a class="dropdown-item" href="#">Clear</a>
+                                    <a class="dropdown-item" href="#">Another temp item</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Separated link</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_View" data-toggle="dropdown">View</a>
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_View">
                                     <a class="dropdown-item" href="#">Toggle Light/Dark Mode</a>
-                                    <div class="dropdown-divider"></div> <a class="dropdown-item" href="#">Toggle Nerd/Laic Mode</a> <a class="dropdown-item" href="#">Zoom in editor</a> <a class="dropdown-item" href="#">Zoom out editor</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Toggle Nerd/Laic Mode</a>
+                                    <a class="dropdown-item" href="#">Zoom in editor</a>
+                                    <a class="dropdown-item" href="#">Zoom out editor</a>
                                 </div>
                             </li>
                         </ul>
@@ -69,8 +76,9 @@
                         ×
                     </button>
                     <h4>
-                        Alert!
-                    </h4> <strong>Warning!</strong> Development version. Will change in future.
+                        Information
+                    </h4>
+                    Development version. Will change in future.
                 </div>
             </div>
         </div>
@@ -79,7 +87,21 @@
                 <div class="xonomy" id="xonomy"></div>
             </div>
             <div class="col-md-1 side-panel-right">
-                <div class="btn-group btn-group-vertical btn-group-lg w-100" role="group">
+                <div class="hidden-elements d-none">
+                    <div data-name="SystemElement" id="ssmSystemElement" class="element draggable hasMenu noChildren"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmSystemElement')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmSystemElement', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmSystemElement', 'openingTagName')">SystemElement</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="sut-robot" id="ssmSystemElement-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmSystemElement-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="sys_elmt_absolute_name" data-value="sut-robot" id="ssmSystemElement-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmSystemElement-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeName')">sys_elmt_absolute_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmSystemElement', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmSystemElement', true)">···</span>
+                        <div class="children"></div><span class="tag closing focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmSystemElement', 'closingTagName')">SystemElement</span><span class="punc">&gt;</span></span>
+                    </div>
+                    <div data-name="Activity" id="ssmActivity" class="element draggable hasMenu noChildren"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmActivity')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmActivity', 'openingTagName')">Activity</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="" id="ssmActivity-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmActivity-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmActivity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="act_descr" data-value="" id="ssmActivity-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmActivity-attribute', 'attributeName')">act_descr</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmActivity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmActivity', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmActivity', true)">···</span>
+                        <div class="children"></div><span class="tag closing focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmActivity', 'closingTagName')">Activity</span><span class="punc">&gt;</span></span>
+                    </div>
+                    <div data-name="ReportingData" id="ssmReportingData" class="element draggable hasMenu noChildren"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmReportingData')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #ccffcc;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmReportingData', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmReportingData', 'openingTagName')">ReportingData</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="movementStatus" id="ReportingData-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ReportingData-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ReportingData-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="rd_descr" data-value="movementStatus" id="ReportingData-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ReportingData-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ReportingData-attribute', 'attributeName')">rd_descr</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="rd_dataType" data-value="Boolean" id="ReportingData-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ReportingData-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ReportingData-attribute', 'attributeName')">rd_dataType</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmReportingData', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmReportingData', true)">···</span>
+                        <div class="children"></div><span class="tag closing focusable" style="background-color: #ccffcc;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmReportingData', 'closingTagName')">ReportingData</span><span class="punc">&gt;</span></span>
+                    </div>
+                    <div data-name="Event" id="ssmEvent" class="element draggable hasMenu noChildren"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmEvent')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmEvent', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmEvent', 'openingTagName')">Event</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="noAnswer" id="Event-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('Event-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('Event-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('Event-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="event_descr" data-value="" id="Event-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('Event-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('Event-attribute', 'attributeName')">event_descr</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('Event-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmEvent', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmEvent', true)">···</span>
+                        <div class="children"></div><span class="tag closing focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmEvent', 'closingTagName')">Event</span><span class="punc">&gt;</span></span>
+                    </div>
+                </div>
+                <div class="btn-group btn-group-vertical btn-group-lg w-100 d-none" role="group">
                     <button class="ssm btn my-1 systemelement" type="button" onclick="Xonomy.newElementChild('xonomy1','<SystemElement/>')">
                         SystemElement
                     </button>
@@ -95,30 +117,29 @@
                 </div>
                 <!-- TESTING DROPPABLE ELEMENTS -->
                 <!-- we need to create predefined ssm elements with full specification that we will later clone and add to the document -->
-                <hr>
                 <div class="xonomy laic">
-                    <div data-name="SystemElement" id="ssm-systemelement" class="ssm element draggable noChildren" style="">
-                        <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
-                        <span class="tag opening focusable" style="background-color: #ccffff;">
-                            <span class="punc">&lt;</span><span class="name" title="">SystemElement</span>
-                            <span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span>
-                        </span>
-                        <div class="children"></div>
-                        <span class="tag closing focusable" style="background-color: #ccffff;">
-                            <span class="punc">&lt;</span><span class="punc">/</span><span class="name">SystemElement</span><span class="punc">&gt;</span>
-                        </span>
+                    <div data-name="SystemElement" id="ssm-systemelement" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="name" title="">SystemElement</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children"></div> <span class="tag closing focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">SystemElement</span><span class="punc">&gt;</span> </span>
+                    </div>
+                    <div data-name="Activity" id="ssm-activity" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="name" title="">Activity</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children"></div> <span class="tag closing focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Activity</span><span class="punc">&gt;</span> </span>
+                    </div>
+                    <div data-name="ReportingData" id="ssm-ReportingData" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #ccffcc;"><span class="punc">&lt;</span><span class="name" title="">ReportingData</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children"></div> <span class="tag closing focusable" style="background-color: #ccffcc"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">ReportingData</span><span class="punc">&gt;</span> </span>
+                    </div>
+                    <div data-name="Event" id="ssm-Event" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="name" title="">Event</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children"></div> <span class="tag closing focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Event</span><span class="punc">&gt;</span> </span>
                     </div>
                 </div>
 
-                <div class="modal" id="modalSystemElement" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="true"">
-                    <div class="modal-dialog modal-dialog-centered">
+                <div class="modal" id="modalSystemElement" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="true" ">
+                    <div class=" modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Add &lt;SystemElement&gt;</h4>
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-    
                             <form class="form-horizontal">
                                 <div class="form-group">
                                     <label class="control-label col-sm-2" for="space_sys_obj_name_input">space_sys_obj_name</label>
@@ -133,7 +154,7 @@
                                     </div>
                                 </div>
                             </form>
-    
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
@@ -151,6 +172,7 @@
             Generate XML
         </button>
     </div>
+</body>
 </body>
 
 </html>
