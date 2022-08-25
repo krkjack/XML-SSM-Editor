@@ -980,7 +980,8 @@ Xonomy.showBubble=function($anchor) {
 			bottom = (screenHeight - offset.top - 5) + "px";
 		} else {
 			// neither downwards nor upwards is enough space => center the bubble
-			top = (screenHeight - bubbleHeight)/2 + "px";
+			bottom = (offset.top + height) + "px";;
+			//top = (screenHeight - bubbleHeight)/2 + "px";
 		}
 		return { top: top, bottom: bottom };
 	}
