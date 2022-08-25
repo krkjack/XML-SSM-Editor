@@ -11,6 +11,7 @@
     <meta name="description" content="Graficzny edytor XML oparty o model SSM (System Space Model).">
     <script type="text/javascript" src="js/xonomy.js"></script>
     <script type="text/javascript" src="js/docSpec.js"></script>
+    <script  src="js/scripts.js"></script>
     <link rel="icon" type="image/x-icon" href="style/images/favicon.png">
     <link type="text/css" rel="stylesheet" href="style/xonomy.css">
     <link type="text/css" rel="stylesheet" href="style/style.css">
@@ -58,9 +59,10 @@
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_View">
                                     <a class="dropdown-item" href="#">Toggle Light/Dark Mode</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Toggle Nerd/Laic Mode</a>
-                                    <a class="dropdown-item" href="#">Zoom in editor</a>
-                                    <a class="dropdown-item" href="#">Zoom out editor</a>
+                                    <a class="dropdown-item" id="toggle-nerd-laic" href="#">Toggle Nerd/Laic Mode</a>
+                                    <a class="dropdown-item" id="zoom-in" href="#">Zoom in editor</a>
+                                    <a class="dropdown-item" id="zoom-out" href="#">Zoom out editor</a>
+                                    <a class="dropdown-item" id="zoom-reset" href="#">Reset zoom</a>
                                 </div>
                             </li>
                         </ul>
@@ -85,11 +87,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row  flex-nowrap">
             <div class="col-md-10 ml-3">
                 <div class="xonomy" id="xonomy"></div>
             </div>
-            <div class="col-md-1 side-panel-right">
+            <div class="col-1 side-panel-right">
                 <div class="hidden-elements d-none">
                     <div data-name="SystemElement" id="ssmSystemElement" class="element draggable hasMenu">
                         <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmSystemElement')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
