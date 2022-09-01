@@ -384,7 +384,7 @@ function docSpecInit(editorDivId) {
                     action: Xonomy.deleteElement
                 }
                 ],
-                canDropTo: ["act_arg"],
+                canDropTo: ["act_arg", "ReportingData"],
                 attributes: {
                     "value_type": {
                         asker: Xonomy.askPicklist,
@@ -420,48 +420,64 @@ function docSpecInit(editorDivId) {
             "ReportingData": {
                 backgroundColour: "#ccffcc",
                 menu: [{
-                    caption: "Add @space_sys_obj_name=\"obj_name\"",
+                    caption: "Add @space_sys_obj_name",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "space_sys_obj_name",
-                        value: "name"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("space_sys_obj_name");
                     }
                 },
                 {
-                    caption: "Add @rd_descr=\"descr_name\"",
+                    caption: "Add @space_sys_obj_type",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "space_sys_obj_type",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("space_sys_obj_type");
+                    }
+                },
+                {
+                    caption: "Add @rd_descr",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "rd_descr",
-                        value: "descr_name"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("rd_descr");
                     }
                 },
                 {
-                    caption: "Add @rd_units=\"units\"",
+                    caption: "Add @rd_units",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "rd_units",
-                        value: "units"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("rd_units");
                     }
                 },
                 {
-                    caption: "Add @rd_dataType=\"Real\"",
+                    caption: "Add @rd_dataType",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "rd_dataType",
-                        value: "Real"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("rd_dataType");
                     }
+                },
+                {
+                    caption: "Append a <def_value>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: "<def_value/>"
                 },
                 {
                     caption: "Delete this <ReportingData>",
@@ -472,22 +488,24 @@ function docSpecInit(editorDivId) {
                 attributes: {
                     "space_sys_obj_name": {
                         asker: Xonomy.askString,
+                        required: true
+                    },
+                    "space_sys_obj_type": {
+                        asker: Xonomy.askString,
+                        required: true,
                         menu: [{
-                            caption: "Delete this @space_sys_obj_name",
+                            caption: "Delete this @space_sys_obj_type",
                             action: Xonomy.deleteAttribute
                         }
                         ]
                     },
                     "rd_descr": {
                         asker: Xonomy.askString,
-                        menu: [{
-                            caption: "Delete this @rd_descr",
-                            action: Xonomy.deleteAttribute
-                        }
-                        ]
+                        required: true
                     },
                     "rd_dataType": {
                         asker: Xonomy.askPicklist,
+                        required: true,
                         askerParameter: [
                             { value: "SignedInteger" },
                             { value: "Boolean" },
@@ -498,11 +516,6 @@ function docSpecInit(editorDivId) {
                             { value: "AbsoluteTime" },
                             { value: "RelativeTime" }
                         ],
-                        menu: [{
-                            caption: "Delete this @dataType",
-                            action: Xonomy.deleteAttribute
-                        }
-                        ]
                     },
                     "rd_units": {
                         asker: Xonomy.askString,
@@ -518,22 +531,33 @@ function docSpecInit(editorDivId) {
             "Event": {
                 backgroundColour: "#d8d8ff",
                 menu: [{
-                    caption: "Add @space_sys_obj_name=\"name\"",
+                    caption: "Add @space_sys_obj_name",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "space_sys_obj_name",
-                        value: "name"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("space_sys_obj_name");
                     }
                 },
                 {
-                    caption: "Add @event_descr=\"description\"",
+                    caption: "Add @space_sys_obj_type",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "space_sys_obj_type",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("space_sys_obj_type");
+                    }
+                },
+                {
+                    caption: "Add @event_descr",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "event_descr",
-                        value: "description"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("event_descr");
@@ -548,19 +572,20 @@ function docSpecInit(editorDivId) {
                 attributes: {
                     "space_sys_obj_name": {
                         asker: Xonomy.askString,
+                        required: true
+                    },
+                    "space_sys_obj_type": {
+                        asker: Xonomy.askString,
+                        required: true,
                         menu: [{
-                            caption: "Delete this @space_sys_obj_name",
+                            caption: "Delete this @space_sys_obj_type",
                             action: Xonomy.deleteAttribute
                         }
                         ]
                     },
                     "event_descr": {
                         asker: Xonomy.askLongString,
-                        menu: [{
-                            caption: "Delete this @event_descr",
-                            action: Xonomy.deleteAttribute
-                        }
-                        ]
+                        required: true
                     }
                 }
 
