@@ -615,7 +615,7 @@ Xonomy.renderAttribute=function(attribute, optionalParentName) {
 	var htmlID=Xonomy.nextID();
 	classNames="attribute";
 	var readonly=false;
-
+	var required=false;
 	var displayName=attribute.name;
 	var displayValue=Xonomy.xmlEscape(attribute.value);
 	var caption="";
@@ -628,6 +628,7 @@ Xonomy.renderAttribute=function(attribute, optionalParentName) {
 			if(spec.title) title=Xonomy.textByLang(spec.title(attribute));
 			if(spec.caption) caption=Xonomy.textByLang(spec.caption(attribute));
 			if(spec.isReadOnly && spec.isReadOnly(attribute)) { readonly=true; classNames+=" readonly"; }
+			if(spec.required ) { required=true; classNames+=" required"; }
 			if(spec.isInvisible && spec.isInvisible(attribute)) { classNames+=" invisible"; }
 			if(spec.shy && spec.shy(attribute)) { classNames+=" shy"; }
 		}
@@ -640,6 +641,7 @@ Xonomy.renderAttribute=function(attribute, optionalParentName) {
 		html+='<span class="warner"><span class="inside" onclick="Xonomy.click(\''+htmlID+'\', \'warner\')"></span></span>';
 		html+='<span class="name attributeName focusable" title="'+title+'"'+onclick+'>'+displayName+'</span>';
 		html+='<span class="punc">=</span>';
+		if(required) html+="<span class='attrRequired' title='This attribute is required!'>*</span>";
 		var onclick=''; if(!readonly) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeValue\')"';
 		html+='<span class="valueContainer attributeValue focusable"'+onclick+'>';
 			html+='<span class="punc">"</span>';
@@ -1030,6 +1032,15 @@ Xonomy.askString=function(defaultString, askerParameter, jsMe, test) {
 	var html="";
 	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
 		html+="<input name='val' class='textbox focusme' style='width: "+width+"px;' value='"+Xonomy.xmlEscape(defaultString)+"' onkeyup='Xonomy.notKeyUp=true'/>";
+		html+=" <input type='submit' value='OK'>";
+	html+="</form>";
+	return html;
+};
+Xonomy.askInt=function(defaultString, askerParameter, jsMe, test) {
+	var width=($("xonomy").width()*.5)-75
+	var html="";
+	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
+		html+="<input name='val' type='number' class='textbox focusme' style='width: "+width+"px;' value='"+Xonomy.xmlEscape(defaultString)+"' onkeyup='Xonomy.notKeyUp=true'/>";
 		html+=" <input type='submit' value='OK'>";
 	html+="</form>";
 	return html;
@@ -1544,6 +1555,8 @@ Xonomy.insertDropTargets=function(htmlID){
 		}
 	}
 };
+
+
 Xonomy.draggingID=null; //what are we dragging?
 Xonomy.drag=function(ev) { //called when dragging starts
 	// Wrapping all the code into a timeout handler is a workaround for a Chrome browser bug
