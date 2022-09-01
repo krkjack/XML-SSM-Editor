@@ -64,7 +64,8 @@ function docSpecInit(editorDivId) {
             },
             "SystemElement": {
                 backgroundColour: "#ccffff",
-                menu: [{
+                menu: [
+                {
                     caption: "Add @space_sys_obj_name=\"obj_name\"",
                     action: Xonomy.newAttribute,
                     actionParameter: {
@@ -123,11 +124,7 @@ function docSpecInit(editorDivId) {
                     },
                     "sys_elmt_absolute_name": {
                         asker: Xonomy.askString,
-                        menu: [{
-                            caption: "Delete this @sys_elmt_absolute_name",
-                            action: Xonomy.deleteAttribute
-                        }
-                        ]
+                        required: true
                     }
                 }
             },
@@ -180,7 +177,7 @@ function docSpecInit(editorDivId) {
                 {
                     caption: "Append an <act_arg>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<act_arg/>"
+                    actionParameter: "<act_arg act_arg_descr='' act_arg_dataType=''/>"
                 },
                 {
                     caption: "Delete this <Activity>",

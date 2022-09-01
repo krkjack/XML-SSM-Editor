@@ -101,12 +101,12 @@
                             <span class="attributes">
                                 <span data-name="space_sys_obj_name" data-value="" id="ssmSystemElement-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmSystemElement-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                                 <span data-name="sys_elmt_absolute_name" data-value="" id="ssmSystemElement-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmSystemElement-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeName')">sys_elmt_absolute_name</span><span class="punc">=</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeName')">sys_elmt_absolute_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmSystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                             </span>
@@ -119,15 +119,87 @@
                         </span>
                     </div>
 
-                    <div data-name="Activity" id="ssmActivity" class="element draggable hasMenu"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmActivity')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmActivity', 'openingTagName')">Activity</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="" id="ssmActivity-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmActivity-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmActivity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="act_descr" data-value="" id="ssmActivity-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmActivity-attribute', 'attributeName')">act_descr</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmActivity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmActivity', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmActivity', true)">···</span>
-                        <div class="children"></div><span class="tag closing focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmActivity', 'closingTagName')">Activity</span><span class="punc">&gt;</span></span>
+                    <div data-name="Activity" id="ssmActivity" class="element draggable hasMenu">
+                        <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmActivity')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
+                        <span class="tag opening focusable" style="background-color: #f3f5a3;">
+                            <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity', 'warner')"></span></span>
+                            <span class="name" title="" onclick="Xonomy.click('ssmActivity', 'openingTagName')">Activity</span>
+                            <span class="attributes">
+                                <span data-name="space_sys_obj_name" data-value="" id="ssmActivity-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmActivity-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmActivity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                                <span data-name="act_descr" data-value="" id="ssmActivity-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmActivity-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmActivity-attribute', 'attributeName')">act_descr</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmActivity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                            </span>
+                            <span class="rollouter focusable" onclick="Xonomy.click('ssmActivity', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span>
+                        </span>
+                        <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmActivity', true)">···</span>
+                        <div class="children"></div>
+                        <span class="tag closing focusable" style="background-color: #f3f5a3;">
+                            <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmActivity', 'closingTagName')">Activity</span><span class="punc">&gt;</span>
+                        </span>
                     </div>
-                    <div data-name="ReportingData" id="ssmReportingData" class="element draggable hasMenu"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmReportingData')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #ccffcc;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmReportingData', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmReportingData', 'openingTagName')">ReportingData</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="movementStatus" id="ReportingData-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ReportingData-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ReportingData-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="rd_descr" data-value="movementStatus" id="ReportingData-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ReportingData-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ReportingData-attribute', 'attributeName')">rd_descr</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="rd_dataType" data-value="Boolean" id="ReportingData-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ReportingData-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('ReportingData-attribute', 'attributeName')">rd_dataType</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmReportingData', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmReportingData', true)">···</span>
-                        <div class="children"></div><span class="tag closing focusable" style="background-color: #ccffcc;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmReportingData', 'closingTagName')">ReportingData</span><span class="punc">&gt;</span></span>
+                    <div data-name="ReportingData" id="ssmReportingData" class="element draggable hasMenu">
+                        <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmReportingData')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
+                        <span class="tag opening focusable" style="background-color: #ccffcc;">
+                            <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmReportingData', 'warner')"></span></span>
+                            <span class="name" title="" onclick="Xonomy.click('ssmReportingData', 'openingTagName')">ReportingData</span>
+                            <span class="attributes">
+                                <span data-name="space_sys_obj_name" data-value="movementStatus" id="ssmReportingData-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmReportingData-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmReportingData-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                                <span data-name="rd_descr" data-value="movementStatus" id="ssmReportingData-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmReportingData-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmReportingData-attribute', 'attributeName')">rd_descr</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                                <span data-name="rd_dataType" data-value="Boolean" id="ssmReportingData-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmReportingData-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmReportingData-attribute', 'attributeName')">rd_dataType</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                            </span>
+                            <span class="rollouter focusable" onclick="Xonomy.click('ssmReportingData', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span>
+                        </span>
+                        <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmReportingData', true)">···</span>
+                        <div class="children"></div>
+                        <span class="tag closing focusable" style="background-color: #ccffcc;">
+                            <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmReportingData', 'closingTagName')">ReportingData</span><span class="punc">&gt;</span>
+                        </span>
                     </div>
-                    <div data-name="Event" id="ssmEvent" class="element draggable hasMenu"><span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmEvent')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span><span class="tag opening focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmEvent', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmEvent', 'openingTagName')">Event</span><span class="attributes"><span data-name="space_sys_obj_name" data-value="noAnswer" id="Event-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('Event-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('Event-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('Event-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span><span data-name="event_descr" data-value="" id="Event-attribute" class="attribute"><span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('Event-attribute', 'warner')"></span></span><span class="name attributeName focusable" title="" onclick="Xonomy.click('Event-attribute', 'attributeName')">event_descr</span><span class="punc">=</span><span class="valueContainer attributeValue focusable" onclick="Xonomy.click('Event-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span></span></span><span class="rollouter focusable" onclick="Xonomy.click('ssmEvent', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span></span><span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmEvent', true)">···</span>
-                        <div class="children"></div><span class="tag closing focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmEvent', 'closingTagName')">Event</span><span class="punc">&gt;</span></span>
+                    <div data-name="Event" id="ssmEvent" class="element draggable hasMenu">
+                        <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmEvent')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
+                        <span class="tag opening focusable" style="background-color: #d8d8ff;">
+                            <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmEvent', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmEvent', 'openingTagName')">Event</span>
+                            <span class="attributes">
+                                <span data-name="space_sys_obj_name" data-value="noAnswer" id="ssmEvent-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmEvent-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmEvent-attribute', 'attributeName')">space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmEvent-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                                <span data-name="event_descr" data-value="" id="ssmEvent-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmEvent-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmEvent-attribute', 'attributeName')">event_descr</span><span class="punc">=</span>
+                                    <span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmEvent-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
+                            </span>
+                            <span class="rollouter focusable" onclick="Xonomy.click('ssmEvent', 'rollouter')" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span>
+                        </span>
+                        <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmEvent', true)">···</span>
+                        <div class="children"></div>
+                        <span class="tag closing focusable" style="background-color: #d8d8ff;">
+                            <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmEvent', 'closingTagName')">Event</span><span class="punc">&gt;</span>
+                        </span>
                     </div>
+                    
                 </div>
                 <div class="btn-group btn-group-vertical btn-group-lg w-100 d-none" role="group">
                     <button class="ssm btn my-1 systemelement" type="button" onclick="Xonomy.newElementChild('xonomy1','<SystemElement/>')">
