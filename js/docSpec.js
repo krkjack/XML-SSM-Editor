@@ -119,11 +119,7 @@ function docSpecInit(editorDivId) {
                 attributes: {
                     "space_sys_obj_name": {
                         asker: Xonomy.askString,
-                        menu: [{
-                                caption: "Delete this @space_sys_obj_name",
-                                action: Xonomy.deleteAttribute
-                            }
-                        ]
+                        required: true
                     },
                     "sys_elmt_absolute_name": {
                         asker: Xonomy.askString,
@@ -160,6 +156,17 @@ function docSpecInit(editorDivId) {
                         }
                     },
                     {
+                        caption: "Add @act_version=\"1\"",
+                        action: Xonomy.newAttribute,
+                        actionParameter: {
+                            name: "act_version",
+                            value: "1"
+                        },
+                        hideIf: function (jsElement) {
+                            return jsElement.hasAttribute("act_version");
+                        }
+                    },
+                    {
                         caption: "Append an <act_arg>",
                         action: Xonomy.newElementChild,
                         actionParameter: "<act_arg/>"
@@ -183,6 +190,14 @@ function docSpecInit(editorDivId) {
                             asker: Xonomy.askString,
                             menu: [{
                                     caption: "Delete this @act_descr",
+                                    action: Xonomy.deleteAttribute
+                                }
+                            ]
+                        },
+                        "act_version": {
+                            asker: Xonomy.askInt,
+                            menu: [{
+                                    caption: "Delete this @act_version",
                                     action: Xonomy.deleteAttribute
                                 }
                             ]
