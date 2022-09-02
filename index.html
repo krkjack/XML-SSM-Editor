@@ -66,7 +66,7 @@
                     </ul>
                     <ul class="navbar-nav m-md-auto">
                         <span id="currentProjectTitle" onclick="$('#projectTitleModal').show();">Untitled XML SSM Scheme</span>
-                        <div class="modal" id="projectTitleModal" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="true">
+                        <div class="modal" id="projectTitleModal" tabindex="-1" data-backdrop="static" data-keyboard="true">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -80,7 +80,7 @@
                                         </form>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#projectTitleModal').hide();" >Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#projectTitleModal').hide();">Close</button>
                                         <button type="button" class="btn btn-primary" onclick="if($('#projectTitle').val() == undefined || $('#projectTitle').val() == null || $('#projectTitle').val() == '') $('#currentProjectTitle').text($('#projectTitle').attr('placeholder')); else $('#currentProjectTitle').text($('#projectTitle').val());$('#projectTitleModal').hide();">Save</button>
                                     </div>
                                 </div>
@@ -285,10 +285,11 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 d-flex justify-content-center mt-3">
-        <button type="button" onclick="submit()" class="btn btn-primary btn-md active">
-            Generate XML
-        </button>
+        <div class="col-md-12 d-flex justify-content-center mt-3">
+            <button type="button" onclick="submit()" class="btn btn-primary btn-md active">
+                Generate XML
+            </button>
+        </div>
     </div>
     <footer class="position-absolute text-center text-lg-start bg-white text-muted col-md-12 mt-5 px-0">
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
