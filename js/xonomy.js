@@ -45,7 +45,9 @@ Xonomy.isNamespaceDeclaration=function(attributeName) {
 	if(attributeName.length>=6 && attributeName.substring(0, 6)=="xmlns:") ret=true;
 	return ret;
 };
-Xonomy.namespaces={"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
+Xonomy.namespaces={"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+"xmlns":"ase5_SSM",
+"xmlns:ns1":"ase5_SSM"
 }; //eg. "xmlns:mbm": "http://lexonista.com"
 
 Xonomy.xml2js=function(xml, jsParent) {
