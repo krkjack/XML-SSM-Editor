@@ -23,5 +23,13 @@ $(document).ready(function () {
         }
     });
 
-
 });
+
+function downloadXML() {
+    var xmlStructure = Xonomy.harvest();
+    var xmlFile = new Blob([xmlStructure], { type: 'application/xml' });
+    var downloadLink = document.createElement("a");
+    downloadLink.href = URL.createObjectURL(xmlFile);
+    downloadLink.download = $("#currentProjectTitle").text()+".xml";
+    downloadLink.click();
+}

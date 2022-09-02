@@ -11,6 +11,7 @@
     <meta name="description" content="Graficzny edytor XML oparty o model SSM (System Space Model).">
     <script type="text/javascript" src="js/xonomy.js"></script>
     <script type="text/javascript" src="js/docSpec.js"></script>
+    <script type="text/javascript" src="js/xmlString.js"></script>
     <script src="js/scripts.js"></script>
     <link rel="icon" type="image/x-icon" href="style/images/favicon.png">
     <link type="text/css" rel="stylesheet" href="style/xonomy.css">
@@ -66,7 +67,7 @@
                     </ul>
                     <ul class="navbar-nav m-md-auto">
                         <span id="currentProjectTitle" onclick="$('#projectTitleModal').show();">Untitled XML SSM Scheme</span>
-                        <div class="modal" id="projectTitleModal" tabindex="-1" data-backdrop="static" data-keyboard="true">
+                        <div class="modal" id="projectTitleModal" tabindex="-1" role="dialog" data-backdrop="static" keyboard="true">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -74,10 +75,8 @@
                                         <button type="button" class="close" data-dismiss="modal" onclick="$('#projectTitleModal').hide();">&times;</button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-inline">
                                             <label class="sr-only" for="projectTitle">Project Title</label>
                                             <input type="text" class="form-control mb-2 mr-sm-2 w-100" id="projectTitle" maxlength="50" placeholder="Untitled XML SSM Scheme">
-                                        </form>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#projectTitleModal').hide();">Close</button>
@@ -286,7 +285,7 @@
         </div>
     </div>
         <div class="col-md-12 d-flex justify-content-center mt-3">
-            <button type="button" onclick="submit()" class="btn btn-primary btn-md active">
+            <button type="button" onclick="downloadXML()" class="btn btn-primary btn-md active">
                 Generate XML
             </button>
         </div>
