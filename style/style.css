@@ -86,3 +86,16 @@
     height:5vh;
     background-color: red
 }
+
+#currentProjectTitle {
+    cursor: pointer;
+    padding: 2px 8px;
+    display: inline;
+    font-size: 18px;
+    white-space: nowrap;
+}
+
+#currentProjectTitle:hover {
+    background: #eee;
+    border-radius: 2px;
+}

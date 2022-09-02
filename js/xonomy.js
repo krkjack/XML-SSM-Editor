@@ -5,10 +5,15 @@ var Xonomy={
 
 var SSM={};
 
+SSM.clear=function(){
+	SSM.resetXonomyID_toSSM();
+	Xonomy.render("<ssm></ssm>", 'xonomy', docSpec);
+}
+
 Xonomy.setMode=function(mode) {
 	if(mode=="nerd" || mode=="laic") Xonomy.mode=mode;
-	if(mode=="nerd") $(".xonomy").removeClass("laic").addClass("nerd");
-	if(mode=="laic") $(".xonomy").removeClass("nerd").addClass("laic");
+	if(mode=="nerd") $(".xonomy").not(".side-menu").removeClass("laic").addClass("nerd");
+	if(mode=="laic") $(".xonomy").not(".side-menu").removeClass("nerd").addClass("laic");
 }
 
 Xonomy.jsEscape=function(str) {
@@ -296,6 +301,10 @@ Xonomy.verifyDocSpecMenuItem=function(menuItem) { //make sure the menu item has 
 Xonomy.nextID=function() {
 	return "xonomy"+(++Xonomy.lastIDNum);
 };
+
+SSM.resetXonomyID_toSSM=function() {
+	Xonomy.lastIDNum=1;
+}
 Xonomy.lastIDNum=0;
 
 Xonomy.docSpec=null;
@@ -1596,9 +1605,34 @@ SSM.getClonedNodeSSM=function(dataname){ // only predefined
 	var nodeclone = document.getElementById("ssm".concat(dataname)).cloneNode(true);
 	return nodeclone;
 }
+$.fn.getVal = function() {
+	console.log(this.val());
+	return this;
+  };
+
+SSM.showModal=function(dataname){
+	$("#modal".concat(dataname)).modal('show');
+}
+
+SSM.getModalAttributeValues=function(dataname){
+	var modalWindowID = "#modal"+dataname;
+	$(modalWindowID).find($("input[id$='_input']", )).each(function(){
+		var ssmModalAttrID=$(this).attr('id');
+		var ssmModalAttrName = ssmModalAttrID.replace('_input','');
+		console.log(ssmModalAttrName);
+		$(this).getVal();
+	});
+}
 
 SSM.genNodeSSM=function(dataname){
-	//$("#modal".concat(dataname)).modal('show');
+	//var currentModal = $("#modal".concat(dataname))
+	//$(currentModal.modal('show');
+	//$(currentModal).on('click', '#addElement', function(e) {
+	//	$(currentModal).modal("hide");
+	//	$(currentModal).on("hidden.bs.modal", function() {
+	//		console.log("Make me execute ONLY when Okay is clicked, please!");
+	//	});
+	//});
 	var genNode = document.getElementById("ssm"+dataname).cloneNode(true);
 	var nextNodeID = Xonomy.nextID();
 	$(genNode).attr("id", nextNodeID);
@@ -1633,10 +1667,8 @@ Xonomy.drop=function(ev) {
 	} else {
 		if($(node).hasClass("ssmelement")) { // if predefined ssm element we create its clone and add to document
 			var elemDataName = $(node).attr("data-name");
-			//SSM.genNodeSSM(elemDataName);
+			//SSM.showModal(elemDataName);
 			$(ev.target.parentNode).replaceWith(SSM.genNodeSSM(elemDataName));
-			//$("#modal".concat(elemDataName)).modal('show'); // open modal window with form to create new ssm element
-			//$(ev.target.parentNode).replaceWith(SSM.getClonedNodeSSM(elemDataName));
 			$(node).fadeIn(function(){ Xonomy.changed(); });
 		}
 		else {
