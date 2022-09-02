@@ -163,14 +163,11 @@ var docSpec = {
                 }
             },
             {
-                caption: "Add @activity_phase",
-                action: Xonomy.newAttribute,
-                actionParameter: {
-                    name: "activity_phase",
-                    value: "AIT"
-                },
+                caption: "Append an <activity_phase>",
+                action: Xonomy.newElementChild,
+                actionParameter: "<activity_phase>AIT</activity_phase>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("activity_phase");
+                    return jsElement.hasChildElement("activity_phase");
                 }
             },
             {
@@ -201,20 +198,25 @@ var docSpec = {
                     }
                     ]
                 },
-                "activity_phase": {
-                    asker: Xonomy.askPicklist,
-                    askerParameter: [
-                        { value: "OnSwDev" },
-                        { value: "AIT" },
-                        { value: "Oper" }
-                    ],
-                    menu: [{
-                        caption: "Delete this @activity_phase",
-                        action: Xonomy.deleteAttribute
-                    }
-                    ]
-                }
             }
+        },
+        "activity_phase": {
+            backgroundColour: "#f5d4a3",
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askPicklist,
+            askerParameter: [
+                { value: "OnSwDev" },
+                { value: "AIT" },
+                { value: "Oper" }
+            ],
+            menu: [
+                {
+                    caption: "Delete this <activity_phase>",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["Activity"],
         },
         "act_arg": {
             backgroundColour: "#f5d4a3",
@@ -487,8 +489,19 @@ var docSpec = {
                     required: true
                 },
                 "space_sys_obj_type": {
-                    asker: Xonomy.askString,
-                    required: true,
+                    asker: Xonomy.askPicklist,
+                    askerParameter: [
+                        { value: "variable" },
+                        { value: "reporting data" },
+                        { value: "system element" },
+                        { value: "event" },
+                        { value: "activity" },
+                        { value: "step" },
+                        { value: "activity argument" },
+                        { value: "enumerated set" },
+                        { value: "activity specification instance" },
+                        { value: "wait_cond" }
+                    ],
                     menu: [{
                         caption: "Delete this @space_sys_obj_type",
                         action: Xonomy.deleteAttribute
@@ -571,8 +584,19 @@ var docSpec = {
                     required: true
                 },
                 "space_sys_obj_type": {
-                    asker: Xonomy.askString,
-                    required: true,
+                    asker: Xonomy.askPicklist,
+                    askerParameter: [
+                        { value: "variable" },
+                        { value: "reporting data" },
+                        { value: "system element" },
+                        { value: "event" },
+                        { value: "activity" },
+                        { value: "step" },
+                        { value: "activity argument" },
+                        { value: "enumerated set" },
+                        { value: "activity specification instance" },
+                        { value: "wait_cond" }
+                    ],
                     menu: [{
                         caption: "Delete this @space_sys_obj_type",
                         action: Xonomy.deleteAttribute
@@ -584,7 +608,6 @@ var docSpec = {
                     required: true
                 }
             }
-
         }
     }
 }
