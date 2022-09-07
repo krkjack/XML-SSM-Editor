@@ -87,6 +87,10 @@
     background-color: red
 }
 
+#projectTitleModal {
+	background-color: #0009;
+}
+
 #currentProjectTitle {
     cursor: pointer;
     padding: 2px 8px;
