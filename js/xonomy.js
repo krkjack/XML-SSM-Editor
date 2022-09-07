@@ -1037,6 +1037,16 @@ Xonomy.showBubble=function($anchor) {
 		});
 	}
 };
+SSM.askNCName=function(defaultString, askerParameter, jsMe, test) {
+	var width=($("xonomy").width()*.5)-75
+	var html="";
+	var pattern="/^[a-z_][\\w.-]*$";
+	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
+		html+="<input name='val' class='textbox focusme' style='width: "+width+"px;' pattern='"+pattern+"'	 value='"+Xonomy.xmlEscape(defaultString)+"' onkeyup='Xonomy.notKeyUp=true'/>";
+		html+=" <input type='submit' value='OK'>";
+	html+="</form>";
+	return html;
+};
 
 Xonomy.askString=function(defaultString, askerParameter, jsMe, test) {
 	var width=($("xonomy").width()*.5)-75

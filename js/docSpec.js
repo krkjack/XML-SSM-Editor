@@ -67,6 +67,17 @@ var docSpec = {
             backgroundColour: "#ccffff",
             menu: [
                 {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+                {
                     caption: "Add @space_sys_obj_name",
                     action: Xonomy.newAttribute,
                     actionParameter: {
@@ -119,9 +130,14 @@ var docSpec = {
             ],
             canDropTo: ["ssm", "ns1:SystemElement"],
             attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id", 
+                    asker: SSM.askNCName,
+                    rquired: true
+                },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: Xonomy.askString,
+                    asker: SSM.askNCName,
                     required: true
                 },
                 "ns1:sys_elmt_absolute_name": {
@@ -134,7 +150,19 @@ var docSpec = {
         "ns1:Activity": {
             displayName: "Activity",
             backgroundColour: "#f3f5a3",
-            menu: [{
+            menu: [
+                {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+                {
                 caption: "Add @space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
@@ -187,9 +215,14 @@ var docSpec = {
             ],
             canDropTo: ["ns1:SystemElement"],
             attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id", 
+                    asker: SSM.askNCName,
+                    rquired: true
+                },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: Xonomy.askString,
+                    asker: SSM.AskNCName,
                     required: true
                 },
                 "ns1:act_descr": {
@@ -302,7 +335,7 @@ var docSpec = {
             attributes: {
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: Xonomy.askString,
+                    asker: SSM.AskNCName,
                     required: true
                 },
                 "ns1:space_sys_obj_type": {
@@ -441,7 +474,19 @@ var docSpec = {
         "ns1:ReportingData": {
             displayName: "ReportingData",
             backgroundColour: "#ccffcc",
-            menu: [{
+            menu: [
+                {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+                {
                 caption: "Add @space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
@@ -508,9 +553,14 @@ var docSpec = {
             ],
             canDropTo: ["ns1:SystemElement"],
             attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id", 
+                    asker: SSM.askNCName,
+                    rquired: true
+                },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: Xonomy.askString,
+                    asker: SSM.AskNCName,
                     required: true
                 },
                 "ns1:space_sys_obj_type": {
@@ -569,7 +619,19 @@ var docSpec = {
         "ns1:Event": {
             displayName: "Event",
             backgroundColour: "#d8d8ff",
-            menu: [{
+            menu: [
+                {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+                {
                 caption: "Add @space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
@@ -609,9 +671,14 @@ var docSpec = {
             ],
             canDropTo: ["ns1:SystemElement"],
             attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id", 
+                    asker: SSM.askNCName,
+                    rquired: true
+                },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: Xonomy.askString,
+                    asker: SSM.AskNCName,
                     required: true
                 },
                 "ns1:space_sys_obj_type": {
