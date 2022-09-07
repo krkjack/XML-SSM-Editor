@@ -7,7 +7,7 @@ var SSM={};
 
 SSM.clear=function(){
 	SSM.resetXonomyID_toSSM();
-	Xonomy.render("<ssm></ssm>", 'xonomy', docSpec);
+	Xonomy.render("<ssm xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='ase5_SSM https://krkjack.github.io/XML-SSM-Editor/docs/ssm_schema.xsd'></ssm>", 'xonomy', docSpec);
 }
 
 Xonomy.setMode=function(mode) {
