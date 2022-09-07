@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns1:ssm xmlns="ase5_SSM"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="ase5_SSM ssm_schema.xsd" xmlns:ns1="ase5_SSM">
-    <ns1:Api base-url="http://192.168.1.214:8080"/>
+ xsi:schemaLocation="ase5_SSM ssm_schema.xsd" xmlns:ns1="ase5_SSM"  xmlns:n1="ase5_SSM" >
+    <!-- <ns1:Api base-url="http://192.168.1.214:8080"/> -->
     <ns1:SystemElement ns1:space_sys_obj_name="sut-robot" ns1:sys_elmt_absolute_name="sut-robot">
-          <ns1:Activity  ns1:space_sys_obj_name="moveForward" ns1:act_descr="moveForward">
-              <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real"/>
+          <ns1:Activity  ns1:space_sys_obj_name="moveForward" ns1:act_descr="moveForward" xsi:type="ns1:OperativeSystemCall">
+            <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" ns1:act_units='test'>
+                <ns1:def_value>
+            </ns1:act_arg>
+            <ns1:activity_phase>OnSwDev</ns1:activity_phase>
           </ns1:Activity>
           <ns1:Activity ns1:space_sys_obj_name="moveBackwards" ns1:act_descr="moveBackwards">
               <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real"/>
