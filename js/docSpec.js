@@ -346,36 +346,27 @@ var docSpec = {
         "def_value": {
             backgroundColour: "#f5c0a3",
             menu: [{
-                caption: "Add @value_type",
-                action: Xonomy.newAttribute,
-                actionParameter: {
-                    name: "value_type",
-                    value: ""
-                },
+                caption: "Append @value_type",
+                action: Xonomy.newElementChild,
+                actionParameter: "<value_type/>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("value_type");
+                    return jsElement.hasChildElement("value_type");
                 }
             },
             {
-                caption: "Add @value_units",
-                action: Xonomy.newAttribute,
-                actionParameter: {
-                    name: "value_units",
-                    value: ""
-                },
+                caption: "Append @value_units",
+                action: Xonomy.newElementChild,
+                actionParameter: "<value_units/>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("value_units");
+                    return jsElement.hasChildElement("value_units");
                 }
             },
             {
-                caption: "Add @value_result",
-                action: Xonomy.newAttribute,
-                actionParameter: {
-                    name: "value_result",
-                    value: ""
-                },
+                caption: "Append @value_result",
+                action: Xonomy.newElementChild,
+                actionParameter: "<value_result/>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("value_result");
+                    return jsElement.hasChildElement("value_result");
                 }
             },
             {
@@ -384,37 +375,50 @@ var docSpec = {
             }
             ],
             canDropTo: ["act_arg", "ReportingData"],
-            attributes: {
-                "value_type": {
-                    asker: Xonomy.askPicklist,
-                    askerParameter: [
-                        { value: "SignedInteger" },
-                        { value: "Boolean" },
-                        { value: "EnumeratedSet" },
-                        { value: "UnsignedInteger" },
-                        { value: "Real" },
-                        { value: "String" },
-                        { value: "AbsoluteTime" },
-                        { value: "RelativeTime" }
-                    ],
-                },
-                "value_units": {
-                    asker: Xonomy.askString,
-                    menu: [{
-                        caption: "Delete this @value_units",
-                        action: Xonomy.deleteAttribute
-                    }
-                    ]
-                },
-                "value_result": {
-                    asker: Xonomy.askString,
-                    menu: [{
-                        caption: "Delete this @value_result",
-                        action: Xonomy.deleteAttribute
-                    }
-                    ]
-                },
+        },
+        "value_type": {
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askPicklist,
+            askerParameter: [
+                { value: "SignedInteger" },
+                { value: "Boolean" },
+                { value: "EnumeratedSet" },
+                { value: "UnsignedInteger" },
+                { value: "Real" },
+                { value: "String" },
+                { value: "AbsoluteTime" },
+                { value: "RelativeTime" }
+            ],
+            menu: [
+                {
+                    caption: "Delete this <value_type>",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["def_value"],
+        },
+        "value_units": {
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askString,
+            menu: [{
+                caption: "Delete this @value_units",
+                action: Xonomy.deleteAttribute
             }
+            ],
+            canDropTo: ["def_value"],
+        },
+        "value_result": {
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askString,
+            menu: [{
+                caption: "Delete this @value_result",
+                action: Xonomy.deleteAttribute
+            }
+            ],
+            canDropTo: ["def_value"],
         },
         "ReportingData": {
             backgroundColour: "#ccffcc",
