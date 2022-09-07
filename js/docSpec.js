@@ -10,6 +10,7 @@ var docSpec = {
     },
     elements: {
         "ssm": {
+            displayName: "ssm",
             menu: [
                 {
                     caption: "Append an <Api>",
@@ -17,9 +18,9 @@ var docSpec = {
                     actionParameter: "<Api/>"
                 },
                 {
-                    caption: "Append an <SystemElement>",
+                    caption: "Append an <ns1:SystemElement>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<SystemElement/>"
+                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' />"
                 }
             ],
             attributes: {
@@ -61,147 +62,148 @@ var docSpec = {
                 }
             }
         },
-        "SystemElement": {
+        "ns1:SystemElement": {
+            displayName: "SystemElement",
             backgroundColour: "#ccffff",
             menu: [
                 {
-                    caption: "Add @space_sys_obj_name",
+                    caption: "Add @ns1:space_sys_obj_name",
                     action: Xonomy.newAttribute,
                     actionParameter: {
-                        name: "space_sys_obj_name",
+                        name: "ns1:space_sys_obj_name",
                         value: ""
                     },
                     hideIf: function (jsElement) {
-                        return jsElement.hasAttribute("space_sys_obj_name");
+                        return jsElement.hasAttribute("ns1:space_sys_obj_name");
                     }
                 },
                 {
-                    caption: "Add @sys_elmt_absolute_name=",
+                    caption: "Add @ns1:sys_elmt_absolute_name=",
                     action: Xonomy.newAttribute,
                     actionParameter: {
-                        name: "sys_elmt_absolute_name",
+                        name: "ns1:sys_elmt_absolute_name",
                         value: ""
                     },
                     hideIf: function (jsElement) {
-                        return jsElement.hasAttribute("sys_elmt_absolute_name");
+                        return jsElement.hasAttribute("ns1:sys_elmt_absolute_name");
                     }
                 },
                 {
-                    caption: "Append an <Activity>",
+                    caption: "Append an <ns1:Activity>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ns1:Activity/>"
-                    //actionParameter: "<ns1:Activity xmlns:ns1='ase5_SSM'/>"
+                    actionParameter: "<ns1:Activity xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
                 {
-                    caption: "Append a <ReportingData>",
+                    caption: "Append a <ns1:ReportingData>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ReportingData/>"
+                    actionParameter: "<ns1:ReportingData xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
                 {
-                    caption: "Append an <Event>",
+                    caption: "Append an <ns1:Event>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<Event/>"
+                    actionParameter: "<ns1:Event xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
                 {
-                    caption: "New <SystemElement> before this",
+                    caption: "New <ns1:SystemElement> before this",
                     action: Xonomy.newElementBefore,
-                    actionParameter: "<SystemElement/>"
+                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 }, {
-                    caption: "New <SystemElement> after this",
+                    caption: "New <ns1:SystemElement> after this",
                     action: Xonomy.newElementAfter,
-                    actionParameter: "<SystemElement/>"
+                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
                 {
-                    caption: "Delete this <SystemElement>",
+                    caption: "Delete this <ns1:SystemElement>",
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ssm", "SystemElement"],
+            canDropTo: ["ssm", "ns1:SystemElement"],
             attributes: {
-                "space_sys_obj_name": {
+                "ns1:space_sys_obj_name": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "sys_elmt_absolute_name": {
+                "ns1:sys_elmt_absolute_name": {
                     asker: Xonomy.askString,
                     required: true
                 }
             }
         },
-        "Activity": {
+        "ns1:Activity": {
+            displayName: "Activity",
             backgroundColour: "#f3f5a3",
             menu: [{
-                caption: "Add @space_sys_obj_name",
+                caption: "Add @ns1:space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_name",
+                    name: "ns1:space_sys_obj_name",
                     value: "name"
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_name");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_name");
                 }
             },
             {
-                caption: "Add @act_descr",
+                caption: "Add @ns1:act_descr",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "act_descr",
+                    name: "ns1:act_descr",
                     value: "descr"
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("act_descr");
+                    return jsElement.hasAttribute("ns1:act_descr");
                 }
             },
             {
-                caption: "Add @act_version=\"1\"",
+                caption: "Add @ns1:act_version=\"1\"",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "act_version",
+                    name: "ns1:act_version",
                     value: "1"
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("act_version");
+                    return jsElement.hasAttribute("ns1:act_version");
                 }
             },
             {
-                caption: "Append an <activity_phase>",
+                caption: "Append an <ns1:activity_phase>",
                 action: Xonomy.newElementChild,
-                actionParameter: "<activity_phase>AIT</activity_phase>",
+                actionParameter: "<ns1:activity_phase xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>AIT</ns1:activity_phase>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasChildElement("activity_phase");
+                    return jsElement.hasChildElement("ns1:activity_phase");
                 }
             },
             {
-                caption: "Append an <act_arg>",
+                caption: "Append an <ns1:act_arg>",
                 action: Xonomy.newElementChild,
-                actionParameter: "<act_arg act_arg_descr='' act_arg_dataType=''/>"
+                actionParameter: "<ns1:act_arg act_arg_descr='' ns1:act_arg_dataType='' xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
             },
             {
-                caption: "Delete this <Activity>",
+                caption: "Delete this <ns1:Activity>",
                 action: Xonomy.deleteElement
             }
             ],
-            canDropTo: ["SystemElement"],
+            canDropTo: ["ns1:SystemElement"],
             attributes: {
-                "space_sys_obj_name": {
+                "ns1:space_sys_obj_name": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "act_descr": {
+                "ns1:act_descr": {
                     asker: Xonomy.askString,
                     required: true,
                 },
-                "act_version": {
+                "ns1:act_version": {
                     asker: Xonomy.askInt,
                     menu: [{
-                        caption: "Delete this @act_version",
+                        caption: "Delete this @ns1:act_version",
                         action: Xonomy.deleteAttribute
                     }
                     ]
                 },
             }
         },
-        "activity_phase": {
+        "ns1:activity_phase": {
             backgroundColour: "#f5d4a3",
             hasText: true,
             oneliner: true,
@@ -213,89 +215,89 @@ var docSpec = {
             ],
             menu: [
                 {
-                    caption: "Delete this <activity_phase>",
+                    caption: "Delete this <ns1:activity_phase>",
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["Activity"],
+            canDropTo: ["ns1:Activity"],
         },
-        "act_arg": {
+        "ns1:act_arg": {
             backgroundColour: "#f5d4a3",
             menu: [{
-                caption: "Add @space_sys_obj_name",
+                caption: "Add @ns1:space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_name",
+                    name: "ns1:space_sys_obj_name",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_name");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_name");
                 }
             },
             {
-                caption: "Add @space_sys_obj_type",
+                caption: "Add @ns1:space_sys_obj_type",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_type",
+                    name: "ns1:space_sys_obj_type",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_type");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_type");
                 }
             },
             {
-                caption: "Add @act_arg_descr",
+                caption: "Add @ns1:act_arg_descr",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "act_arg_descr",
+                    name: "ns1:act_arg_descr",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("act_arg_descr");
+                    return jsElement.hasAttribute("ns1:act_arg_descr");
                 },
 
             },
             {
-                caption: "Add @act_arg_dataType",
+                caption: "Add @ns1:act_arg_dataType",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "act_arg_dataType",
+                    name: "ns1:act_arg_dataType",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("act_arg_dataType");
+                    return jsElement.hasAttribute("ns1:act_arg_dataType");
                 },
 
             },
             {
-                caption: "Add @act_units",
+                caption: "Add @ns1:act_units",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "act_units",
+                    name: "ns1:act_units",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("act_units");
+                    return jsElement.hasAttribute("ns1:act_units");
                 },
 
             },
             {
-                caption: "Append a <def_value>",
+                caption: "Append a <ns1:def_value>",
                 action: Xonomy.newElementChild,
-                actionParameter: "<def_value/>"
+                actionParameter: "<ns1:def_value xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
             },
             {
-                caption: "Delete this <act_arg>",
+                caption: "Delete this <ns1:act_arg>",
                 action: Xonomy.deleteElement
             }
             ],
-            canDropTo: ["Activity"],
+            canDropTo: ["ns1:Activity"],
             attributes: {
-                "space_sys_obj_name": {
+                "ns1:space_sys_obj_name": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "space_sys_obj_type": {
+                "ns1:space_sys_obj_type": {
                     asker: Xonomy.askPicklist,
                     askerParameter: [
                         { value: "variable" },
@@ -315,11 +317,11 @@ var docSpec = {
                     }
                     ]
                 },
-                "act_arg_descr": {
+                "ns1:act_arg_descr": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "act_arg_dataType": {
+                "ns1:act_arg_dataType": {
                     asker: Xonomy.askPicklist,
                     askerParameter: [
                         { value: "SignedInteger" },
@@ -333,50 +335,50 @@ var docSpec = {
                     ],
                     required: true
                 },
-                "act_units": {
+                "ns1:act_units": {
                     asker: Xonomy.askString,
                     menu: [{
-                        caption: "Delete this @act_units",
+                        caption: "Delete this @ns1:act_units",
                         action: Xonomy.deleteAttribute
                     }
                     ]
                 },
             }
         },
-        "def_value": {
+        "ns1:def_value": {
             backgroundColour: "#f5c0a3",
             menu: [{
-                caption: "Append @value_type",
+                caption: "Append @ns1:value_type",
                 action: Xonomy.newElementChild,
-                actionParameter: "<value_type/>",
+                actionParameter: "<ns1:value_type xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasChildElement("value_type");
+                    return jsElement.hasChildElement("ns1:value_type");
                 }
             },
             {
-                caption: "Append @value_units",
+                caption: "Append @ns1:value_units",
                 action: Xonomy.newElementChild,
-                actionParameter: "<value_units/>",
+                actionParameter: "<ns1:value_units xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasChildElement("value_units");
+                    return jsElement.hasChildElement("ns1:value_units");
                 }
             },
             {
-                caption: "Append @value_result",
+                caption: "Append @ns1:value_result",
                 action: Xonomy.newElementChild,
-                actionParameter: "<value_result/>",
+                actionParameter: "<ns1:value_result xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
                 hideIf: function (jsElement) {
-                    return jsElement.hasChildElement("value_result");
+                    return jsElement.hasChildElement("ns1:value_result");
                 }
             },
             {
-                caption: "Delete this <def_value>",
+                caption: "Delete this <ns1:def_value>",
                 action: Xonomy.deleteElement
             }
             ],
-            canDropTo: ["act_arg", "ReportingData"],
+            canDropTo: ["ns1:act_arg", "ns1:ReportingData"],
         },
-        "value_type": {
+        "ns1:value_type": {
             hasText: true,
             oneliner: true,
             asker: Xonomy.askPicklist,
@@ -392,108 +394,108 @@ var docSpec = {
             ],
             menu: [
                 {
-                    caption: "Delete this <value_type>",
+                    caption: "Delete this <ns1:value_type>",
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["def_value"],
+            canDropTo: ["ns1:def_value"],
         },
-        "value_units": {
+        "ns1:value_units": {
             hasText: true,
             oneliner: true,
             asker: Xonomy.askString,
             menu: [{
-                caption: "Delete this @value_units",
+                caption: "Delete this @ns1:value_units",
                 action: Xonomy.deleteAttribute
             }
             ],
-            canDropTo: ["def_value"],
+            canDropTo: ["ns1:def_value"],
         },
-        "value_result": {
+        "ns1:value_result": {
             hasText: true,
             oneliner: true,
             asker: Xonomy.askString,
             menu: [{
-                caption: "Delete this @value_result",
+                caption: "Delete this @ns1:value_result",
                 action: Xonomy.deleteAttribute
             }
             ],
-            canDropTo: ["def_value"],
+            canDropTo: ["ns1:def_value"],
         },
-        "ReportingData": {
+        "ns1:ReportingData": {
             backgroundColour: "#ccffcc",
             menu: [{
-                caption: "Add @space_sys_obj_name",
+                caption: "Add @ns1:space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_name",
+                    name: "ns1:space_sys_obj_name",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_name");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_name");
                 }
             },
             {
-                caption: "Add @space_sys_obj_type",
+                caption: "Add @ns1:space_sys_obj_type",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_type",
+                    name: "ns1:space_sys_obj_type",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_type");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_type");
                 }
             },
             {
-                caption: "Add @rd_descr",
+                caption: "Add @ns1:rd_descr",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "rd_descr",
+                    name: "ns1:rd_descr",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("rd_descr");
+                    return jsElement.hasAttribute("ns1:rd_descr");
                 }
             },
             {
-                caption: "Add @rd_units",
+                caption: "Add @ns1:rd_units",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "rd_units",
+                    name: "ns1:rd_units",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("rd_units");
+                    return jsElement.hasAttribute("ns1:rd_units");
                 }
             },
             {
-                caption: "Add @rd_dataType",
+                caption: "Add @ns1:rd_dataType",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "rd_dataType",
+                    name: "ns1:rd_dataType",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("rd_dataType");
+                    return jsElement.hasAttribute("ns1:rd_dataType");
                 }
             },
             {
-                caption: "Append a <def_value>",
+                caption: "Append a <ns1:def_value>",
                 action: Xonomy.newElementChild,
-                actionParameter: "<def_value/>"
+                actionParameter: "<ns1:def_value xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
             },
             {
-                caption: "Delete this <ReportingData>",
+                caption: "Delete this <ns1:ReportingData>",
                 action: Xonomy.deleteElement
             }
             ],
-            canDropTo: ["SystemElement"],
+            canDropTo: ["ns1:SystemElement"],
             attributes: {
-                "space_sys_obj_name": {
+                "ns1:space_sys_obj_name": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "space_sys_obj_type": {
+                "ns1:space_sys_obj_type": {
                     asker: Xonomy.askPicklist,
                     askerParameter: [
                         { value: "variable" },
@@ -513,11 +515,11 @@ var docSpec = {
                     }
                     ]
                 },
-                "rd_descr": {
+                "ns1:rd_descr": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "rd_dataType": {
+                "ns1:rd_dataType": {
                     asker: Xonomy.askPicklist,
                     required: true,
                     askerParameter: [
@@ -531,7 +533,7 @@ var docSpec = {
                         { value: "RelativeTime" }
                     ],
                 },
-                "rd_units": {
+                "ns1:rd_units": {
                     asker: Xonomy.askString,
                     menu: [{
                         caption: "Delete this @rd_units",
@@ -542,53 +544,53 @@ var docSpec = {
             }
 
         },
-        "Event": {
+        "ns1:Event": {
             backgroundColour: "#d8d8ff",
             menu: [{
-                caption: "Add @space_sys_obj_name",
+                caption: "Add @ns1:space_sys_obj_name",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_name",
+                    name: "ns1:space_sys_obj_name",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_name");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_name");
                 }
             },
             {
-                caption: "Add @space_sys_obj_type",
+                caption: "Add @ns1:space_sys_obj_type",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "space_sys_obj_type",
+                    name: "ns1:space_sys_obj_type",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("space_sys_obj_type");
+                    return jsElement.hasAttribute("ns1:space_sys_obj_type");
                 }
             },
             {
-                caption: "Add @event_descr",
+                caption: "Add @ns1:event_descr",
                 action: Xonomy.newAttribute,
                 actionParameter: {
-                    name: "event_descr",
+                    name: "ns1:event_descr",
                     value: ""
                 },
                 hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("event_descr");
+                    return jsElement.hasAttribute("ns1:event_descr");
                 }
             },
             {
-                caption: "Delete this <Event>",
+                caption: "Delete this <ns1:Event>",
                 action: Xonomy.deleteElement
             }
             ],
-            canDropTo: ["SystemElement"],
+            canDropTo: ["ns1:SystemElement"],
             attributes: {
-                "space_sys_obj_name": {
+                "ns1:space_sys_obj_name": {
                     asker: Xonomy.askString,
                     required: true
                 },
-                "space_sys_obj_type": {
+                "ns1:space_sys_obj_type": {
                     asker: Xonomy.askPicklist,
                     askerParameter: [
                         { value: "variable" },
@@ -603,12 +605,12 @@ var docSpec = {
                         { value: "wait_cond" }
                     ],
                     menu: [{
-                        caption: "Delete this @space_sys_obj_type",
+                        caption: "Delete this @ns1:space_sys_obj_type",
                         action: Xonomy.deleteAttribute
                     }
                     ]
                 },
-                "event_descr": {
+                "ns1:event_descr": {
                     asker: Xonomy.askLongString,
                     required: true
                 }

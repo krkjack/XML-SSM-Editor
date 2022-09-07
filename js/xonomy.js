@@ -45,9 +45,9 @@ Xonomy.isNamespaceDeclaration=function(attributeName) {
 	if(attributeName.length>=6 && attributeName.substring(0, 6)=="xmlns:") ret=true;
 	return ret;
 };
-Xonomy.namespaces={"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-"xmlns":"ase5_SSM",
-"xmlns:ns1":"ase5_SSM"
+Xonomy.namespaces={
+"xmlns:ns1":"ase5_SSM",
+"xsi:schemaLocation=":"ase5_SSM https://krkjack.github.io/XML-SSM-Editor/docs/ssm_schema.xsd"
 }; //eg. "xmlns:mbm": "http://lexonista.com"
 
 Xonomy.xml2js=function(xml, jsParent) {
@@ -1604,6 +1604,7 @@ Xonomy.dragOut=function(ev) {
 };
 
 SSM.getClonedNodeSSM=function(dataname){ // only predefined
+	//var nodeclone = document.getElementById("ssm".concat(dataname)).cloneNode(true);
 	var nodeclone = document.getElementById("ssm".concat(dataname)).cloneNode(true);
 	return nodeclone;
 }
