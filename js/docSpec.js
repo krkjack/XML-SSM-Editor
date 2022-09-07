@@ -24,10 +24,26 @@ var docSpec = {
                 }
             ],
             attributes: {
-                "xmlns": {
+                "xmlns:ns1": {
                     asker: Xonomy.askString,
                     menu: [{
-                        caption: "Delete this @xmlns",
+                        caption: "Delete this @xmlns:ns1",
+                        action: Xonomy.deleteAttribute
+                    }
+                    ]
+                },
+                "xmlns:n1": {
+                    asker: Xonomy.askString,
+                    menu: [{
+                        caption: "Delete this @xmlns:n1",
+                        action: Xonomy.deleteAttribute
+                    }
+                    ]
+                },
+                "xsi:schemaLocation": {
+                    asker: Xonomy.askString,
+                    menu: [{
+                        caption: "Delete this @xsi:schemaLocation",
                         action: Xonomy.deleteAttribute
                     }
                     ]
@@ -222,7 +238,7 @@ var docSpec = {
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: SSM.AskNCName,
+                    asker: SSM.askNCName,
                     required: true
                 },
                 "ns1:act_descr": {
@@ -335,7 +351,7 @@ var docSpec = {
             attributes: {
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: SSM.AskNCName,
+                    asker: SSM.askNCName,
                     required: true
                 },
                 "ns1:space_sys_obj_type": {
@@ -560,7 +576,7 @@ var docSpec = {
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: SSM.AskNCName,
+                    asker: SSM.askNCName,
                     required: true
                 },
                 "ns1:space_sys_obj_type": {
@@ -678,7 +694,7 @@ var docSpec = {
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
-                    asker: SSM.AskNCName,
+                    asker: SSM.askNCName,
                     required: true
                 },
                 "ns1:space_sys_obj_type": {
