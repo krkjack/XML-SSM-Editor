@@ -438,6 +438,7 @@ var docSpec = {
                 action: Xonomy.deleteElement
             }
             ],
+            mustBeAfter: ["ReportingData"],
             canDropTo: ["ns1:act_arg", "ns1:ReportingData"],
         },
         "ns1:value_type": {
