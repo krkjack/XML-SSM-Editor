@@ -40,7 +40,7 @@
 .xonomy.nerd .element > .tag.opening > .attributes > .attribute > .name { color: #ff4455; cursor: pointer; }
 .xonomy.nerd .element > .tag.opening > .attributes > .attribute > .valueContainer { cursor: pointer; }
 .xonomy.nerd .element > .tag.opening > .attributes > .attribute > .valueContainer > .value { color: #666666; }
-.xonomy.nerd .element > .children > .textnode > .value { color: #000000; cursor: pointer; }
+.xonomy.nerd .element > .children > .textnode > .value { color: #000000; cursor: pointer; line-height: 2em; white-space: pre-wrap; }
 .xonomy.nerd .element > .children > .textnode > .value > .insertionPoint { display: none; }
 .xonomy.nerd .element > .children > .textnode > .value > .dots { display: none; }
 
@@ -152,7 +152,7 @@
 
 /*Chewed selectable text*/
 .xonomy.nerd .element > .children > .textnode .char { }
-.xonomy.nerd .element > .children > .textnode .word { white-space: nowrap; }
+.xonomy.nerd .element > .children > .textnode .word {  }
 .xonomy.nerd .hasInlineMenu > .children > .textnode .char > .selector { position: absolute; left: 0px; right: 0px; bottom: -2px; height: 1px; background-color: #eeeeee; z-index: 2; }
 .xonomy.nerd .hasInlineMenu > .children > .textnode .char > .selector > .inside { position: absolute; left: 0px; right: 0px; bottom: -2px; top: -3px; background-color: transparent; }
 .xonomy.nerd .hasInlineMenu > .children > .textnode .char > .selector > .inside:hover { background-color: #cccccc; left: -1px; right: -1px; }
@@ -231,7 +231,7 @@
 .xonomy.laic .element > .children > .textnode { display: block; margin: 10px 0px 0px 0px; }
 .xonomy.laic .element.oneliner > .children > .textnode { margin-top: 0px; }
 .xonomy.laic .element > .children > .textnode > .value { display: inline-block; font-family: monospace; background-color: #ffffff; padding: 4px 0px; border-bottom: 1px solid #999999; cursor: pointer; min-width: 2em; }
-.xonomy.laic .element.oneliner > .children > .textnode > .value { text-align: center; }
+.xonomy.laic .element.oneliner > .children > .textnode > .value { text-align: center; white-space: pre-wrap; }
 .xonomy.laic .element > .tag.closing { display: none; }
 .xonomy.laic .element > .tag { display: block; padding: 5px 10px; background-color: #eeeeee; box-shadow: 0px 0px 2px #999999; z-index: 9;}
 .xonomy.laic .element > .tag > .name {font-weight: bold; color: #315696; cursor: pointer;}
@@ -349,7 +349,7 @@
 
 /*Chewed selectable text*/
 .xonomy.laic .element > .children > .textnode .char { }
-.xonomy.laic .element > .children > .textnode .word { white-space: nowrap; }
+.xonomy.laic .element > .children > .textnode .word {  }
 .xonomy.laic .hasInlineMenu > .children > .textnode .char > .selector { position: absolute; left: 0px; right: 0px; bottom: -7px; height: 0px; background-color: #999999; z-index: 2; }
 .xonomy.laic .hasInlineMenu > .children > .textnode .char > .selector > .inside { position: absolute; left: 0px; right: 0px; bottom: -3px; top: -5px; background-color: transparent; }
 .xonomy.laic .hasInlineMenu > .children > .textnode .char > .selector > .inside:hover { background-color: #00cc00; left: -1px; right: -1px; }
