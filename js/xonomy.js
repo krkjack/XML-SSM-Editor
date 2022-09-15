@@ -648,12 +648,13 @@ Xonomy.renderAttribute=function(attribute, optionalParentName) {
 	var html="";
 	html+='<span data-name="'+attribute.name+'" data-value="'+Xonomy.xmlEscape(attribute.value)+'" id="'+htmlID+'" class="'+classNames+'">';
 		html+='<span class="punc"> </span>';
-		var onclick=''; if(!readonly) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeName\')"';
+		var onclick=''; if(!readonly && required) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeName\');shakeElement($(this))"';
 		html+='<span class="warner"><span class="inside" onclick="Xonomy.click(\''+htmlID+'\', \'warner\')"></span></span>';
 		html+='<span class="name attributeName focusable" title="'+title+'"'+onclick+'>'+displayName+'</span>';
 		html+='<span class="punc">=</span>';
 		if(required) html+="<span class='attrRequired' title='This attribute is required!'>*</span>";
 		var onclick=''; if(!readonly) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeValue\')"';
+		
 		html+='<span class="valueContainer attributeValue focusable"'+onclick+'>';
 			html+='<span class="punc">"</span>';
 			html+='<span class="value">'+displayValue+'</span>';
@@ -1651,6 +1652,9 @@ SSM.genNodeSSM=function(dataname){
 	var genNode = document.getElementById("ssm"+dataname).cloneNode(true);
 	var nextNodeID = Xonomy.nextID();
 	$(genNode).attr("id", nextNodeID);
+	//$(genNode).find("*[id^='ssm']").each(function(){
+	//	$(this).attr('id', Xonomy.nextID());
+	//});
 	$(genNode).find("span").each(function(){
 		if($(this).attr("onclick") && $(this).attr("onclick").indexOf('attribute') == -1) {
 			var valueNode = $(this).attr('onclick');
