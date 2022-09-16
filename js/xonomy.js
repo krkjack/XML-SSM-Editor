@@ -550,6 +550,8 @@ Xonomy.renderElement=function(element) {
 	Xonomy.verifyDocSpecElement(element.name);
 	var spec=Xonomy.docSpec.elements[element.name];
 	var classNames="element";
+	var required=false;
+	var readonly=false;
 	if(spec.canDropTo && spec.canDropTo.length>0) classNames+=" draggable";
 	var hasText = spec.hasText(element);
 	if(hasText) classNames+=" hasText";
@@ -565,6 +567,7 @@ Xonomy.renderElement=function(element) {
 	if(spec.menu.length>0) classNames+=" hasMenu"; //not always accurate: whether an element has a menu is actually determined at runtime
 	var displayName=element.name;
 	if(spec.displayName) displayName=Xonomy.textByLang(spec.displayName(element));
+	if(spec.required ) { required=true; classNames+=" required"; }
 	var title="";
 	if(spec.title) title=Xonomy.textByLang(spec.title(element));
 	var html="";
@@ -576,7 +579,10 @@ Xonomy.renderElement=function(element) {
 		html+='<span class="tag opening focusable" style="background-color: '+spec.backgroundColour(element)+';">';
 			html+='<span class="punc">&lt;</span>';
 			html+='<span class="warner"><span class="inside" onclick="Xonomy.click(\''+htmlID+'\', \'warner\')"></span></span>';
-			html+='<span class="name" title="'+title+'" onclick="Xonomy.click(\''+htmlID+'\', \'openingTagName\')">'+displayName+'</span>';
+			if(required) html+='<span class="name" title="'+title+'" onclick="Xonomy.click(\''+htmlID+'\', \'openingTagName\');shakeElement($(this));">'+displayName+'</span>';
+			else
+				html+='<span class="name" title="'+title+'" onclick="Xonomy.click(\''+htmlID+'\', \'openingTagName\')">'+displayName+'</span>';
+			if(required) html+="<span class='attrRequired' title='This attribute is required!'>*</span>";
 			html+='<span class="attributes">';
 				for(var i=0; i<element.attributes.length; i++) {
 					Xonomy.verifyDocSpecAttribute(element.name, element.attributes[i].name);
@@ -1290,6 +1296,18 @@ Xonomy.newElementChild=function(htmlID, parameter) {
 	var html=Xonomy.renderElement(Xonomy.xml2js(parameter, jsElement));
 	var $html=$(html).hide();
 	$("#"+htmlID+" > .children").append($html);
+	Xonomy.plusminus(htmlID, true);
+	Xonomy.elementReorder($html.attr("id"));
+	Xonomy.changed();
+	$html.fadeIn();
+	window.setTimeout(function(){ Xonomy.setFocus($html.prop("id"), "openingTagName"); }, 100);
+};
+Xonomy.newElementChildPrepend=function(htmlID, parameter) {
+	Xonomy.clickoff();
+	var jsElement=Xonomy.harvestElement(document.getElementById(htmlID));
+	var html=Xonomy.renderElement(Xonomy.xml2js(parameter, jsElement));
+	var $html=$(html).hide();
+	$("#"+htmlID+" > .children").prepend($html);
 	Xonomy.plusminus(htmlID, true);
 	Xonomy.elementReorder($html.attr("id"));
 	Xonomy.changed();

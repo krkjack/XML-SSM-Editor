@@ -131,15 +131,31 @@ var docSpec = {
                     action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Event xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
-                /*                 {
-                                    caption: "New <SystemElement> before this",
-                                    action: Xonomy.newElementBefore,
-                                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
-                                }, {
-                                    caption: "New <SystemElement> after this",
-                                    action: Xonomy.newElementAfter,
-                                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
-                                }, */
+                /* {
+                    caption: "New <SystemElement> before this",
+                    action: Xonomy.newElementBefore,
+                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+                }, {
+                    caption: "New <SystemElement> after this",
+                    action: Xonomy.newElementAfter,
+                    actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+                }, */
+                {
+                    caption: "Prepend <contextual_name>...",
+                    action: Xonomy.newElementChildPrepend,
+                    actionParameter: "<ns1:contextual_name xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:space_system_obj_ref xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/></ns1:contextual_name>",
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:contextual_name");
+                    }
+                },
+                {
+                    caption: "Prepend <parentSystemElement>",
+                    action: Xonomy.newElementChildPrepend,
+                    actionParameter: "<ns1:parentSystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:parentSystemElement");
+                    }
+                },
                 {
                     caption: "Delete this <SystemElement>",
                     action: Xonomy.deleteElement
@@ -167,6 +183,51 @@ var docSpec = {
                     required: true
                 }
             }
+        },
+        "ns1:parentSystemElement": {
+            displayName: "parentSystemElement",
+            hasText: true,
+            oneliner: true,
+            asker: SSM.askNCName,
+            backgroundColour: "#daffff",
+            menu: [
+                {
+                    caption: "Delete this <parentSystemElement>",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:SystemElement"],
+            attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id",
+                    asker: SSM.askNCName,
+                    required: true,
+                    menu: [{
+                        caption: "Delete this @SSM_element_id",
+                        action: Xonomy.deleteAttribute
+                    }]
+                }
+            }
+        },
+        "ns1:contextual_name": {
+            displayName: "contextual_name",
+            backgroundColour: "#f2f2f2",
+            menu: [
+                {
+                    caption: "Delete this <contextual_name>",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:SystemElement"]
+        },
+        "ns1:space_system_obj_ref": {
+            displayName: "space_system_obj_ref",
+            hasText: true,
+            oneliner: true,
+            required: true,
+            asker: SSM.askNCName,
+            backgroundColour: "#f2f2f2",
+            canDropTo: ["ns1:contextual_name"],
         },
         "ns1:Activity": {
             displayName: "Activity",
@@ -537,7 +598,7 @@ var docSpec = {
             oneliner: true,
             asker: Xonomy.askString,
             menu: [{
-                caption: "Delete this value_units",
+                caption: "Delete this <value_units>",
                 action: Xonomy.deleteAttribute
             }
             ],
@@ -549,7 +610,7 @@ var docSpec = {
             oneliner: true,
             asker: Xonomy.askString,
             menu: [{
-                caption: "Delete this value_result",
+                caption: "Delete this <value_result>",
                 action: Xonomy.deleteAttribute
             }
             ],
@@ -634,7 +695,7 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Delete this <ns1:ReportingData>",
+                    caption: "Delete this <ReportingData>",
                     action: Xonomy.deleteElement
                 }
             ],
@@ -794,7 +855,7 @@ var docSpec = {
                         { value: "wait_cond" }
                     ],
                     menu: [{
-                        caption: "Delete this space_sys_obj_type",
+                        caption: "Delete this @space_sys_obj_type",
                         action: Xonomy.deleteAttribute
                     }
                     ]
