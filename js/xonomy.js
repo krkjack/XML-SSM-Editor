@@ -1057,6 +1057,16 @@ SSM.askNCName=function(defaultString, askerParameter, jsMe, test) {
 	return html;
 };
 
+SSM.askAnyURI=function(defaultString, askerParameter, jsMe, test) {
+	var width=($("xonomy").width()*.5)-75
+	var html="";
+	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
+		html+="<input name='val' type='url' class='textbox focusme' style='width: "+width+"px;' value='"+Xonomy.xmlEscape(defaultString)+"' onkeyup='Xonomy.notKeyUp=true'/>";
+		html+=" <input type='submit' value='OK'>";
+	html+="</form>";
+	return html;
+};
+
 Xonomy.askString=function(defaultString, askerParameter, jsMe, test) {
 	var width=($("xonomy").width()*.5)-75
 	var html="";
