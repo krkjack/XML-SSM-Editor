@@ -80,6 +80,7 @@
 
 /*Clickable items: current state*/
 .xonomy.nerd .element.current > .tag > .name { background-color: #ffff99; color: #00cc00; padding: 0px 3px; margin: 0px -3px; border-radius: 2px; }
+.xonomy.laic .element.current.required > .tag > .name { background: none !important;  padding: 0px 3px; margin: 0px -3px; border-radius: 2px; }
 .xonomy.nerd .element > .tag.opening > .attributes > .attribute.current > .name { background-color: #ffff99; color: #00cc00; padding: 0px 3px; margin: 0px -3px; border-radius: 2px; }
 .xonomy.nerd .element > .tag.opening > .attributes > .attribute.required > .name { background: none !important; padding: 0px 3px; margin: 0px -3px; border-radius: 2px;  }
 .xonomy.nerd .element > .tag.opening > .attributes > .attribute > .valueContainer.current { background-color: #ffff99; padding: 0px 3px; margin: 0px -3px; border-radius: 2px; }
@@ -345,6 +346,7 @@
 
 /*Clickable items: current state*/
 .xonomy.laic .element.current > .tag > .name { background-color: #ffff99; }
+.xonomy.laic .element.current.required > .tag > .name { background: none !important;}
 .xonomy.laic .element > .tag.opening > .attributes > .attribute.current > .name { background-color: #ffff99; }
 .xonomy.laic .element > .tag.opening > .attributes > .attribute.required > .name { background: none !important; }
 .xonomy.laic .element > .tag.opening > .attributes > .attribute > .valueContainer.current { background-color: #ffffcc; }
