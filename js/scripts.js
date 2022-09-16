@@ -25,6 +25,13 @@ $(document).ready(function () {
 
 });
 
+function shakeElement(element){
+    element.addClass('shake');
+    setTimeout(function(){
+        element.removeClass('shake');
+    },820);
+};
+
 function downloadXML() {
     var xmlStructure = Xonomy.harvest();
     var xmlFile = new Blob([xmlStructure], { type: 'application/xml' });

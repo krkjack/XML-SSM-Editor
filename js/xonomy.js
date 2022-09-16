@@ -7,7 +7,7 @@ var SSM={};
 
 SSM.clear=function(){
 	SSM.resetXonomyID_toSSM();
-	Xonomy.render("<ssm></ssm>", 'xonomy', docSpec);
+	Xonomy.render("<ssm xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='ase5_SSM https://krkjack.github.io/XML-SSM-Editor/docs/ssm_schema.xsd'></ssm>", 'xonomy', docSpec);
 }
 
 Xonomy.setMode=function(mode) {
@@ -45,9 +45,9 @@ Xonomy.isNamespaceDeclaration=function(attributeName) {
 	if(attributeName.length>=6 && attributeName.substring(0, 6)=="xmlns:") ret=true;
 	return ret;
 };
-Xonomy.namespaces={"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-"xmlns":"ase5_SSM",
-"xmlns:ns1":"ase5_SSM"
+Xonomy.namespaces={
+"xmlns:ns1":"ase5_SSM",
+"xsi:schemaLocation=":"ase5_SSM https://krkjack.github.io/XML-SSM-Editor/docs/ssm_schema.xsd"
 }; //eg. "xmlns:mbm": "http://lexonista.com"
 
 Xonomy.xml2js=function(xml, jsParent) {
@@ -648,12 +648,13 @@ Xonomy.renderAttribute=function(attribute, optionalParentName) {
 	var html="";
 	html+='<span data-name="'+attribute.name+'" data-value="'+Xonomy.xmlEscape(attribute.value)+'" id="'+htmlID+'" class="'+classNames+'">';
 		html+='<span class="punc"> </span>';
-		var onclick=''; if(!readonly) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeName\')"';
+		var onclick=''; if(!readonly && required) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeName\');shakeElement($(this))"';
 		html+='<span class="warner"><span class="inside" onclick="Xonomy.click(\''+htmlID+'\', \'warner\')"></span></span>';
 		html+='<span class="name attributeName focusable" title="'+title+'"'+onclick+'>'+displayName+'</span>';
 		html+='<span class="punc">=</span>';
 		if(required) html+="<span class='attrRequired' title='This attribute is required!'>*</span>";
 		var onclick=''; if(!readonly) onclick=' onclick="Xonomy.click(\''+htmlID+'\', \'attributeValue\')"';
+		
 		html+='<span class="valueContainer attributeValue focusable"'+onclick+'>';
 			html+='<span class="punc">"</span>';
 			html+='<span class="value">'+displayValue+'</span>';
@@ -980,7 +981,7 @@ Xonomy.showBubble=function($anchor) {
 	var bubbleHeight = $bubble.outerHeight();
 	var width = $anchor.width(); if (width > 40) width = 40;
 	var height = $anchor.height(); if (height > 25) height = 25;
-	if (Xonomy.mode == "laic") { width = width - 25; height = height + 10; }
+	//if (Xonomy.mode == "laic") { width = width - 25; height = height + 10; }
 
 	function verticalPlacement() {
 		var top = "";
@@ -990,11 +991,13 @@ Xonomy.showBubble=function($anchor) {
 			top = (offset.top + height) + "px";
 		} else if (screenHeight - offset.top + 5 + bubbleHeight > 0) {
 			// 5px above for some padding. Anchor using bottom so animation opens upwards.
-			bottom = (screenHeight - offset.top - 5) + "px";
+			bottom = (screenHeight - offset.top + 5) + "px";
+		} else if (offset.top + 10 > bubbleHeight) {
+			// Anchor using bottom so animation opens upwards.
+			bottom = (screenHeight - offset.top - 10) + "px";
 		} else {
 			// neither downwards nor upwards is enough space => center the bubble
-			bottom = (offset.top + height) + "px";;
-			//top = (screenHeight - bubbleHeight)/2 + "px";
+			top = (screenHeight - bubbleHeight)/2 + "px";
 		}
 		return { top: top, bottom: bottom };
 	}
@@ -1036,6 +1039,16 @@ Xonomy.showBubble=function($anchor) {
 			}
 		});
 	}
+};
+SSM.askNCName=function(defaultString, askerParameter, jsMe, test) {
+	var width=($("xonomy").width()*.5)-75
+	var html="";
+	var RegExPattern="^[a-z_][\\w.-]*$";
+	html+="<form onsubmit='Xonomy.answer(this.val.value); return false'>";
+		html+="<input name='val' class='textbox focusme' style='width: "+width+"px;' pattern='"+RegExPattern+"' value='"+Xonomy.xmlEscape(defaultString)+"' onkeyup='Xonomy.notKeyUp=true'/>";
+		html+=" <input type='submit' value='OK'>";
+	html+="</form>";
+	return html;
 };
 
 Xonomy.askString=function(defaultString, askerParameter, jsMe, test) {
@@ -1604,6 +1617,7 @@ Xonomy.dragOut=function(ev) {
 };
 
 SSM.getClonedNodeSSM=function(dataname){ // only predefined
+	//var nodeclone = document.getElementById("ssm".concat(dataname)).cloneNode(true);
 	var nodeclone = document.getElementById("ssm".concat(dataname)).cloneNode(true);
 	return nodeclone;
 }
@@ -1638,6 +1652,9 @@ SSM.genNodeSSM=function(dataname){
 	var genNode = document.getElementById("ssm"+dataname).cloneNode(true);
 	var nextNodeID = Xonomy.nextID();
 	$(genNode).attr("id", nextNodeID);
+	//$(genNode).find("*[id^='ssm']").each(function(){
+	//	$(this).attr('id', Xonomy.nextID());
+	//});
 	$(genNode).find("span").each(function(){
 		if($(this).attr("onclick") && $(this).attr("onclick").indexOf('attribute') == -1) {
 			var valueNode = $(this).attr('onclick');
