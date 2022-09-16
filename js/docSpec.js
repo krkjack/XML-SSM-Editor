@@ -141,16 +141,16 @@ var docSpec = {
                     actionParameter: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 }, */
                 {
-                    caption: "Prepend <contextual_name>...",
-                    action: Xonomy.newElementChildPrepend,
+                    caption: "Append <contextual_name>...",
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:contextual_name xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:space_system_obj_ref xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/></ns1:contextual_name>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
                     }
                 },
                 {
-                    caption: "Prepend <parentSystemElement>",
-                    action: Xonomy.newElementChildPrepend,
+                    caption: "Append <parentSystemElement>",
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:parentSystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:parentSystemElement");
@@ -158,7 +158,7 @@ var docSpec = {
                 },
                 {
                     caption: "Append <Annotation>",
-                    action: Xonomy.newElementChildPrepend,
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -242,35 +242,66 @@ var docSpec = {
             backgroundColour: "#f2f2f2",
             menu: [
                 {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+                {
                     caption: "Append <Comment>",
                     action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Comment xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
-                    //hideIf: function (jsElement) {
-                    //    return jsElement.hasChildElement("ns1:Comment");
-                    //},
+                    hideIf: function (jsElement) {
+                        if(jsElement.hasChildElement("ns1:Comment") || jsElement.hasChildElement("ns1:Image") || jsElement.hasChildElement("ns1:Document"))
+                            return true;
+                        else
+                            return false;
+                    },
                 },
                 {
                     caption: "Append <Image>",
                     action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Image xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
-                    //hideIf: function (jsElement) {
-                    //    return jsElement.hasChildElement("ns1:Image");
-                    //},
+                    hideIf: function (jsElement) {
+                        if(jsElement.hasChildElement("ns1:Comment") || jsElement.hasChildElement("ns1:Image") || jsElement.hasChildElement("ns1:Document"))
+                            return true;
+                        else
+                            return false;
+                    },
                 },
                 {
                     caption: "Append <Document>",
                     action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Document xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
-                    //hideIf: function (jsElement) {
-                    //    return jsElement.hasChildElement("ns1:Document");
-                    //},
+                    hideIf: function (jsElement) {
+                        if(jsElement.hasChildElement("ns1:Comment") || jsElement.hasChildElement("ns1:Image") || jsElement.hasChildElement("ns1:Document"))
+                            return true;
+                        else
+                            return false;
+                    },
                 },
                 {
                     caption: "Delete this <Annotation>",
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement", "ns1:Activity", "ns1:act_arg", "ns1:Event", "ns1:ReportingData"]
+            canDropTo: ["ns1:SystemElement", "ns1:Activity", "ns1:act_arg", "ns1:Event", "ns1:ReportingData"],
+            attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id",
+                    asker: SSM.askNCName,
+                    required: true,
+                    menu: [{
+                        caption: "Delete this @SSM_element_id",
+                        action: Xonomy.deleteAttribute
+                    }]
+                }
+            } 
         },
         "ns1:Comment": {
             displayName: "Comment",
@@ -387,8 +418,8 @@ var docSpec = {
                     actionParameter: "<ns1:act_arg act_arg_descr='' ns1:act_arg_dataType='' xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
                 {
-                    caption: "Prepend <contextual_name>...",
-                    action: Xonomy.newElementChildPrepend,
+                    caption: "Append <contextual_name>...",
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:contextual_name xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:space_system_obj_ref xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/></ns1:contextual_name>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -396,7 +427,7 @@ var docSpec = {
                 },
                 {
                     caption: "Append <Annotation>...",
-                    action: Xonomy.newElementChildPrepend,
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -549,8 +580,8 @@ var docSpec = {
                 }
             },
             {
-                caption: "Prepend <contextual_name>...",
-                action: Xonomy.newElementChildPrepend,
+                caption: "Append <contextual_name>...",
+                action: Xonomy.newElementChild,
                 actionParameter: "<ns1:contextual_name xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:space_system_obj_ref xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/></ns1:contextual_name>",
                 hideIf: function (jsElement) {
                     return jsElement.hasChildElement("ns1:contextual_name");
@@ -558,7 +589,7 @@ var docSpec = {
             },
             {
                 caption: "Append <Annotation>...",
-                action: Xonomy.newElementChildPrepend,
+                action: Xonomy.newElementChild,
                 actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                 hideIf: function (jsElement) {
                     return jsElement.hasChildElement("ns1:contextual_name");
@@ -812,8 +843,8 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Prepend <contextual_name>...",
-                    action: Xonomy.newElementChildPrepend,
+                    caption: "Append <contextual_name>...",
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:contextual_name xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:space_system_obj_ref xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/></ns1:contextual_name>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -821,7 +852,7 @@ var docSpec = {
                 },
                 {
                     caption: "Append <Annotation>...",
-                    action: Xonomy.newElementChildPrepend,
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -952,8 +983,8 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Prepend <contextual_name>...",
-                    action: Xonomy.newElementChildPrepend,
+                    caption: "Append <contextual_name>...",
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:contextual_name xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:space_system_obj_ref xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/></ns1:contextual_name>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -961,7 +992,7 @@ var docSpec = {
                 },
                 {
                     caption: "Append <Annotation>...",
-                    action: Xonomy.newElementChildPrepend,
+                    action: Xonomy.newElementChild,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");

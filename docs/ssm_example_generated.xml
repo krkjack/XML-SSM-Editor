@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ssm xmlns="ase5_SSM">
+<ssm xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns="ase5_SSM" xsi:schemaLocation="ase5_SSM https://krkjack.github.io/XML-SSM-Editor/docs/ssm_schema.xsd">
   <SystemElement p2:sys_elmt_absolute_name="NcName1" p2:space_sys_obj_name="NcName1" p2:space_sys_obj_type="variable" p2:SSM_element_id="ID1" xmlns:p2="ase5_SSM">
     <p2:Annotation p2:SSM_element_id="ID2">
       <p2:Annotation p2:SSM_element_id="ID3">
