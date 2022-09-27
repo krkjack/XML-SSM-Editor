@@ -35,7 +35,7 @@ var docSpec = {
                 "xmlns:n1": {
                     asker: Xonomy.askString,
                     menu: [{
-                        caption: "Delete this @xmlns:n1",
+                        caption: "Delete this @xmlns:ns1",
                         action: Xonomy.deleteAttribute
                     }
                     ]
@@ -157,8 +157,8 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Append <Annotation>",
-                    action: Xonomy.newElementChild,
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -174,7 +174,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -209,7 +209,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -295,7 +295,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -426,8 +426,8 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Append <Annotation>...",
-                    action: Xonomy.newElementChild,
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -443,7 +443,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -484,7 +484,7 @@ var docSpec = {
                     displayName: "act_version",
                     asker: Xonomy.askInt,
                     menu: [{
-                        caption: "Delete this act_version",
+                        caption: "Delete this @act_version",
                         action: Xonomy.deleteAttribute
                     }
                     ]
@@ -588,8 +588,8 @@ var docSpec = {
                 }
             },
             {
-                caption: "Append <Annotation>...",
-                action: Xonomy.newElementChild,
+                caption: "Prepend <Annotation>...",
+                action: Xonomy.newElementChildPrepend,
                 actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                 hideIf: function (jsElement) {
                     return jsElement.hasChildElement("ns1:contextual_name");
@@ -652,7 +652,7 @@ var docSpec = {
                     displayName: "act_units",
                     asker: Xonomy.askString,
                     menu: [{
-                        caption: "Delete this act_units",
+                        caption: "Delete this @act_units",
                         action: Xonomy.deleteAttribute
                     }
                     ]
@@ -709,7 +709,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -851,8 +851,8 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Append <Annotation>...",
-                    action: Xonomy.newElementChild,
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:contextual_name");
@@ -868,7 +868,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -991,12 +991,9 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Append <Annotation>...",
-                    action: Xonomy.newElementChild,
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: "<ns1:Annotation xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Annotation>",
-                    hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:contextual_name");
-                    }
                 },
                 {
                     caption: "Delete this <Event>",
@@ -1008,7 +1005,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: true,
+                    required: false,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
