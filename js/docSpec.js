@@ -383,11 +383,22 @@ var docSpec = {
                     }
                 },
                 {
+                    caption: "Add @type",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "xsi:type",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("xsi:type");
+                    }
+                },
+                {
                     caption: "Add @act_descr",
                     action: Xonomy.newAttribute,
                     actionParameter: {
                         name: "ns1:act_descr",
-                        value: "descr"
+                        value: ""
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("ns1:act_descr");
@@ -415,7 +426,7 @@ var docSpec = {
                 {
                     caption: "Append <act_arg>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ns1:act_arg act_arg_descr='' ns1:act_arg_dataType='' xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+                    actionParameter: "<ns1:act_arg ns1:act_arg_descr='' ns1:act_arg_dataType='' xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
                 },
                 {
                     caption: "Append <contextual_name>...",
@@ -474,6 +485,15 @@ var docSpec = {
                         action: Xonomy.deleteAttribute
                     }
                     ]
+                },
+                "xsi:type": {
+                    displayName: "type",
+                    asker: Xonomy.askPicklist,
+                    askerParameter: [
+                        { value: "OperativeSystemCall" },
+                        { value: "Telecommand" }
+                    ],
+                    required: true,
                 },
                 "ns1:act_descr": {
                     displayName: "act_descr",
