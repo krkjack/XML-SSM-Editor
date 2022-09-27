@@ -4,7 +4,7 @@
     <ns1:SystemElement ns1:SSM_element_id="ID000" ns1:space_sys_obj_name="sut-robot" ns1:sys_elmt_absolute_name="sut-robot">
         <ns1:Activity ns1:space_sys_obj_name="moveForward" ns1:act_descr="moveForward" xsi:type="ns1:OperativeSystemCall" ns1:SSM_element_id="ID670">
             <ns1:activity_phase>AIT</ns1:activity_phase>
-            <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" ns1:act_units="test" ns1:SSM_element_id="ID680">
+            <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" xsi:type="ns1:CompoundActivityArgument" ns1:act_units="test" ns1:SSM_element_id="ID680">
                 <ns1:def_value>
                     <ns1:value_type>SignedInteger</ns1:value_type>
                     <ns1:value_units>value_units1</ns1:value_units>
