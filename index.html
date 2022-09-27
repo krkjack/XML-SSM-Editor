@@ -114,6 +114,7 @@
                 <div class="xonomy" id="xonomy"></div>
             </div>
             <div class="col-1 side-panel-right">
+                <!-- HIDDEN ELEMENTS FOR DRAG N DROP -->
                 <div class="hidden-elements d-none">
                     <div data-name="ns1:SystemElement" id="ssmns1:SystemElement" class="element draggable hasMenu">
                         <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmns1:SystemElement')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
@@ -123,12 +124,12 @@
                             <span class="attributes">
                                 <span data-name="ns1:space_sys_obj_name" data-value="" id="ssmns1:SystemElement-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeName')">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeName');shakeElement($(this))">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                                 <span data-name="ns1:sys_elmt_absolute_name" data-value="" id="ssmns1:SystemElement-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeName')">ns1:sys_elmt_absolute_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeName');shakeElement($(this))">ns1:sys_elmt_absolute_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                             </span>
@@ -148,12 +149,12 @@
                             <span class="name" title="" onclick="Xonomy.click('ssmns1:Activity', 'openingTagName')">Activity</span>
                             <span class="attributes">
                                 <span data-name="ns1:space_sys_obj_name" data-value="" id="ssmns1:Activity-attribute" class="attribute">
-                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Activity-attribute', 'warner')"></span></span>
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Activity-attribute', 'warner');shakeElement($(this))"></span></span>
                                     <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:Activity-attribute', 'attributeName')">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:Activity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                                 <span data-name="ns1:act_descr" data-value="" id="ssmns1:Activity-attribute" class="attribute">
-                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Activity-attribute', 'warner')"></span></span>
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Activity-attribute', 'warner');shakeElement($(this))"></span></span>
                                     <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:Activity-attribute', 'attributeName')">ns1:act_descr</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:Activity-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
@@ -175,17 +176,17 @@
                             <span class="attributes">
                                 <span data-name="ns1:space_sys_obj_name" data-value="" id="ssmns1:ReportingData-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeName')">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeName');shakeElement($(this))">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                                 <span data-name="ns1:rd_descr" data-value="" id="ssmns1:ReportingData-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeName')">ns1:rd_descr</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeName');shakeElement($(this))">ns1:rd_descr</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                                 <span data-name="ns1:rd_dataType" data-value="" id="ssmns1:ReportingData-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeName')">ns1:rd_dataType</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeName');shakeElement($(this))">ns1:rd_dataType</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:ReportingData-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                             </span>
@@ -204,12 +205,12 @@
                             <span class="attributes">
                                 <span data-name="ns1:space_sys_obj_name" data-value="" id="ssmns1:Event-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Event-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:Event-attribute', 'attributeName')">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:Event-attribute', 'attributeName');shakeElement($(this))">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:Event-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
                                 <span data-name="ns1:event_descr" data-value="" id="ssmns1:Event-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Event-attribute', 'warner')"></span></span>
-                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:Event-attribute', 'attributeName')">ns1:event_descr</span><span class="punc">=</span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:Event-attribute', 'attributeName');shakeElement($(this))">ns1:event_descr</span><span class="punc">=</span>
                                     <span class="attrRequired" title="This attribute is required!">*</span>
                                     <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:Event-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
                                 </span>
@@ -222,11 +223,10 @@
                             <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmns1:Event', 'closingTagName')">Event</span><span class="punc">&gt;</span>
                         </span>
                     </div>
-
+                <!-- HIDDEN ELEMENTS FOR DRAG N DROP -->
                 </div>
-                <!-- TESTING DROPPABLE ELEMENTS -->
-                <!-- we need to create predefined ssm elements with full specification that we will later clone and add to the document -->
                 <div class="xonomy laic side-menu sticky-top">
+                    <!-- DRAG N DROP BUTTONS -->
                     <div data-name="ns1:SystemElement" id="ssm-systemelement" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="name" title="">SystemElement</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
                         <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">SystemElement</span><span class="punc">&gt;</span> </span>
                     </div>
@@ -239,7 +239,9 @@
                     <div data-name="ns1:Event" id="ssm-event" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="name" title="">Event</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
                         <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Event</span><span class="punc">&gt;</span> </span>
                     </div>
-                    
+                 <!-- DRAG N DROP BUTTONS -->
+                 <hr>
+                 <button type="button" class="btn btn-primary draggable" draggable="true" ondragstart="Xonomy.drag(event)">TestButton1</button>
                 </div>
 
                 <div class="modal" id="modalSystemElement" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="true" ">

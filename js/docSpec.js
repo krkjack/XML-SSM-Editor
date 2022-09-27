@@ -1,3 +1,5 @@
+import { SSMElements } from './elementDefinitions.js';
+
 var docSpec = {
     allowModeSwitching: true,
     allowLayby: false,
