@@ -1722,9 +1722,10 @@ Xonomy.drop = function (ev) {
 		if ($(node).hasClass("ssmelement")) { // if predefined ssm element we create its clone and add to document
 			var elemDataName = $(node).attr("data-name");
 			//SSM.showModal(elemDataName);
-			$(ev.target.parentNode).replaceWith(SSM.genNodeSSM(elemDataName));
+			// Version with cloning invisible nodes
+			//$(ev.target.parentNode).replaceWith(SSM.genNodeSSM(elemDataName));
 			// Version with calling the function of newElementChild instaed of copying invisible nodes
-			// Xonomy.newElementChildPrepend($(ev.target).closest('.element').attr('id'),"<"+elemDataName+" xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>");
+			Xonomy.newElementChildPrepend($(ev.target).closest('.element').attr('id'),SSMElements.Activity);
 			$(node).fadeIn(function () { Xonomy.changed(); });
 		}
 		else {
