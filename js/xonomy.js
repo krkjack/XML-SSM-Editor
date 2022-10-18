@@ -1723,9 +1723,9 @@ Xonomy.drop = function (ev) {
 			var elemDataName = $(node).attr("data-name");
 			//SSM.showModal(elemDataName);
 			// Version with cloning invisible nodes
-			//$(ev.target.parentNode).replaceWith(SSM.genNodeSSM(elemDataName));
+			$(ev.target.parentNode).replaceWith(SSM.genNodeSSM(elemDataName));
 			// Version with calling the function of newElementChild instaed of copying invisible nodes
-			Xonomy.newElementChildPrepend($(ev.target).closest('.element').attr('id'),SSMElements.Activity);
+			//Xonomy.newElementChildPrepend($(ev.target).closest('.element').attr('id'),SSMElements.Activity);
 			$(node).fadeIn(function () { Xonomy.changed(); });
 		}
 		else {
