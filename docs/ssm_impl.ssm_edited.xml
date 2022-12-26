@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns1:ssm xmlns="ase5_SSM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ase5_SSM ssm_schema.xsd" xmlns:ns1="ase5_SSM" xmlns:n1="ase5_SSM">
-    <!-- <ns1:Api base-url="http://192.168.1.214:8080"/> -->
     <ns1:SystemElement ns1:SSM_element_id="ID000" ns1:space_sys_obj_name="sut-robot" ns1:sys_elmt_absolute_name="sut-robot">
         <ns1:Activity ns1:space_sys_obj_name="moveForward" ns1:act_descr="moveForward" xsi:type="ns1:OperativeSystemCall" ns1:SSM_element_id="ID670">
             <ns1:activity_phase>AIT</ns1:activity_phase>
-            <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" xsi:type="ns1:CompoundActivityArgument" ns1:act_units="test" ns1:SSM_element_id="ID680">
+            <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" xsi:type="ns1:SimpleActivityArgument" ns1:act_units="test" ns1:SSM_element_id="ID680">
                 <ns1:def_value>
-                    <ns1:value_type>SignedInteger</ns1:value_type>
-                    <ns1:value_units>value_units1</ns1:value_units>
-                    <ns1:value_result>value_result1</ns1:value_result>
+                    <ns1:value_type>UnsignedInteger</ns1:value_type>
+                    <ns1:value_units>meter</ns1:value_units>
+                    <ns1:value_result>0</ns1:value_result>
                 </ns1:def_value>
+                <ns1:ActivityCall ns1:SSM_element_id="ID780"> 
+                    <ns1:Activity>ID670</ns1:Activity>
+                </ns1:ActivityCall>
             </ns1:act_arg>
         </ns1:Activity>
-        <ns1:ReportingData ns1:space_sys_obj_name="distanceFront" ns1:rd_descr="distanceFront" ns1:rd_dataType="Real" ns1:SSM_element_id="ID710"/>
-        <!-- <ns1:ReportingData ns1:space_sys_obj_name="distanceDriven" ns1:rd_descr="distanceDriven" ns1:rd_dataType="Real" ns1:SSM_element_id="ID730"/> -->
-        <ns1:Event ns1:space_sys_obj_name="noAnswer" ns1:event_descr="The connection to the SUT has been lost." ns1:SSM_element_id="ID740"/>
-        <!-- <ns1:Event ns1:space_sys_obj_name="obstacleFound" ns1:event_descr="An obstacle has been detected on the defined path." ns1:SSM_element_id="ID750"/> -->
+        <ns1:ReportingData ns1:rd_type="parameter" ns1:space_sys_obj_name="distanceFront" ns1:rd_descr="distanceFront" ns1:rd_dataType="Real" ns1:SSM_element_id="ID710"/>
+        <ns1:ReportingData ns1:rd_type="parameter" ns1:space_sys_obj_name="distanceDriven" ns1:rd_descr="distanceDriven" ns1:rd_dataType="Real" ns1:SSM_element_id="ID730"/>
+        <ns1:Event ns1:space_sys_obj_name="noAnswer" ns1:event_descr="The connection to the SUT has been lost." ns1:SSM_element_id="ID740" ns1:event_type="software error" ns1:event_severity="high"/>
+        <ns1:Event ns1:space_sys_obj_name="obstacleFound" ns1:event_descr="An obstacle has been detected on the defined path." ns1:SSM_element_id="ID750" ns1:event_type="information" ns1:event_severity="normal"/>
     </ns1:SystemElement>
 </ns1:ssm>
