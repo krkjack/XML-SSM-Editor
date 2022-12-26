@@ -22,7 +22,7 @@
 					<xs:element name="act_arg" type="ns1:Act_ArgType" minOccurs="0" maxOccurs="unbounded">
 						<xs:key name="act_arg_pk">
 							<xs:selector xpath="."/>
-							<xs:field xpath="@SSM_element_id"/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
 						</xs:key>
 					</xs:element>
 				</xs:sequence>
@@ -620,6 +620,14 @@
 	<xs:complexType name="Event">
 		<xs:complexContent>
 			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence minOccurs="0">
+					<xs:choice>
+						<xs:element name="Activity" type="xs:IDREF"/>
+						<xs:element name="ReportingData" type="xs:IDREF"/>
+					</xs:choice>
+				</xs:sequence>
+				<xs:attribute name="event_type" type="ns1:eventType" use="required"/>
+				<xs:attribute name="event_severity" type="ns1:eventSeverity" use="required"/>
 				<xs:attribute name="event_descr" type="xs:string" use="required"/>
 			</xs:extension>
 		</xs:complexContent>
@@ -1573,8 +1581,9 @@
 				<xs:sequence minOccurs="0">
 					<xs:element name="def_value" type="ns1:ValueType"/>
 				</xs:sequence>
-				<xs:attribute name="rd_descr" type="xs:string" use="required"/>
+				<xs:attribute name="rd_type" type="ns1:reportingDataType" use="required"/>
 				<xs:attribute name="rd_dataType" type="ns1:predefinedDataTypes" use="required"/>
+				<xs:attribute name="rd_descr" type="xs:string" use="required"/>
 				<xs:attribute name="rd_units" type="xs:string"/>
 			</xs:extension>
 		</xs:complexContent>
@@ -1786,19 +1795,19 @@
 					<xs:field xpath="@ns1:SSM_element_id"/>
 				</xs:unique>
 				<xs:unique name="act_UK1">
-					<xs:selector xpath="."/>
+					<xs:selector xpath="./ns1:Activity"/>
 					<xs:field xpath="@ns1:SSM_element_id"/>
-					<xs:field xpath="ns1:Activity/@space_sys_obj_name"/>
+					<xs:field xpath="@space_sys_obj_name"/>
 				</xs:unique>
 				<xs:unique name="rd_UK1">
-					<xs:selector xpath="."/>
+					<xs:selector xpath="./ns1:ReportingData"/>
 					<xs:field xpath="@ns1:SSM_element_id"/>
-					<xs:field xpath="ns1:ReportingData/@ns1:space_sys_obj_name"/>
+					<xs:field xpath="@ns1:space_sys_obj_name"/>
 				</xs:unique>
 				<xs:unique name="event_UK1">
-					<xs:selector xpath="."/>
+					<xs:selector xpath="./ns1:Event"/>
 					<xs:field xpath="@ns1:SSM_element_id"/>
-					<xs:field xpath="ns1:Event/@ns1:space_sys_obj_name"/>
+					<xs:field xpath="@ns1:space_sys_obj_name"/>
 				</xs:unique>
 			</xs:element>
 		</xs:sequence>
@@ -1990,11 +1999,11 @@
 						<xs:element name="Activity" type="n1:Activity">
 							<xs:key name="Activity_pk1">
 								<xs:selector xpath="."/>
-								<xs:field xpath="@SSM_element_id"/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
 							</xs:key>
 							<xs:unique name="Activity_UK1">
 								<xs:selector xpath="."/>
-								<xs:field xpath="@space_sys_obj_name"/>
+								<xs:field xpath="@ns1:space_sys_obj_name"/>
 							</xs:unique>
 							<xs:unique name="ActArg_UK2">
 								<xs:selector xpath="."/>
@@ -2285,6 +2294,29 @@
 			<xs:enumeration value="OnSwDev"/>
 			<xs:enumeration value="AIT"/>
 			<xs:enumeration value="Oper"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eventType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="information"/>
+			<xs:enumeration value="anomaly report"/>
+			<xs:enumeration value="progress report"/>
+			<xs:enumeration value="software error"/>
+			<xs:enumeration value="scheduling event"/>
+		</xs:restriction>
+	</xs:simpleType>
+		<xs:simpleType name="eventSeverity">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="normal"/>
+				<xs:enumeration value="low"/>
+				<xs:enumeration value="medium"/>
+				<xs:enumeration value="high"/>
+			</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="reportingDataType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="parameter"/>
+			<xs:enumeration value="compound parameter"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
