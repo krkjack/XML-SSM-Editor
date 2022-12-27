@@ -37,7 +37,9 @@
                         <!-- </li> -->
                         <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_File" data-toggle="dropdown">File</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_File">
-                                <a class="dropdown-item btn-file" href="#">Load XML File..</a>
+                                <div id="output"></div>
+                                <label class="dropdown-item btn-file" for="inputXML">Load XML File..</label>
+                                <input type="file" class="custom-file-input" style="display:none;" id="inputXML">
                                 <a class="dropdown-item" href="#">Generate XML File / Save as...</a>
                                 <!-- <a class="dropdown-item" href="#">Something else here</a> -->
                                 <!-- <div class="dropdown-divider"></div> -->
@@ -57,7 +59,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_View" data-toggle="dropdown">View</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_View">
-                                <a class="dropdown-item" href="#">Toggle Light/Dark Mode</a>
+                                <a class="dropdown-item" href="#" onclick="toggleCSSLoading('style/dark.css')">Toggle Light/Dark Mode</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" id="toggle-nerd-laic" href="#">Toggle Nerd/Laic Mode</a>
                                 <a class="dropdown-item" id="zoom-in" href="#">Zoom in editor</a>
@@ -88,7 +90,7 @@
                     </ul>
                     <ul class="navbar-nav ml-md-auto">
                         <li class="nav-item active">
-                            <a class="nav-link" href="https://github.com/krkjack/XML-SSM-Editor/"><i class="fab fa-github" style="rgba(0,0,0,.9);"></i> GitHub</a>
+                            <a class="nav-link" href="https://github.com/krkjack/XML-SSM-Editor/"><i class="fab fa-github" style="color: rgba(0,0,0,.9);"></i> GitHub</a>
                         </li>
                     </ul>
                 </div>
@@ -119,7 +121,7 @@
                 <div class="hidden-elements d-none">
                     <div data-name="ns1:SystemElement" id="ssmns1:SystemElement" class="element draggable hasMenu">
                         <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmns1:SystemElement')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
-                        <span class="tag opening focusable" style="background-color: #ccffff;">
+                        <span class="tag opening focusable" style="background-color: var(--se-color);">
                             <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:SystemElement', 'warner')"></span></span>
                             <span class="name" title="" onclick="Xonomy.click('ssmns1:SystemElement', 'openingTagName')">SystemElement</span>
                             <span class="attributes">
@@ -138,14 +140,14 @@
                         </span>
                         <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmns1:SystemElement', true)">···</span>
                         <div class="children"></div>
-                        <span class="tag closing focusable" style="background-color: #ccffff;">
+                        <span class="tag closing focusable" style="background-color: var(--se-color);">
                             <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmns1:SystemElement', 'closingTagName')">SystemElement</span><span class="punc">&gt;</span>
                         </span>
                     </div>
 
                     <div data-name="ns1:Activity" id="ssmns1:Activity" class="element draggable hasMenu">
                         <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmns1:Activity')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
-                        <span class="tag opening focusable" style="background-color: #f3f5a3;">
+                        <span class="tag opening focusable" style="background-color: var(--activity-color);">
                             <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Activity', 'warner')"></span></span>
                             <span class="name" title="" onclick="Xonomy.click('ssmns1:Activity', 'openingTagName')">Activity</span>
                             <span class="attributes">
@@ -165,13 +167,13 @@
                         <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmns1:Activity', true)">···</span>
                         <div class="children">
                         </div>
-                        <span class="tag closing focusable" style="background-color: #f3f5a3;">
+                        <span class="tag closing focusable" style="background-color: var(--activity-color);">
                             <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmns1:Activity', 'closingTagName')">Activity</span><span class="punc">&gt;</span>
                         </span>
                     </div>
                     <div data-name="ns1:ReportingData" id="ssmns1:ReportingData" class="element draggable hasMenu">
                         <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmns1:ReportingData')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
-                        <span class="tag opening focusable" style="background-color: #ccffcc;">
+                        <span class="tag opening focusable" style="background-color: var(--rd-color);">
                             <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:ReportingData', 'warner')"></span></span>
                             <span class="name" title="" onclick="Xonomy.click('ssmns1:ReportingData', 'openingTagName')">ReportingData</span>
                             <span class="attributes">
@@ -195,13 +197,13 @@
                         </span>
                         <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmns1:ReportingData', true)">···</span>
                         <div class="children"></div>
-                        <span class="tag closing focusable" style="background-color: #ccffcc;">
+                        <span class="tag closing focusable" style="background-color: var(--rd-color);">
                             <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmns1:ReportingData', 'closingTagName')">ReportingData</span><span class="punc">&gt;</span>
                         </span>
                     </div>
                     <div data-name="ns1:Event" id="ssmns1:Event" class="element draggable hasMenu">
                         <span class="connector"><span class="plusminus" onclick="Xonomy.plusminus('ssmns1:Event')"></span><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span></span>
-                        <span class="tag opening focusable" style="background-color: #d8d8ff;">
+                        <span class="tag opening focusable" style="background-color: var(--event-color);">
                             <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:Event', 'warner')"></span></span><span class="name" title="" onclick="Xonomy.click('ssmns1:Event', 'openingTagName')">Event</span>
                             <span class="attributes">
                                 <span data-name="ns1:space_sys_obj_name" data-value="" id="ssmns1:Event-attribute" class="attribute">
@@ -220,7 +222,7 @@
                         </span>
                         <span class="childrenCollapsed focusable" onclick="Xonomy.plusminus('ssmns1:Event', true)">···</span>
                         <div class="children"></div>
-                        <span class="tag closing focusable" style="background-color: #d8d8ff;">
+                        <span class="tag closing focusable" style="background-color: var(--event-color);">
                             <span class="punc">&lt;</span><span class="punc">/</span><span class="name" onclick="Xonomy.click('ssmns1:Event', 'closingTagName')">Event</span><span class="punc">&gt;</span>
                         </span>
                     </div>
@@ -228,17 +230,17 @@
                 </div>
                 <div class="xonomy laic side-menu sticky-top">
                     <!-- DRAG N DROP BUTTONS -->
-                    <div data-name="ns1:SystemElement" id="ssm-systemelement" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="name" title="">SystemElement</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
-                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: #ccffff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">SystemElement</span><span class="punc">&gt;</span> </span>
+                    <div data-name="ns1:SystemElement" id="ssm-systemelement" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: var(--se-color);"><span class="punc">&lt;</span><span class="name" title="">SystemElement</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: var(--se-color);"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">SystemElement</span><span class="punc">&gt;</span> </span>
                     </div>
-                    <div data-name="ns1:Activity" id="ssm-activity" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="name" title="">Activity</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
-                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: #f3f5a3;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Activity</span><span class="punc">&gt;</span> </span>
+                    <div data-name="ns1:Activity" id="ssm-activity" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: var(--activity-color);"><span class="punc">&lt;</span><span class="name" title="">Activity</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: var(--activity-color);"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Activity</span><span class="punc">&gt;</span> </span>
                     </div>
-                    <div data-name="ns1:ReportingData" id="ssm-reportingdata" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #ccffcc;"><span class="punc">&lt;</span><span class="name" title="">ReportingData</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
-                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: #ccffcc"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">ReportingData</span><span class="punc">&gt;</span> </span>
+                    <div data-name="ns1:ReportingData" id="ssm-reportingdata" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: var(--rd-color);"><span class="punc">&lt;</span><span class="name" title="">ReportingData</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: var(--rd-color)"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">ReportingData</span><span class="punc">&gt;</span> </span>
                     </div>
-                    <div data-name="ns1:Event" id="ssm-event" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="name" title="">Event</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
-                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: #d8d8ff;"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Event</span><span class="punc">&gt;</span> </span>
+                    <div data-name="ns1:Event" id="ssm-event" class="ssmelement element draggable noChildren"> <span class="connector"><span class="draghandle" draggable="true" ondragstart="Xonomy.drag(event)"></span> </span> <span class="tag opening focusable" style="background-color: var(--event-color);"><span class="punc">&lt;</span><span class="name" title="">Event</span><span class="attributes"></span><span class="rollouter focusable" style="display: none;"></span><span class="punc slash">/</span><span class="punc">&gt;</span> </span>
+                        <div class="children ssmbutton"></div> <span class="tag closing focusable" style="background-color: var(--event-color);"><span class="punc">&lt;</span><span class="punc">/</span><span class="name">Event</span><span class="punc">&gt;</span> </span>
                     </div>
                  <!-- DRAG N DROP BUTTONS -->
                  <hr>
