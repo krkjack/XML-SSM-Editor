@@ -1,3 +1,11 @@
+:root {
+  --se-color: #ccffff;
+  --activity-color: #f3f5a3;
+  --rd-color: #ccffcc;
+  --event-color: #d8d8ff;
+  --misc-color: #f5d4a3;
+}
+
 #flex-nav {
     width: 90vw;
     display:flex;
@@ -71,6 +79,7 @@
 	background-color: #ccffcc;
     border-color: #9eff9e
 }
+
 .event {
     color: #315696;
 	background-color: #d8d8ff;

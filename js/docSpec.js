@@ -87,7 +87,7 @@ var docSpec = {
         },
         "ns1:SystemElement": {
             displayName: "SystemElement",
-            backgroundColour: "#ccffff",
+            backgroundColour: "var(--se-color)",
             menu: [
                 {
                     caption: "Add @SSM_element_id",
@@ -354,7 +354,7 @@ var docSpec = {
         },
         "ns1:Activity": {
             displayName: "Activity",
-            backgroundColour: "#f3f5a3",
+            backgroundColour: "var(--activity-color)",
             menu: [
                 {
                     caption: "Add @SSM_element_id",
@@ -520,7 +520,7 @@ var docSpec = {
         },
         "ns1:activity_phase": {
             displayName: "activity_phase",
-            backgroundColour: "#f5d4a3",
+            backgroundColour: "var(--misc-color)",
             hasText: true,
             oneliner: true,
             asker: Xonomy.askPicklist,
@@ -539,7 +539,7 @@ var docSpec = {
         },
         "ns1:act_arg": {
             displayName: "act_arg",
-            backgroundColour: "#f5d4a3",
+            backgroundColour: "var(--misc-color)",
             menu: [{
                 caption: "Add @space_sys_obj_name",
                 action: Xonomy.newAttribute,
@@ -793,7 +793,7 @@ var docSpec = {
         },
         "ns1:ReportingData": {
             displayName: "ReportingData",
-            backgroundColour: "#ccffcc",
+            backgroundColour: "var(--rd-color)",
             menu: [
                 {
                     caption: "Add @SSM_element_id",
@@ -961,7 +961,7 @@ var docSpec = {
         },
         "ns1:Event": {
             displayName: "Event",
-            backgroundColour: "#d8d8ff",
+            backgroundColour: "var(--event-color)",
             menu: [
                 {
                     caption: "Add @SSM_element_id",
