@@ -29,47 +29,56 @@
                 <a class="navbar-brand"><img src="style/images/favicon.png" width="40" height="40" alt="" /> SSM XML Editor</a>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="navbar-nav">
-                        <!-- <li class="nav-item active"> -->
-                        <!-- <a class="nav-link" href="#">Link <span class="sr-only">(current)</span></a> -->
-                        <!-- </li> -->
-                        <!-- <li class="nav-item"> -->
-                        <!-- <a class="nav-link" href="#">Link</a> -->
-                        <!-- </li> -->
-                        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_File" data-toggle="dropdown">File</a>
+                        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_File" data-toggle="dropdown">File</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_File">
                                 <div id="output"></div>
                                 <label class="dropdown-item btn-file" for="inputXML">Load XML File..</label>
                                 <input type="file" class="custom-file-input" style="display:none;" id="inputXML">
                                 <a class="dropdown-item" href="#">Generate XML File / Save as...</a>
-                                <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                <!-- <div class="dropdown-divider"></div> -->
-                                <!-- <a class="dropdown-item" href="#">Separated link</a> -->
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_Edit" data-toggle="dropdown">Edit</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_Edit" data-toggle="dropdown">Edit</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_Edit">
                                 <a class="dropdown-item" href="#" onclick="SSM.clear()">Clear</a>
-                                <!-- <a class="dropdown-item" href="#">Another temp item</a> -->
-                                <!-- <a class="dropdown-item" href="#">Something else here</a> -->
-                                <!-- <div class="dropdown-divider"></div> -->
-                                <!-- <a class="dropdown-item" href="#">Separated link</a> -->
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink_View" data-toggle="dropdown">View</a>
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink_View" data-toggle="dropdown">View</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink_View">
                                 <a class="dropdown-item" href="#" onclick="toggleCSSLoading('style/dark.css')">Toggle Light/Dark Mode</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" id="toggle-nerd-laic" href="#">Toggle Nerd/Laic Mode</a>
-                                <a class="dropdown-item" id="zoom-in" href="#">Zoom in editor</a>
-                                <a class="dropdown-item" id="zoom-out" href="#">Zoom out editor</a>
-                                <a class="dropdown-item" id="zoom-reset" href="#">Reset zoom</a>
+                                <a class="dropdown-item" id="toggle-nerd-laic" href="#">Toggle XML View Mode</a>
                             </div>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" data-toggle="modal" data-target="#helpModal">Help</a>
+                        </li>
+                        <div class="modal" id="helpModal" tabindex="-1" role="dialog" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Usage</h4>
+                                        <button type="button" class="close" data-dismiss="modal" onclick="$('#helpModal').hide();">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <ul>
+                                            <li>Click on "Untitled XML SSM Scheme" to edit document name.</li>
+                                            <li>Drag and drop elements from the left panel to the editor to create them.</li>
+                                            <li>Clicking element or attribute name opens its menu. From there you can perform actions like element deletion or appending a subelement.</li>
+                                            <li>Clicking element or attribute value opens a panel for value insertion.</li>
+                                            <li>Elements marked with an asterrisk <span class="attrRequired">*</span> are required by SSM standard and must have a value.</li>
+                                            <li>XML (and SSM) namespace is set to ns1:</li>
+                                        </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
                     </ul>
                     <ul class="navbar-nav m-md-auto">
-                        <span id="currentProjectTitle" onclick="$('#projectTitleModal').show();">Untitled XML SSM Scheme</span>
+                        <span id="currentProjectTitle" data-toggle="modal" data-target="#projectTitleModal">Untitled XML SSM Scheme</span>
                         <div class="modal" id="projectTitleModal" tabindex="-1" role="dialog" data-backdrop="static" keyboard="true">
                             <div class="modal-dialog modal-sm modal-dialog-centered">
                                 <div class="modal-content">
@@ -87,30 +96,33 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </ul>
                     <ul class="navbar-nav ml-md-auto">
-                        <li class="nav-item active">
+                        <!-- <li class="nav-item active">
                             <a class="nav-link" href="https://github.com/krkjack/XML-SSM-Editor/"><i class="fab fa-github" style="color: rgba(0,0,0,.9);"></i> GitHub</a>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </nav>
-            <div class="col-md-12">
+<!--             <div class="col-md-12">
                 <div class="alert alert-dismissable alert-info">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
                         ×
                     </button>
                     <h4>
-                        Information
+                        Usage
                     </h4>
-                    Development version. Will change in future.
                     <ul>
-                        <li>Elements marked with an asterrisk <span class="attrRequired">*</span> are required and need to be filled in.</li>
-                        <li>XML namespace is set to ns1:</li>
-                        <li>The zoom function (WIP) doesn't work on Firefox. See <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/zoom">Mozilla docs</a>.</li>
+                        <li>Click on "Untitled XML SSM Scheme" to edit document name.</li>
+                        <li>Drag and drop elements from the left panel to the editor to create them.</li>
+                        <li>Clicking element or attribute name opens its menu. From there you can perform actions like element deletion or appending a subelement.</li>
+                        <li>Clicking element or attribute value opens a panel for value insertion.</li>
+                        <li>Elements marked with an asterrisk <span class="attrRequired">*</span> are required by SSM standard and must have a value.</li>
+                        <li>XML (and SSM) namespace is set to ns1:</li>
                     </ul>
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="row  flex-nowrap">
             <div class="col-md-10 ml-3">
@@ -244,7 +256,7 @@
                     </div>
                  <!-- DRAG N DROP BUTTONS -->
                  <hr>
-                 <button type="button" class="btn btn-primary draggable" draggable="true" ondragstart="Xonomy.drag(event)">TestButton1</button>
+                 <button type="button" class="btn btn-primary draggable" draggable="true" ondragstart="Xonomy.drag(event)" onclick="test()">TestButton1</button>
                 </div>
 
                 <div class="modal" id="modalSystemElement" tabindex="-1" role="dialog" data-backdrop="static" data-keyboard="true" ">
@@ -290,7 +302,7 @@
     </div>
     <footer class="position-absolute text-center text-lg-start bg-white text-muted col-md-12 mt-5 px-0">
         <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.025);">
-            © 2022 Lorem Ipsum:
+            Praca inżynierska 2022. Uniwersytet im. Adama Mickiewicza w Poznaniu.
         </div>
     </footer>
 </body>
