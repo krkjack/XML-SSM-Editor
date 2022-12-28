@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="text/javascript" src="js/xonomy.js"></script>
+    <link type="text/css" rel="stylesheet" href="style/xonomy.css">
+    <script type="text/javascript">
+        function start() {
+            Xonomy.setMode("laic")
+            var xml = "<pracownicy><pracownik id='00'/><pracownik id='16205'><imie>Jan</imie><nazwisko>Nowak</nazwisko></pracownik></pracownicy>";
+            var editor = document.getElementById("editor");
+            Xonomy.render(xml, editor, docSpec);
+        }
+        var docSpec = {
+            elements: {
+                "pracownik": {
+                    backgroundColor: "coralblue",
+                    menu: [
+                        {
+                            caption: "Dodaj @id",
+                            action: Xonomy.newAttribute,
+                            actionParameter: {
+                                name: "id",
+                                value: ""
+                            },
+                            hideIf: function (jsElement) {
+                                return jsElement.hasAttribute("id");
+                            }
+                        },
+                        {
+                            caption: "Dołącz <imie>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<imie/>"
+                        },
+                        {
+                            caption: "Dołącz <nazwisko>",
+                            action: Xonomy.newElementChild,
+                            actionParameter: "<nazwisko/>"
+                        },
+                        {
+                            caption: "Usuń <pracownik>",
+                            action: Xonomy.deleteElement
+                        }
+],
+                attributes: {
+                    "id": {
+                        displayName: "id",
+                        asker: Xonomy.askString,
+                    menu: [{
+                            caption: "Usuń to @id",
+                            action: Xonomy.deleteAttribute
+                        }],
+                    }
+                }
+            },
+            "imie": {
+                oneliner: true
+            },
+            "nazwisko": {
+                oneliner: true
+            }
+        }
+}
+    </script>
+</head>
+
+<body onload="start()">
+    <div id="editor"></div>
+</body>
+
+</html>
