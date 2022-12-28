@@ -1,29 +1,17 @@
 var SSMElements = {
-    SystemElement: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' />",
-    Activity: "<ns1:Activity xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' />",
-    ReportingData: "<ns1:ReportingData xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' />",
-    Event: "<ns1:Event xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' />"
+    SystemElement: "<ns1:SystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'  ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:sys_elmt_absolute_name='' />",
+    Activity: "<ns1:Activity xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ns1:SSM_element_id='' ns1:space_sys_obj_name=''><ns1:activity_phase>AIT</ns1:activity_phase></ns1:Activity>",
+    ReportingData: "<ns1:ReportingData xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ns1:SSM_element_id='' ns1:space_sys_obj_name=''/>",
+    Event: "<ns1:Event xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ns1:SSM_element_id='' ns1:space_sys_obj_name=''/>"
 };
 
 var docSpec = {
     allowModeSwitching: true,
     allowLayby: false,
-    laybyMessage: "This is your temporary lay-by for document fragments. You can drag and drop any XML elements here.",
-    onchange: function () {
-        console.log("I been changed now!")
-    },
-    validate: function (obj) {
-        console.log("I be validatin' now!")
-    },
     elements: {
         "ssm": {
             displayName: "ssm",
             menu: [
-                {
-                    caption: "Append <Api>",
-                    action: Xonomy.newElementChild,
-                    actionParameter: "<Api/>"
-                },
                 {
                     caption: "Append <SystemElement>",
                     action: Xonomy.newElementChild,
@@ -51,34 +39,6 @@ var docSpec = {
                     asker: Xonomy.askString,
                     menu: [{
                         caption: "Delete this @xsi:schemaLocation",
-                        action: Xonomy.deleteAttribute
-                    }
-                    ]
-                }
-            }
-        },
-        "Api": {
-            menu: [{
-                caption: "Add @label=\"base-url\"",
-                action: Xonomy.newAttribute,
-                actionParameter: {
-                    name: "base-url",
-                    value: "http://192.168.1.100:8080"
-                },
-                hideIf: function (jsElement) {
-                    return jsElement.hasAttribute("base-url");
-                }
-            }, {
-                caption: "Delete this <Api>",
-                action: Xonomy.deleteElement
-            }
-            ],
-            canDropTo: ["ssm"],
-            attributes: {
-                "base-url": {
-                    asker: Xonomy.askString,
-                    menu: [{
-                        caption: "Delete this @base-url",
                         action: Xonomy.deleteAttribute
                     }
                     ]
@@ -125,18 +85,17 @@ var docSpec = {
                 {
                     caption: "Append <Activity>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ns1:Activity xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:Activity>"
-                    // actionParameter: "<ns1:Activity xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'><ns1:activity_phase>AIT</ns1:activity_phase></ns1:Activity>"
+                    actionParameter: SSMElements.Activity
                 },
                 {
                     caption: "Append <ReportingData>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ns1:ReportingData xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+                    actionParameter: SSMElements.ReportingData
                 },
                 {
                     caption: "Append <Event>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ns1:Event xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>"
+                    actionParameter: SSMElements.Event
                 },
                 /* {
                     caption: "New <SystemElement> before this",
@@ -181,7 +140,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -216,7 +175,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -302,7 +261,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -461,7 +420,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -522,6 +481,7 @@ var docSpec = {
             displayName: "activity_phase",
             backgroundColour: "var(--misc-color)",
             hasText: true,
+            required:true,
             oneliner: true,
             asker: Xonomy.askPicklist,
             askerParameter: [
@@ -529,12 +489,12 @@ var docSpec = {
                 { value: "AIT" },
                 { value: "Oper" }
             ],
-            menu: [
+/*             menu: [
                 {
                     caption: "Delete this <activity_phase>",
                     action: Xonomy.deleteElement
                 }
-            ],
+            ], */
             canDropTo: ["ns1:Activity"],
         },
         "ns1:act_arg": {
@@ -736,7 +696,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -895,7 +855,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute
@@ -1032,7 +992,7 @@ var docSpec = {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
-                    required: false,
+                    required: true,
                     menu: [{
                         caption: "Delete this @SSM_element_id",
                         action: Xonomy.deleteAttribute

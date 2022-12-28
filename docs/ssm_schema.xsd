@@ -1790,10 +1790,10 @@
 					<xs:selector xpath="."/>
 					<xs:field xpath="ns1:parentSystemElement"/>
 				</xs:keyref>
-				<xs:unique name="SE_pk1">
+				<xs:key name="SE_pk1">
 					<xs:selector xpath="."/>
 					<xs:field xpath="@ns1:SSM_element_id"/>
-				</xs:unique>
+				</xs:key>
 				<xs:unique name="act_UK1">
 					<xs:selector xpath="./ns1:Activity"/>
 					<xs:field xpath="@ns1:SSM_element_id"/>
