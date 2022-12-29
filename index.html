@@ -71,7 +71,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                      </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +90,8 @@
                                             <input type="text" class="form-control mb-2 mr-sm-2 w-100" id="projectTitle" maxlength="50" placeholder="Untitled XML SSM Scheme">
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="$('#projectTitleModal').hide();">Close</button>
-                                        <button type="button" class="btn btn-primary" onclick="if($('#projectTitle').val() == undefined || $('#projectTitle').val() == null || $('#projectTitle').val() == '') $('#currentProjectTitle').text($('#projectTitle').attr('placeholder')); else $('#currentProjectTitle').text($('#projectTitle').val());$('#projectTitleModal').hide();">Save</button>
+                                        <button type="button" class="btn btn-secondary" id="projectTitleCloseButton" data-dismiss="modal" onclick="$('#projectTitleModal').hide();">Close</button>
+                                        <button type="button" class="btn btn-primary" id="projectTitleSaveButton" onclick="if($('#projectTitle').val() == undefined || $('#projectTitle').val() == null || $('#projectTitle').val() == '') shakeElement($('#projectTitleSaveButton')); else {$('#currentProjectTitle').text($('#projectTitle').val()); $('#projectTitleModal').hide();$('#projectTitleCloseButton').trigger('click');}">Save</button>
                                     </div>
                                 </div>
                             </div>
@@ -294,9 +294,25 @@
         </div>
     </div>
         <div class="col-md-12 d-flex justify-content-center mt-3">
-            <button type="button" onclick="downloadXML()" class="btn btn-primary btn-md active">
+            <button id="downloadButton" type="button" onclick="downloadXML()" class="btn btn-primary btn-md active">
                 Generate XML
             </button>
+        </div>
+    </div>
+    <div class="modal" id="validationModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">XSD Validation error!</h4>
+                    <button type="button" class="close" data-dismiss="modal" onclick="$('#validationModal').hide();">&times;</button>
+                </div>
+                <div class="modal-body" id="modal-validation-body">
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
     <footer class="position-absolute text-center text-lg-start bg-white text-muted col-md-12 mt-5 px-0">

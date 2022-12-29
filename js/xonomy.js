@@ -13,7 +13,10 @@ SSM.load = function () {
 
 SSM.clear = function () {
 	SSM.resetXonomyID_toSSM();
-	Xonomy.render("<ssm xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:schemaLocation='ase5_SSM https://krkjack.github.io/XML-SSM-Editor/docs/ssm_schema.xsd'></ssm>", 'xonomy', docSpec);
+	Xonomy.harvestCache = {};
+	Xonomy.refresh();
+	Xonomy.validate();
+	Xonomy.render("<ns1:ssm xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:ssm>", 'xonomy', docSpec);
 }
 
 Xonomy.setMode = function (mode) {
@@ -311,7 +314,7 @@ Xonomy.nextID = function () {
 };
 
 SSM.resetXonomyID_toSSM = function () {
-	Xonomy.lastIDNum = 1;
+	Xonomy.lastIDNum = -1;
 }
 Xonomy.lastIDNum = 0;
 
