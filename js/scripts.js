@@ -43,7 +43,7 @@ function validate_xsd_by_post(contentToValidate, callback){
     post.setRequestHeader('Content-Type', 'application/json');
     post.send(JSON.stringify({
         "contentToValidate": contentBASE64,
-        "validationType": "large"
+        "validationType": "ssm"
     }))
 };
 
