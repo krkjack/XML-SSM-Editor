@@ -9,7 +9,7 @@ var docSpec = {
     allowModeSwitching: true,
     allowLayby: false,
     elements: {
-        "ssm": {
+        "ns1:ssm": {
             displayName: "ssm",
             menu: [
                 {
