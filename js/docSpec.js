@@ -1,8 +1,10 @@
-var ns = " xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' ";
+var ns = " xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' "
+var xmlTemplate = "<ns1:ssm"+ns+"></ns1:ssm>"
+
 var SSMElements = {
     SystemElement: "<ns1:SystemElement "+ns+" ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:sys_elmt_absolute_name='' />",
     Activity: "<ns1:Activity "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:act_descr='' xsi:type=''><ns1:activity_phase>AIT</ns1:activity_phase></ns1:Activity>",
-    ActivityIDREF: "<ns1:Activity "+ns+"/>",
+    ActivityIDREF: "<n1:Activity "+ns+"/>",
     ReportingData: "<ns1:ReportingData "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:rd_descr='' ns1:rd_dataType='' />",
     Event: "<ns1:Event "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:event_descr='' ns1:event_severity='' ns1:event_type=''/>",
     def_value: "<ns1:def_value "+ns+"ns1:SSM_element_id=''><ns1:value_result></ns1:value_result></ns1:def_value>",
@@ -457,8 +459,8 @@ var docSpec = {
                     displayName: "type",
                     asker: Xonomy.askPicklist,
                     askerParameter: [
-                        { value: "OperativeSystemCall" },
-                        { value: "Telecommand" }
+                        { value: "ns1:OperativeSystemCall" },
+                        { value: "ns1:Telecommand" }
                     ],
                     required: true,
                 },
@@ -678,8 +680,8 @@ var docSpec = {
                     displayName: "type",
                     asker: Xonomy.askPicklist,
                     askerParameter: [
-                        { value: "SimpleActivityArgument" },
-                        { value: "CompoundActivityArgument" }
+                        { value: "ns1:SimpleActivityArgument" },
+                        { value: "ns1:CompoundActivityArgument" }
                     ],
                     required: true,
                 },
@@ -687,7 +689,7 @@ var docSpec = {
         },
         "ns1:ActivityCall": {
             displayName: "ActivityCall",
-            backgroundColour: "var(--misc2-color)",
+            backgroundColour: "var(--miscb-color)",
             menu: [
                 {
                     caption: "Add @SSM_element_id",
@@ -706,6 +708,14 @@ var docSpec = {
                     actionParameter: SSMElements.ActivityIDREF,
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:value_type");
+                    }
+                },
+                {
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
+                    actionParameter: SSMElements.Annotation,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:contextual_name");
                     }
                 },
                 {
@@ -820,7 +830,7 @@ var docSpec = {
             canDropTo: ["ns1:def_value"],
         },
         "ns1:value_result": {
-            displayName: "value_results",
+            displayName: "value_result",
             hasText: true,
             oneliner: true,
             required: true,
@@ -878,6 +888,17 @@ var docSpec = {
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("ns1:rd_descr");
+                    }
+                },
+                {
+                    caption: "Add @rd_type",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:rd_type",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:rd_type");
                     }
                 },
                 {
@@ -972,6 +993,16 @@ var docSpec = {
                     displayName: "rd_descr",
                     asker: Xonomy.askString,
                     required: true
+                },
+                "ns1:rd_type": {
+                    displayName: "rd_type",
+                    asker: Xonomy.askPicklist,
+                    required: true,
+                    askerParameter: [
+                        { value: "parameter" },
+                        { value: "compound parameter" },
+                        { value: "EnumeratedSet" }
+                    ],
                 },
                 "ns1:rd_dataType": {
                     displayName: "rd_dataType",
@@ -1166,6 +1197,20 @@ var docSpec = {
                     required: true
                 }
             }
-        }
+        },
+        "n1:Activity": {
+            displayName: "Activity",
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askNCName,
+            backgroundColour: "#f2f2f2",
+            menu: [
+                {
+                    caption: "Delete this <Activity> (IDREF)",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:ActivityCall"],
+        },
     }
 }

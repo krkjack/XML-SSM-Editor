@@ -107,7 +107,6 @@ Xonomy.js2xml = function (js) {
 				var child = js.children[i];
 				if (child.type == "text") hasText = true;
 			}
-			if (hasText) xml += " xml:space='preserve'";
 			xml += ">";
 			for (var i = 0; i < js.children.length; i++) {
 				var child = js.children[i];
@@ -402,7 +401,7 @@ Xonomy.refresh = function () {
 			$(this.parentNode).children(".rollouter").show();
 		}
 	});
-	$(".xonomy .element").each(function () { //refresh display names, display values and captions:
+	$(".xonomy .element").not(".ssmelement").each(function () { //refresh display names, display values and captions:
 		var elSpec = Xonomy.docSpec.elements[this.getAttribute("data-name")];
 		if (elSpec.displayName) $(this).children(".tag").children(".name").html(Xonomy.textByLang(elSpec.displayName(Xonomy.harvestElement(this))));
 		if (elSpec.caption) {
