@@ -104,24 +104,6 @@
                     </ul>
                 </div>
             </nav>
-<!--             <div class="col-md-12">
-                <div class="alert alert-dismissable alert-info">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-                        ×
-                    </button>
-                    <h4>
-                        Usage
-                    </h4>
-                    <ul>
-                        <li>Click on "Untitled XML SSM Scheme" to edit document name.</li>
-                        <li>Drag and drop elements from the left panel to the editor to create them.</li>
-                        <li>Clicking element or attribute name opens its menu. From there you can perform actions like element deletion or appending a subelement.</li>
-                        <li>Clicking element or attribute value opens a panel for value insertion.</li>
-                        <li>Elements marked with an asterrisk <span class="attrRequired">*</span> are required by SSM standard and must have a value.</li>
-                        <li>XML (and SSM) namespace is set to ns1:</li>
-                    </ul>
-                </div>
-            </div> -->
         </div>
         <div class="row  flex-nowrap">
             <div class="col-md-10 ml-3">
@@ -294,7 +276,7 @@
         </div>
     </div>
         <div class="col-md-12 d-flex justify-content-center mt-3">
-            <button id="downloadButton" type="button" onclick="downloadXML()" class="btn btn-primary btn-md active">
+            <button id="downloadButton" type="button" onclick="downloadXML(false)" class="btn btn-primary btn-md active">
                 Generate XML
             </button>
         </div>
@@ -311,6 +293,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="downloadXML(true)" >Download anyway</button>
                 </div>
             </div>
         </div>
