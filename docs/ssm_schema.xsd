@@ -2128,9 +2128,9 @@
 		<xs:complexContent>
 			<xs:extension base="ns1:SSMElement">
 				<xs:sequence>
+					<xs:element name="value_result" type="xs:string"/>
 					<xs:element name="value_type" type="ns1:predefinedDataTypes" minOccurs="0"/>
 					<xs:element name="value_units" type="xs:string" minOccurs="0"/>
-					<xs:element name="value_result" type="xs:string"/>
 				</xs:sequence>
 			</xs:extension>
 		</xs:complexContent>

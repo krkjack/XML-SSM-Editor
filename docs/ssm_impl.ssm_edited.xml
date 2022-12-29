@@ -5,9 +5,9 @@
             <ns1:activity_phase>AIT</ns1:activity_phase>
             <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" xsi:type="ns1:SimpleActivityArgument" ns1:act_units="test" ns1:SSM_element_id="ID680">
                 <ns1:def_value>
+                    <ns1:value_result>0</ns1:value_result>
                     <ns1:value_type>UnsignedInteger</ns1:value_type>
                     <ns1:value_units>meter</ns1:value_units>
-                    <ns1:value_result>0</ns1:value_result>
                 </ns1:def_value>
                 <ns1:ActivityCall ns1:SSM_element_id="ID780"> 
                     <ns1:Activity>ID670</ns1:Activity>
