@@ -21,10 +21,11 @@ $(document).ready(function () {
 
 });
 
-function validate_xsd_by_post(contentToValidate, callback) {
+function validate_xsd_by_post(contentToValidate, callback, validatorURL) {
     $('#modal-validation-body').empty();
     contentBASE64 = btoa(contentToValidate);
     var post = new XMLHttpRequest();
+    post.addEventListener('error', handleEvent);
     post.onload = function () {
         if (post.status == 200 && post.responseXML.getElementsByTagName("result")[0].innerHTML == 'FAILURE') {
             var errorMsg = "<h5>Validation failed. Please correct the following errors:</h5>";
@@ -38,11 +39,9 @@ function validate_xsd_by_post(contentToValidate, callback) {
         else if (post.status == 200 && post.responseXML.getElementsByTagName("result")[0].innerHTML == 'SUCCESS') {
             callback(true);
         }
-        else if (post.status == 500) {
-            callback(true);
-        }
     };
-    post.open("POST", "http://localhost:9090/rest/ssm/api/validate", true);
+    
+    post.open("POST", validatorURL, true);
     post.setRequestHeader('Content-Type', 'application/json');
     post.send(JSON.stringify({
         "contentToValidate": contentBASE64,
@@ -50,6 +49,12 @@ function validate_xsd_by_post(contentToValidate, callback) {
     }))
 };
 
+function handleEvent(e) {
+    var errorMsg = "<h5>Couldn't connect to the validator service</h5>";
+    $('#modal-validation-body').html("<div style='white-space: pre-wrap;'>" + errorMsg + e.type + e.bytes + "</div>");
+    $('#validationModal').modal();
+    callback(false);
+}
 
 function shakeElement(element) {
     element.addClass('shake');
@@ -76,7 +81,7 @@ function downloadXML(skipValidation) {
             if (resp) {
                 downloadLink.click();
             }
-        });
+        }, "http://localhost:9090/rest/ssm/api/validate");
     }
 }
 
