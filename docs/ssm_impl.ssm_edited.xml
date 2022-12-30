@@ -1,22 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <ns1:ssm xmlns="ase5_SSM" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="ase5_SSM ssm_schema.xsd" xmlns:ns1="ase5_SSM" xmlns:n1="ase5_SSM">
-    <ns1:SystemElement ns1:SSM_element_id="ID000" ns1:space_sys_obj_name="sut-robot" ns1:sys_elmt_absolute_name="sut-robot">
-        <ns1:Activity ns1:space_sys_obj_name="moveForward" ns1:act_descr="moveForward" xsi:type="ns1:OperativeSystemCall" ns1:SSM_element_id="ID670">
-            <ns1:activity_phase>AIT</ns1:activity_phase>
-            <ns1:act_arg ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance" ns1:act_arg_dataType="Real" xsi:type="ns1:SimpleActivityArgument" ns1:act_units="test" ns1:SSM_element_id="ID680">
-                <ns1:def_value>
-                    <ns1:value_result>0</ns1:value_result>
-                    <ns1:value_type>UnsignedInteger</ns1:value_type>
-                    <ns1:value_units>meter</ns1:value_units>
-                </ns1:def_value>
-                <ns1:ActivityCall ns1:SSM_element_id="ID780"> 
-                    <ns1:Activity>ID670</ns1:Activity>
+    <ns1:SystemElement ns1:SSM_element_id="ID000" ns1:space_sys_obj_name="sut-roverMain" ns1:sys_elmt_absolute_name="sut-rover">
+    <ns1:subSystemElement ns1:SSM_element_id="ID200" ns1:space_sys_obj_name="connectionModule" ns1:sys_elmt_absolute_name="roverConnectionModule">
+        <ns1:Activity ns1:space_sys_obj_name="moveForward" ns1:act_descr="moveForward" xsi:type="ns1:OperativeSystemCall" ns1:SSM_element_id="ID201">
+            <ns1:activity_phase>Oper</ns1:activity_phase>
+            <ns1:act_arg ns1:SSM_element_id="ID202" ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance to move forward" ns1:act_arg_dataType="Real" xsi:type="ns1:SimpleActivityArgument" ns1:act_units="centimeter">
+                <ns1:ActivityCall ns1:SSM_element_id="ID203"> 
+                    <ns1:Directive ns1:DirectiveName="wheel_move" ns1:DirectiveValue="direction_forward(10)" ns1:ActivityType="OSC"></ns1:Directive>
                 </ns1:ActivityCall>
             </ns1:act_arg>
         </ns1:Activity>
-        <ns1:ReportingData ns1:rd_type="parameter" ns1:space_sys_obj_name="distanceFront" ns1:rd_descr="distanceFront" ns1:rd_dataType="Real" ns1:SSM_element_id="ID710"/>
-        <ns1:ReportingData ns1:rd_type="parameter" ns1:space_sys_obj_name="distanceDriven" ns1:rd_descr="distanceDriven" ns1:rd_dataType="Real" ns1:SSM_element_id="ID730"/>
-        <ns1:Event ns1:space_sys_obj_name="noAnswer" ns1:event_descr="The connection to the SUT has been lost." ns1:SSM_element_id="ID740" ns1:event_type="software error" ns1:event_severity="high"/>
-        <ns1:Event ns1:space_sys_obj_name="obstacleFound" ns1:event_descr="An obstacle has been detected on the defined path." ns1:SSM_element_id="ID750" ns1:event_type="information" ns1:event_severity="normal"/>
+        <ns1:Activity ns1:space_sys_obj_name="moveBackward" ns1:act_descr="moveBackward" xsi:type="ns1:OperativeSystemCall" ns1:SSM_element_id="ID204">
+            <ns1:activity_phase>Oper</ns1:activity_phase>
+            <ns1:act_arg ns1:SSM_element_id="ID205" ns1:space_sys_obj_name="distance" ns1:act_arg_descr="distance to move forward" ns1:act_arg_dataType="Real" xsi:type="ns1:SimpleActivityArgument" ns1:act_units="centimeter">
+                <ns1:ActivityCall ns1:SSM_element_id="ID206"> 
+                    <ns1:Directive ns1:DirectiveName="wheel_move" ns1:DirectiveValue="direction_backward(10)" ns1:ActivityType="OSC"></ns1:Directive>
+                </ns1:ActivityCall>
+            </ns1:act_arg>
+        </ns1:Activity>
+        <ns1:ReportingData ns1:SSM_element_id="ID207" ns1:rd_type="parameter" ns1:space_sys_obj_name="distanceDriven" ns1:rd_descr="distanceDriven" ns1:rd_dataType="Real">
+            <ns1:def_value>
+                <ns1:value_result>0</ns1:value_result>
+                <ns1:value_type>Real</ns1:value_type>
+                <ns1:value_units>cm</ns1:value_units>
+            </ns1:def_value>
+        </ns1:ReportingData>
+        <ns1:parentSystemElement>ID000</ns1:parentSystemElement>
+    </ns1:subSystemElement>
+        <ns1:subSystemElement ns1:SSM_element_id="ID300" ns1:space_sys_obj_name="connectionModule" ns1:sys_elmt_absolute_name="roverConnectionModule">
+            <ns1:Activity  ns1:SSM_element_id="ID100" ns1:space_sys_obj_name="restartModule" ns1:act_descr="Restarts the Connection module" xsi:type="ns1:OperativeSystemCall">
+                <ns1:activity_phase>OnSwDev</ns1:activity_phase>
+                <ns1:act_arg ns1:SSM_element_id="ID101" ns1:space_sys_obj_name="rebootCommand" ns1:act_arg_descr="System Call which reboots the module" xsi:type="ns1:SimpleActivityArgument" ns1:act_arg_dataType="String">
+                    <ns1:ActivityCall ns1:SSM_element_id="ID102"> 
+                        <ns1:Directive ns1:DirectiveName="reboot" ns1:DirectiveValue="time(0)" ns1:ActivityType="OSC"></ns1:Directive>
+                    </ns1:ActivityCall>
+                </ns1:act_arg>
+            </ns1:Activity>
+            <ns1:parentSystemElement>ID000</ns1:parentSystemElement>
+        </ns1:subSystemElement>
+        <ns1:Event ns1:space_sys_obj_name="noAnswer" ns1:event_descr="The connection to the SUT has been lost." ns1:SSM_element_id="ID001" ns1:event_type="software error" ns1:event_severity="high">
+            <ns1:ActivityCall ns1:SSM_element_id="ID002">
+                <n1:Activity>ID102</n1:Activity>
+            </ns1:ActivityCall>
+        </ns1:Event>
+        <ns1:Event ns1:space_sys_obj_name="obstacleFound" ns1:event_descr="An obstacle has been detected on the defined path." ns1:SSM_element_id="ID750" ns1:event_type="information" ns1:event_severity="normal">
+            <ns1:ActivityCall ns1:SSM_element_id="ID781">
+                <n1:Activity>ID204</n1:Activity>
+            </ns1:ActivityCall>
+        </ns1:Event>
     </ns1:SystemElement>
 </ns1:ssm>

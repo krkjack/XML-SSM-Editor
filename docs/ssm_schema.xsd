@@ -35,7 +35,7 @@
 		<xs:complexContent>
 			<xs:extension base="ns1:SSMElement">
 				<xs:sequence>
-					<xs:element name="Activity" type="xs:IDREF">
+					<xs:element name="Activity" type="xs:IDREF" minOccurs="0">
 						<xs:annotation>
 							<xs:documentation>referred activity</xs:documentation>
 						</xs:annotation>
@@ -621,10 +621,9 @@
 		<xs:complexContent>
 			<xs:extension base="ns1:SpaceSystemObject">
 				<xs:sequence minOccurs="0">
-					<xs:choice>
-						<xs:element name="Activity" type="xs:IDREF"/>
-						<xs:element name="ReportingData" type="xs:IDREF"/>
-					</xs:choice>
+					<xs:element name="ActivityCall" type="ns1:ActivityCall"/>
+					<xs:element name="ReportingData" type="xs:IDREF" minOccurs="0"/>
+					<xs:element name="Event" type="xs:IDREF" minOccurs="0"/>
 				</xs:sequence>
 				<xs:attribute name="event_type" type="ns1:eventType" use="required"/>
 				<xs:attribute name="event_severity" type="ns1:eventSeverity" use="required"/>
@@ -2024,10 +2023,10 @@
 							</xs:key>
 						</xs:element>
 						<xs:element name="subSystemElement" type="n1:SystemElement">
-							<xs:key name="subEvent_uniqueName">
+							<xs:unique name="subEvent_uniqueName">
 								<xs:selector xpath="."/>
 								<xs:field xpath="ns1:Event/@ns1:space_sys_obj_name"/>
-							</xs:key>
+							</xs:unique>
 							<xs:unique name="subRD_uniqueName">
 								<xs:selector xpath="."/>
 								<xs:field xpath="ns1:ReportingData/@ns1:space_sys_obj_name"/>
