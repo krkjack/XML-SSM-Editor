@@ -4,7 +4,6 @@ var xmlTemplate = "<ns1:ssm"+ns+"></ns1:ssm>"
 var SSMElements = {
     SystemElement: "<ns1:SystemElement "+ns+" ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:sys_elmt_absolute_name='' />",
     Activity: "<ns1:Activity "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:act_descr='' xsi:type=''><ns1:activity_phase>AIT</ns1:activity_phase></ns1:Activity>",
-    ActivityIDREF: "<n1:Activity "+ns+"/>",
     ReportingData: "<ns1:ReportingData "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:rd_descr='' ns1:rd_dataType='' />",
     Event: "<ns1:Event "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:event_descr='' ns1:event_severity='' ns1:event_type=''/>",
     def_value: "<ns1:def_value "+ns+"ns1:SSM_element_id=''><ns1:value_result></ns1:value_result></ns1:def_value>",
@@ -12,6 +11,9 @@ var SSMElements = {
     contextual_name: "<ns1:contextual_name "+ns+"'><ns1:space_system_obj_ref "+ns+"'/></ns1:contextual_name>",
     act_arg: "<ns1:act_arg "+ns+" ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:act_arg_descr='' ns1:act_arg_dataType='' xsi:type='' />",
     ActivityCall: "<ns1:ActivityCall "+ns+" ns1:SSM_element_id=''></ns1:ActivityCall>",
+    ActivityIDREF: "<n1:Activity "+ns+"/>",
+    EventIDREF: "<n1:Event "+ns+"/>",
+    ReportingDataIDREF: "<n1:ReportingData "+ns+"/>",
 };
 
 var docSpec = {
@@ -707,7 +709,23 @@ var docSpec = {
                     action: Xonomy.newElementChild,
                     actionParameter: SSMElements.ActivityIDREF,
                     hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:value_type");
+                        return jsElement.hasChildElement("n1:Activity");
+                    }
+                },
+                {
+                    caption: "Append <Event> IDREF",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.EventIDREF,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("n1:Event");
+                    }
+                },
+                {
+                    caption: "Append <ReportingData> IDREF",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.ReportingDataIDREF,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("n1:ReportingData");
                     }
                 },
                 {
@@ -1207,6 +1225,34 @@ var docSpec = {
             menu: [
                 {
                     caption: "Delete this <Activity> (IDREF)",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:ActivityCall"],
+        },
+        "n1:Event": {
+            displayName: "Event",
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askNCName,
+            backgroundColour: "#f2f2f2",
+            menu: [
+                {
+                    caption: "Delete this <Event> (IDREF)",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:ActivityCall"],
+        },
+        "n1:ReportingData": {
+            displayName: "ReportingData",
+            hasText: true,
+            oneliner: true,
+            asker: Xonomy.askNCName,
+            backgroundColour: "#f2f2f2",
+            menu: [
+                {
+                    caption: "Delete this <ReportingData> (IDREF)",
                     action: Xonomy.deleteElement
                 }
             ],
