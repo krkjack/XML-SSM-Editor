@@ -7,8 +7,14 @@ var SSM = {};
 
 
 SSM.load = function () {
-	
 	Xonomy.render(XMLstring, 'xonomy', docSpec);
+}
+
+SSM.startup = function () {
+	Xonomy.verifyDocSpecElement("ns1:SystemElement"); 
+	Xonomy.verifyDocSpecElement("ns1:Activity"); 
+	Xonomy.verifyDocSpecElement("ns1:ReportingData"); 
+	Xonomy.verifyDocSpecElement("ns1:Event");
 }
 
 SSM.clear = function () {
@@ -16,7 +22,7 @@ SSM.clear = function () {
 	Xonomy.harvestCache = {};
 	Xonomy.refresh();
 	Xonomy.validate();
-	Xonomy.render("<ns1:ssm xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:ssm>", 'xonomy', docSpec);
+	Xonomy.render("<ns1:ssm xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'></ns1:ssm>", 'xonomy', docSpec); 
 }
 
 Xonomy.setMode = function (mode) {
