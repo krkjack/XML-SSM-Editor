@@ -17,7 +17,7 @@
     <link type="text/css" rel="stylesheet" href="style/style.css">
 </head>
 
-<body onload="Xonomy.render(xmlTemplate, 'xonomy', docSpec);">
+<body onload="Xonomy.render(xmlTemplate, 'xonomy', docSpec);SSM.startup()">
     <div class="container-fluid">
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-light bg-light w-100">
@@ -117,6 +117,11 @@
                             <span class="punc">&lt;</span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:SystemElement', 'warner')"></span></span>
                             <span class="name" title="" onclick="Xonomy.click('ssmns1:SystemElement', 'openingTagName')">SystemElement</span>
                             <span class="attributes">
+                                <span data-name="ns1:SSM_element_id" data-value="" id="ssmns1:SystemElement-attribute" class="attribute">
+                                    <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'warner')"></span></span>
+                                    <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeName');shakeElement($(this))">ns1:SSM_element_id</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>
+                                    <span class="valueContainer attributeValue focusable" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeValue')"><span class="punc">"</span><span class="value"></span><span class="punc">"</span></span>
+                                </span>
                                 <span data-name="ns1:space_sys_obj_name" data-value="" id="ssmns1:SystemElement-attribute" class="attribute">
                                     <span class="punc"> </span><span class="warner"><span class="inside" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'warner')"></span></span>
                                     <span class="name attributeName focusable" title="" onclick="Xonomy.click('ssmns1:SystemElement-attribute', 'attributeName');shakeElement($(this))">ns1:space_sys_obj_name</span><span class="punc">=</span><span class="attrRequired" title="This attribute is required!">*</span>

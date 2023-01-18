@@ -137,16 +137,12 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ssm", "ns1:SystemElement"],
+            canDropTo: ["ns1:ssm", "ns1:SystemElement"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
@@ -178,10 +174,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 }
             }
         },
@@ -264,10 +257,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 }
             } 
         },
@@ -426,10 +416,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
@@ -618,10 +605,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
@@ -747,10 +731,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 }
             }
         },
@@ -805,10 +786,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 }
             }
         },
@@ -976,10 +954,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
@@ -1145,10 +1120,7 @@ var docSpec = {
                     displayName: "SSM_element_id",
                     asker: SSM.askNCName,
                     required: true,
-                    menu: [{
-                        caption: "Delete this @SSM_element_id",
-                        action: Xonomy.deleteAttribute
-                    }]
+
                 },
                 "ns1:space_sys_obj_name": {
                     displayName: "space_sys_obj_name",
