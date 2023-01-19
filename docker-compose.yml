@@ -1,0 +1,10 @@
+version: "1.0"
+services:
+  ssm-editor:
+    build: ssm-editor/.
+    ports:
+      - "8080:80"
+  xsd-ssm-validator:
+    build: xsd-ssm-validator/.
+    ports:
+      - "9090:9090"

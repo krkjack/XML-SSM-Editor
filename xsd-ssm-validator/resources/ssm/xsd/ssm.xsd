@@ -1,0 +1,2321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2013 rel. 2 sp1 (http://www.altova.com) by NIEVES (VTCB) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="ase5_SSM" xmlns:n1="ase5_SSM" targetNamespace="ase5_SSM" elementFormDefault="qualified" attributeFormDefault="qualified" xml:lang="english">
+	<xs:element name="ssm" type="ns1:ssm"/>
+	<xs:complexType name="Act_ArgType" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence minOccurs="0">
+					<xs:element name="def_value" type="ns1:ValueType"/>
+				</xs:sequence>
+				<xs:attribute name="act_arg_descr" type="xs:string" use="required"/>
+				<xs:attribute name="act_arg_dataType" type="ns1:predefinedDataTypes" use="required"/>
+				<xs:attribute name="act_units" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Activity" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence>
+					<xs:element name="activity_phase" type="ns1:systemPhase" default="AIT" maxOccurs="unbounded"/>
+					<xs:element name="act_arg" type="ns1:Act_ArgType" minOccurs="0" maxOccurs="unbounded">
+						<xs:key name="act_arg_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="act_descr" type="xs:string" use="required"/>
+				<xs:attribute name="act_version" type="xs:int" use="optional" default="1"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivityCall">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence>
+					<xs:element name="Activity" type="xs:IDREF" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>referred activity</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="ActivityArgument" type="ns1:Act_ArgType">
+							<xs:key name="activityArgument_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@SSM_element_id"/>
+							</xs:key>
+							<xs:unique name="activtyArgumentName">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@space_sys_obj_name"/>
+								<xs:field xpath="ns1:contextual_name/ns1:space_system_obj_ref"/>
+							</xs:unique>
+						</xs:element>
+					</xs:sequence>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="Directive">
+							<xs:complexType>
+								<xs:attribute name="DirectiveName" type="xs:NCName" use="required"/>
+								<xs:attribute name="DirectiveValue" type="xs:string" use="required"/>
+								<xs:attribute name="ActivityType" use="required">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:enumeration value="Procedure"/>
+											<xs:enumeration value="OSC"/>
+											<xs:enumeration value="Telecommand"/>
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:attribute>
+							</xs:complexType>
+							<xs:key name="Directive_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:ActivityType"/>
+								<xs:field xpath="@ns1:DirectiveName"/>
+							</xs:key>
+						</xs:element>
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ActivitySpecificationInstance">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:attribute name="referredActivity" type="xs:IDREF" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Annotation">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:choice maxOccurs="unbounded">
+					<xs:element name="Comment" type="xs:string"/>
+					<xs:element name="Image" type="xs:anyURI"/>
+					<xs:element name="Document" type="xs:anyURI"/>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Argument">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence minOccurs="0">
+					<xs:element name="DefaultValue" type="ns1:ValueType"/>
+				</xs:sequence>
+				<xs:attribute name="Argument_Name" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ArrayActivityArgument" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:CompoundActivityArgument"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ArrayRecordArgument">
+		<xs:complexContent>
+			<xs:extension base="ns1:ArrayActivityArgument">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="RecordActivityArgument" type="ns1:RecordActivityArgument">
+						<xs:unique name="recordArgsNames">
+							<xs:selector xpath="."/>
+							<xs:field xpath="ns1:Argument/@space_sys_obj_name"/>
+						</xs:unique>
+						<xs:key name="recordActArg_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ArraySimpleArgument">
+		<xs:complexContent>
+			<xs:extension base="ns1:ArrayActivityArgument">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="SimpleActivityArgument" type="ns1:SimpleActivityArgument">
+						<xs:key name="simpleActArg_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AskUserNodeType">
+		<xs:complexContent>
+			<xs:extension base="ns1:SimpleFactorNode">
+				<xs:sequence>
+					<xs:element name="AskMessage" type="ns1:ExpressionNode">
+						<xs:key name="askMessageId">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="DefaultMessage" type="ns1:ExpressionNode" minOccurs="0">
+						<xs:key name="defaultMessage_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ExpectedReturnedType" type="ns1:predefinedDataTypes" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AssignmentStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="Variable" type="xs:IDREF"/>
+					<xs:element name="Expression" type="ns1:Expression"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="AST" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ASTLeaf" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:AST">
+				<xs:sequence>
+					<xs:element name="ASTValue" type="ns1:ValueType"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ASTNode" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:AST">
+				<xs:attribute name="astNodeType" type="ns1:astNodeType" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Body" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="BodyStatement" abstract="true">
+		<xs:sequence>
+			<xs:element name="StatementType">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ns1:StatementType"/>
+					</xs:complexContent>
+				</xs:complexType>
+				<xs:key name="stmnt_type_pk1">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@ns1:statement_category"/>
+					<xs:field xpath="ns1:statement_scope"/>
+				</xs:key>
+			</xs:element>
+			<xs:element name="annotation" type="ns1:Annotation" minOccurs="0"/>
+		</xs:sequence>
+		<xs:attribute name="container_body" type="xs:IDREF" use="required"/>
+		<xs:attribute name="order" type="xs:int" use="required" form="qualified"/>
+	</xs:complexType>
+	<xs:complexType name="CaseStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="logical_cond" type="ns1:Expression"/>
+					<xs:sequence maxOccurs="unbounded">
+						<xs:element name="CaseBranch">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:SSMElement">
+										<xs:sequence>
+											<xs:element name="ComparativeExpression" type="ns1:ComparativeExpressionNode"/>
+											<xs:element name="CaseBranchBody">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:extension base="ns1:Body">
+															<xs:choice maxOccurs="unbounded">
+																<xs:element name="StepStatement" type="ns1:StepStatement"/>
+																<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+																	<xs:key name="CaseBranchBodyProcStmnt_pk">
+																		<xs:selector xpath="."/>
+																		<xs:field xpath="@container_body"/>
+																		<xs:field xpath="@ns1:order"/>
+																	</xs:key>
+																</xs:element>
+															</xs:choice>
+														</xs:extension>
+													</xs:complexContent>
+												</xs:complexType>
+												<xs:keyref name="statementContainer_fk" refer="ns1:caseBranch_body_pk">
+													<xs:selector xpath="ns1:StepStatement"/>
+													<xs:field xpath="@container_body"/>
+												</xs:keyref>
+												<xs:keyref name="casBranchProcStatementContainer_fk" refer="ns1:caseBranch_body_pk">
+													<xs:selector xpath="ns1:ProcedureStatement"/>
+													<xs:field xpath="@container_body"/>
+												</xs:keyref>
+												<xs:unique name="statement_pk1">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:SSM_element_id"/>
+													<xs:field xpath="ns1:StepStatement/@ns1:order"/>
+												</xs:unique>
+												<xs:key name="caseBranch_body_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:SSM_element_id"/>
+												</xs:key>
+											</xs:element>
+											<xs:element name="ComparativeTag" minOccurs="0" maxOccurs="unbounded">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="BooleanOperator" type="ns1:booleanOperator" default="AND"/>
+														<xs:element name="ComparativeExpression" type="ns1:ComparativeExpressionNode"/>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:key name="caseBranck_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+					</xs:sequence>
+					<xs:element name="case_otherwise_body" minOccurs="0">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement"/>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="CaseOtherwBodyProcStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:unique name="otherwiseStatement_pk">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+							<xs:field xpath="@ns1:order"/>
+						</xs:unique>
+						<xs:key name="Otherwise_body_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+						<xs:keyref name="otherwiseContainer_fk" refer="ns1:Otherwise_body_pk">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="otherwiseProcStmntContainer_fk" refer="ns1:Otherwise_body_pk">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ComparativeExpressionNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:choice>
+					<xs:element name="RelationalNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="RelationalOperatorLeaf">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="ns1:ASTLeaf">
+														<xs:sequence>
+															<xs:sequence minOccurs="0">
+																<xs:element name="Annotation" type="ns1:Annotation"/>
+															</xs:sequence>
+															<xs:sequence>
+																<xs:element name="ASTValue">
+																	<xs:complexType>
+																		<xs:complexContent>
+																			<xs:restriction base="ns1:ValueType">
+																				<xs:sequence>
+																					<xs:sequence minOccurs="0">
+																						<xs:element name="Annotation" type="ns1:Annotation"/>
+																					</xs:sequence>
+																					<xs:sequence>
+																						<xs:element name="value_units" type="xs:string" minOccurs="0"/>
+																						<xs:element name="value_result">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:string">
+																									<xs:enumeration value="="/>
+																									<xs:enumeration value="!="/>
+																									<xs:enumeration value=">="/>
+																									<xs:enumeration value=">"/>
+																									<xs:enumeration value="&lt;"/>
+																									<xs:enumeration value="&lt;="/>
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:element>
+																					</xs:sequence>
+																				</xs:sequence>
+																			</xs:restriction>
+																		</xs:complexContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:sequence>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="TermNode" type="ns1:TermNode"/>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="BetweenNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="Term" type="ns1:TermNode" maxOccurs="2"/>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="WithinNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="TermNode" type="ns1:TermNode"/>
+										<xs:element name="ConstantLeaf">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:restriction base="ns1:ASTLeaf">
+														<xs:sequence>
+															<xs:sequence minOccurs="0">
+																<xs:element name="Annotation" type="ns1:Annotation"/>
+															</xs:sequence>
+															<xs:sequence>
+																<xs:element name="ASTValue">
+																	<xs:complexType>
+																		<xs:complexContent>
+																			<xs:restriction base="ns1:ValueType">
+																				<xs:sequence>
+																					<xs:sequence>
+																						<xs:element name="value_result" type="xs:string"/>
+																					</xs:sequence>
+																				</xs:sequence>
+																			</xs:restriction>
+																		</xs:complexContent>
+																	</xs:complexType>
+																</xs:element>
+															</xs:sequence>
+														</xs:sequence>
+													</xs:restriction>
+												</xs:complexContent>
+											</xs:complexType>
+										</xs:element>
+										<xs:choice minOccurs="0">
+											<xs:element name="PercentageLeaf">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:restriction base="ns1:ASTLeaf">
+															<xs:sequence>
+																<xs:sequence>
+																	<xs:element name="ASTValue">
+																		<xs:complexType>
+																			<xs:complexContent>
+																				<xs:restriction base="ns1:ValueType">
+																					<xs:sequence>
+																						<xs:sequence>
+																							<xs:element name="value_result">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:enumeration value="%"/>
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:sequence>
+																				</xs:restriction>
+																			</xs:complexContent>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:sequence>
+														</xs:restriction>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="UnitsLeaf">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:restriction base="ns1:ASTLeaf">
+															<xs:sequence>
+																<xs:sequence>
+																	<xs:element name="ASTValue">
+																		<xs:complexType>
+																			<xs:complexContent>
+																				<xs:restriction base="ns1:ValueType">
+																					<xs:sequence>
+																						<xs:sequence>
+																							<xs:element name="value_result" type="xs:string"/>
+																						</xs:sequence>
+																					</xs:sequence>
+																				</xs:restriction>
+																			</xs:complexContent>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:sequence>
+														</xs:restriction>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:choice>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="InNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence minOccurs="2" maxOccurs="unbounded">
+										<xs:element name="Term" type="ns1:TermNode"/>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="CompoundActivityArgument" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:Act_ArgType"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ConfirmationBody">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="ConfirmationCondition">
+						<xs:complexType>
+							<xs:choice>
+								<xs:element name="If_expr" type="ns1:Expression">
+									<xs:key name="ifExpr_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+								<xs:element name="Wait_Cond" type="ns1:Wait_Statement">
+									<xs:key name="waitStatement_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:container_body"/>
+										<xs:field xpath="@ns1:order"/>
+									</xs:key>
+									<xs:keyref name="saveContextStmnt_fk" refer="ns1:waitStatement_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:container_body"/>
+										<xs:field xpath="@ns1:order"/>
+									</xs:keyref>
+								</xs:element>
+							</xs:choice>
+							<xs:attribute name="order" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:minInclusive value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="contextual_name">
+		<xs:attribute name="space_sys_obj_name" type="xs:NCName" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="ContinuationAction">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence minOccurs="0">
+					<xs:element name="Event" type="xs:IDREF">
+						<xs:annotation>
+							<xs:documentation>raises event if action is raise event</xs:documentation>
+						</xs:annotation>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="continuationAction" use="required">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="restart"/>
+							<xs:enumeration value="abort"/>
+							<xs:enumeration value="continue"/>
+							<xs:enumeration value="terminate"/>
+							<xs:enumeration value="resume"/>
+							<xs:enumeration value="ask user"/>
+							<xs:enumeration value="raise event"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ContinuationTest">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence minOccurs="3" maxOccurs="3">
+					<xs:element name="ContinuationTestStatus">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ContinuationAction" type="ns1:ContinuationAction">
+									<xs:unique name="CA_UK">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:continuationAction"/>
+									</xs:unique>
+									<xs:key name="contAction_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+							</xs:sequence>
+							<xs:attribute name="confirmationStatus" type="ns1:confirmationStatus" use="required"/>
+						</xs:complexType>
+						<xs:key name="cont_status_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:confirmationStatus"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="EnumeratedSet">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="enumerated_constant" type="xs:string"/>
+				</xs:sequence>
+				<xs:attribute name="enum_data_set_description" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Event">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ActivityCall" type="ns1:ActivityCall"/>
+					<xs:element name="ReportingData" type="xs:IDREF" minOccurs="0"/>
+					<xs:element name="Event" type="xs:IDREF" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="event_type" type="ns1:eventType" use="required"/>
+				<xs:attribute name="event_severity" type="ns1:eventSeverity" use="required"/>
+				<xs:attribute name="event_descr" type="xs:string" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Expression">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence>
+					<xs:element name="ExprDefinition" type="ns1:ExpressionNode">
+						<xs:key name="expr_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ExpressionNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:choice>
+					<xs:element name="RelationalExpressionNode" type="ns1:RelationalExpressionNode">
+						<xs:key name="relationalExpressionNode_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="BooleanOperatorNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="RelationalExpressionNode">
+											<xs:complexType>
+												<xs:complexContent>
+													<xs:extension base="ns1:RelationalExpressionNode"/>
+												</xs:complexContent>
+											</xs:complexType>
+											<xs:key name="BooleanOperator_relationalExpression_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:SSM_element_id"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ExpressionNode" type="ns1:ExpressionNode">
+											<xs:key name="expressionNode_pk1">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:SSM_element_id"/>
+											</xs:key>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="booleanOperator" type="ns1:booleanOperator" use="required"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="FactorNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:choice>
+					<xs:element name="SimpleFactorNode" type="ns1:SimpleFactorNode">
+						<xs:key name="SimpleFactorNode">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="PowerNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="SimpleFactorNode" type="ns1:SimpleFactorNode"/>
+										<xs:element name="FactorNode" type="ns1:FactorNode"/>
+									</xs:sequence>
+									<xs:attribute name="powerOperator" type="xs:string" use="required" fixed="**"/>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="powerNode_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ForStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="Variable" type="ns1:Variable"/>
+					<xs:element name="From_Value_Expression" type="ns1:Expression">
+						<xs:key name="from_value_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="To_Value_Expression" type="ns1:Expression">
+						<xs:key name="toValue_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="Increment_Value_Expression" type="ns1:Expression">
+						<xs:key name="increment_value_expression">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ForBody">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement">
+											<xs:key name="forBodyStepStament_pk1">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="ForBodyProcStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:keyref name="stepStatementContainer_fk" refer="ns1:ForBody_pk">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="procStatementContainer_fk" refer="ns1:ForBody_pk">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:key name="ForBody_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Function">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence>
+					<xs:element name="FunctionArgument" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ArgumentExpr" type="ns1:Expression">
+									<xs:key name="functArgExpresion_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+								<xs:element name="DataType" type="ns1:predefinedDataTypes"/>
+								<xs:element name="DefaultValue" type="ns1:ValueType" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+						<xs:unique name="functArg_UK">
+							<xs:selector xpath="."/>
+							<xs:field xpath="ns1:ArgumentExpr/@ns1:SSM_element_id"/>
+						</xs:unique>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="isStandard" type="xs:boolean" use="required"/>
+				<xs:attribute name="functionName" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="IfStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="logical_cond" type="ns1:Expression"/>
+					<xs:element name="if_then_body">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement">
+											<xs:key name="ifThenBody_stepStmnt_pk1">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="ifThenBodyProcStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:order"/>
+												<xs:field xpath="@container_body"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:keyref name="IFThenBody_StmntContainer_fk" refer="ns1:IFThenBody_pk1">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="IFThenBody_ProcStmntContainer_fk" refer="ns1:IFThenBody_pk1">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:key name="IFThenBody_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="if_else_body" minOccurs="0">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement">
+											<xs:key name="ifElseBody_StepStmnt_pk1">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="ifElseBodyProcStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:order"/>
+												<xs:field xpath="@container_body"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="IFElseBody_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+						<xs:keyref name="IFElseBody_StmntContainer_fk" refer="ns1:IFElseBody_pk1">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="IFElseBody_ProcStmntContainer_fk" refer="ns1:IFElseBody_pk1">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InformUserStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:ProcedureStatement">
+				<xs:sequence>
+					<xs:element name="Ackmt_Msg" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="Msg_Expr" type="ns1:Expression">
+									<xs:key name="msg_expr_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+								<xs:element name="Annotation" type="ns1:Annotation" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+						<xs:unique name="acknMessage_pk">
+							<xs:selector xpath="ns1:Msg_Expr"/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:unique>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitiateActivityStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:ProcedureStatement">
+				<xs:sequence>
+					<xs:element name="ActivityCall" type="ns1:ActivityCall">
+						<xs:key name="ActivityCall_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="Act_Specification_Inst" type="ns1:ActivitySpecificationInstance" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>alias or complete name to be assigned to the called activity instance</xs:documentation>
+						</xs:annotation>
+						<xs:unique name="act_specific_uk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:referredActivity"/>
+							<xs:field xpath="@ns1:space_sys_obj_name"/>
+						</xs:unique>
+						<xs:key name="act_specifi_instance_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitiateAndConfirmActivityStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:ProcedureStatement">
+				<xs:sequence>
+					<xs:element name="ActivityCall" type="ns1:ActivityCall">
+						<xs:key name="activityCal_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ContinuationTest" type="ns1:ContinuationTest" minOccurs="0">
+						<xs:key name="contTest_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+						<xs:unique name="ContinuationTestUniqueConfStatus">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+							<xs:field xpath="ns1:ContinuationTestStatus/@ns1:confirmationStatus"/>
+						</xs:unique>
+					</xs:element>
+					<xs:element name="ActivitySpecificationInstance" type="ns1:ActivitySpecificationInstance" minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>alias or complete name to be assigned to the called activity instance</xs:documentation>
+						</xs:annotation>
+						<xs:unique name="referredActivityUniqueAlias">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:referredActivity"/>
+							<xs:field xpath="@ns1:space_sys_obj_name"/>
+						</xs:unique>
+						<xs:key name="actSpecifInstance">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitiateAndConfirmStepStatement" abstract="false">
+		<xs:complexContent>
+			<xs:extension base="ns1:ProcedureStatement">
+				<xs:sequence>
+					<xs:element name="Step" type="ns1:Step">
+						<xs:unique name="step_name_uk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:space_sys_obj_name"/>
+							<xs:field xpath="ns1:ParentProcedure"/>
+						</xs:unique>
+						<xs:key name="step_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ContinuationTest" type="ns1:ContinuationTest">
+						<xs:unique name="contTestUniqueConfirmStatus">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+							<xs:field xpath="ns1:ContinuationTestStatus/@ns1:confirmationStatus"/>
+						</xs:unique>
+						<xs:key name="contTest_PK">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="InitiateInParallelStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:ProcedureStatement">
+				<xs:sequence>
+					<xs:element name="InitiateInParallelBody">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="InitiateAndConfirmStepStatement" type="ns1:InitiateAndConfirmStepStatement">
+											<xs:key name="InitConfStepStmnt_pk1">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="InitiateAndConfirmActivityStatement" type="ns1:InitiateAndConfirmActivityStatement">
+											<xs:key name="InitConfActStmnt_pk1">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:keyref name="InitAndConfStpStmnContainer_fk" refer="ns1:initParallel_PK1">
+							<xs:selector xpath="ns1:InitiateAndConfirmStepStatement"/>
+							<xs:field xpath="@ns1:container_body"/>
+						</xs:keyref>
+						<xs:key name="initParallel_PK1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+						<xs:keyref name="InitAndConfActStmnContainer_fk" refer="ns1:initParallel_PK1">
+							<xs:selector xpath="ns1:InitiateAndConfirmActivityStatement"/>
+							<xs:field xpath="@ns1:container_body"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="untilOneCompletes" type="xs:boolean" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LeafSimpleFactorNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:SimpleFactorNode">
+				<xs:choice>
+					<xs:element name="ConstantLeaf">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="ns1:ASTLeaf">
+									<xs:sequence>
+										<xs:sequence minOccurs="0">
+											<xs:element name="Annotation" type="ns1:Annotation">
+												<xs:key name="Leaf_Ann_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:SSM_element_id"/>
+												</xs:key>
+											</xs:element>
+										</xs:sequence>
+										<xs:sequence>
+											<xs:element name="ASTValue">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:restriction base="ns1:ValueType">
+															<xs:sequence>
+																<xs:sequence>
+																	<xs:element name="value_type" type="ns1:predefinedDataTypes" minOccurs="0"/>
+																	<xs:element name="value_result" type="xs:string"/>
+																</xs:sequence>
+															</xs:sequence>
+														</xs:restriction>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="constant_leaf_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="VariableLeaf">
+						<xs:annotation>
+							<xs:documentation>value is the name of the variable to get the value</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:restriction base="ns1:ASTLeaf">
+									<xs:sequence>
+										<xs:sequence minOccurs="0">
+											<xs:element name="Annotation" type="ns1:Annotation">
+												<xs:key name="variableAnn_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:SSM_element_id"/>
+												</xs:key>
+											</xs:element>
+										</xs:sequence>
+										<xs:sequence>
+											<xs:element name="ASTValue">
+												<xs:complexType>
+													<xs:complexContent>
+														<xs:restriction base="ns1:ValueType">
+															<xs:sequence>
+																<xs:sequence>
+																	<xs:element name="value_result" type="xs:string"/>
+																</xs:sequence>
+															</xs:sequence>
+														</xs:restriction>
+													</xs:complexContent>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:sequence>
+								</xs:restriction>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="SFN_variableLeaf_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ArgumentLeaf">
+						<xs:annotation>
+							<xs:documentation>name of the activity argument to get the value</xs:documentation>
+						</xs:annotation>
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTLeaf"/>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="SFN_ArgLeaf_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="FunctionLeaf">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTLeaf">
+									<xs:sequence>
+										<xs:element name="Function" type="ns1:Function">
+											<xs:unique name="function_args_uniqueness">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:functionName"/>
+												<xs:field xpath="ns1:FunctionArgument/ns1:ArgumentExpr/@ns1:SSM_element_id"/>
+											</xs:unique>
+											<xs:key name="function_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:SSM_element_id"/>
+											</xs:key>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="SFN_FuncLeaf_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="LogStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:ProcedureStatement">
+				<xs:sequence>
+					<xs:element name="LogMessage" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="LogExpr" type="ns1:Expression">
+									<xs:key name="LogExpr_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+								<xs:element name="Annotation" type="ns1:Annotation" minOccurs="0"/>
+							</xs:sequence>
+						</xs:complexType>
+						<xs:unique name="logMessage">
+							<xs:selector xpath="ns1:LogExpr"/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:unique>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ObjectOperationRequestStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="ObjectPropertyOperation" type="ns1:ObjectPropertyOperation">
+						<xs:key name="objPropOper_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ReferredSpaceObject" type="xs:IDREF" minOccurs="0"/>
+					<xs:element name="OperationArgument" minOccurs="0" maxOccurs="unbounded">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="ArgValueExpr" type="ns1:Expression">
+									<xs:key name="OpArgValExpr_pk">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+								<xs:element name="Argument" type="ns1:Argument">
+									<xs:key name="OperArg_pk1">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ObjectPropertyOperation">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence minOccurs="0">
+					<xs:element name="ReferredPropertyOperation" type="ns1:ObjectPropertyOperation"/>
+				</xs:sequence>
+				<xs:attribute name="OperationName" type="xs:NCName" use="required"/>
+				<xs:attribute name="isOperation" type="xs:boolean" use="required">
+					<xs:annotation>
+						<xs:documentation>if it is not operation, is property</xs:documentation>
+					</xs:annotation>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ObjectPropertyRequest">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence>
+					<xs:element name="RequestedObject" type="xs:IDREF"/>
+					<xs:element name="RequestedProperty" type="ns1:ObjectPropertyOperation" minOccurs="0"/>
+					<xs:sequence minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="PropertyRequestArgument">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ArgumentValueExpression" type="ns1:Expression"/>
+									<xs:element name="Argument" type="ns1:Argument"/>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="OperativeSystemCall">
+		<xs:complexContent>
+			<xs:extension base="ns1:Activity"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ParenthesisExpressionNodeType">
+		<xs:complexContent>
+			<xs:extension base="ns1:SimpleFactorNode">
+				<xs:sequence>
+					<xs:element name="ExpressionNode" type="ns1:ExpressionNode"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="PreconditionsBody">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="PreCondition">
+						<xs:complexType>
+							<xs:choice>
+								<xs:element name="If_expr" type="ns1:Expression">
+									<xs:key name="IfExpr_pk1">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:SSM_element_id"/>
+									</xs:key>
+								</xs:element>
+								<xs:element name="Wait_cond" type="ns1:Wait_Statement">
+									<xs:key name="waitCond_pk1">
+										<xs:selector xpath="."/>
+										<xs:field xpath="@ns1:container_body"/>
+										<xs:field xpath="@ns1:order"/>
+									</xs:key>
+								</xs:element>
+							</xs:choice>
+							<xs:attribute name="order" use="required">
+								<xs:simpleType>
+									<xs:restriction base="xs:int">
+										<xs:minInclusive value="1"/>
+									</xs:restriction>
+								</xs:simpleType>
+							</xs:attribute>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Procedure">
+		<xs:complexContent>
+			<xs:extension base="ns1:Activity">
+				<xs:sequence>
+					<xs:element name="proc_script" type="xs:string"/>
+					<xs:sequence minOccurs="0">
+						<xs:annotation>
+							<xs:documentation>only if compiled</xs:documentation>
+						</xs:annotation>
+						<xs:element name="ProcedureDeclarationBody" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:SSMElement">
+										<xs:sequence maxOccurs="unbounded">
+											<xs:element name="Proc_Local_Event" type="ns1:Event"/>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:key name="proc_decl_body_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="PreconditionsBody" type="ns1:PreconditionsBody" minOccurs="0">
+							<xs:keyref name="waitCond_container_fk1" refer="ns1:ProcPrecBody_pk1">
+								<xs:selector xpath="ns1:PreCondition/ns1:Wait_cond"/>
+								<xs:field xpath="@ns1:container_body"/>
+							</xs:keyref>
+							<xs:key name="ProcPrecBody_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="ProcedureMainBody">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:Body">
+										<xs:choice maxOccurs="unbounded">
+											<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+												<xs:key name="procMainBodyStmnt_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@container_body"/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:key>
+											</xs:element>
+											<xs:element name="SetProcedureContextStatement" type="ns1:SetProcedureContextStatement">
+												<xs:unique name="setProcContext_pk1">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:container_body"/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:unique>
+											</xs:element>
+										</xs:choice>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:keyref name="setProcContext_fk1" refer="ns1:procMainBody_pk1">
+								<xs:selector xpath="ns1:SetProcedureContextStatement"/>
+								<xs:field xpath="@ns1:container_body"/>
+							</xs:keyref>
+							<xs:key name="procMainBody_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+							<xs:keyref name="procStmnt_container_fk" refer="ns1:procMainBody_pk1">
+								<xs:selector xpath="ns1:ProcedureStatement"/>
+								<xs:field xpath="@container_body"/>
+							</xs:keyref>
+							<xs:unique name="StmntOrder_unique">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:ProcedureStatement/@ns1:order"/>
+							</xs:unique>
+						</xs:element>
+						<xs:element name="ConfirmationBody" type="ns1:ConfirmationBody" minOccurs="0">
+							<xs:keyref name="waitCond_container_fk" refer="ns1:conf_body_primary_key">
+								<xs:selector xpath="ns1:ConfirmationCondition/ns1:Wait_Cond"/>
+								<xs:field xpath="@ns1:container_body"/>
+							</xs:keyref>
+							<xs:key name="conf_body_primary_key">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="WatchdogBody" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:Body">
+										<xs:sequence maxOccurs="unbounded">
+											<xs:element name="InitiateAndConfirmStepStatement" type="ns1:InitiateAndConfirmStepStatement">
+												<xs:unique name="initAndConfirmStp_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:container_body"/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:unique>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:unique name="watchdogStmntUniqueOrder">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:InitiateAndConfirmStepStatement/@ns1:order"/>
+							</xs:unique>
+							<xs:key name="watchBody_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+							<xs:keyref name="initiateAndConfirmContainer_fk" refer="ns1:watchBody_pk">
+								<xs:selector xpath="ns1:InitiateAndConfirmStepStatement"/>
+								<xs:field xpath="@ns1:container_body"/>
+							</xs:keyref>
+						</xs:element>
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProcedureStatement" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:BodyStatement"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ProductNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:choice>
+					<xs:element name="FactorNode" type="ns1:FactorNode">
+						<xs:key name="factorNode_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="MultiplicationOperatorNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="ProductNode" type="ns1:ProductNode"/>
+										<xs:element name="FactorNode" type="ns1:FactorNode"/>
+									</xs:sequence>
+									<xs:attribute name="multiplicationOperator" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="*"/>
+												<xs:enumeration value="/"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="multOpNode_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RecordActivityArgument">
+		<xs:complexContent>
+			<xs:extension base="ns1:CompoundActivityArgument">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="Argument" type="ns1:Act_ArgType">
+						<xs:key name="argument_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RelationalExpressionNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:sequence>
+					<xs:element name="TermNode" type="ns1:TermNode">
+						<xs:key name="TermNode_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ComparativeExpressionNode" type="ns1:ComparativeExpressionNode" minOccurs="0">
+						<xs:key name="compExprNode_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RepeatStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="repeat_cond" type="ns1:Expression">
+						<xs:key name="repeatCond_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="timeout" type="ns1:TimeoutType" minOccurs="0"/>
+					<xs:element name="RepeatBody">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:sequence maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement">
+											<xs:key name="stpStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="repeatBodyProcStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:unique name="repeatBody_uk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+							<xs:field xpath="ns1:StepStatement/@ns1:order"/>
+						</xs:unique>
+						<xs:key name="repeatBody_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+						<xs:keyref name="stepStmntCont_fk1" refer="ns1:repeatBody_pk1">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="repeatBodyProcStmntCont_fk1" refer="ns1:repeatBody_pk1">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ReportingData">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence minOccurs="0">
+					<xs:element name="def_value" type="ns1:ValueType"/>
+				</xs:sequence>
+				<xs:attribute name="rd_type" type="ns1:reportingDataType" use="required"/>
+				<xs:attribute name="rd_dataType" type="ns1:predefinedDataTypes" use="required"/>
+				<xs:attribute name="rd_descr" type="xs:string" use="required"/>
+				<xs:attribute name="rd_units" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="RestartContinuationAction">
+		<xs:complexContent>
+			<xs:extension base="ns1:ContinuationAction">
+				<xs:choice minOccurs="0">
+					<xs:element name="Timeout" type="ns1:TimeoutType"/>
+					<xs:sequence>
+						<xs:element name="MaxTimes" type="ns1:Expression"/>
+						<xs:element name="Event" type="xs:IDREF"/>
+					</xs:sequence>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SaveContextStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence maxOccurs="unbounded">
+					<xs:element name="RDCopy">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="referencedRD" type="xs:IDREF"/>
+								<xs:element name="LocalRD" type="ns1:ReportingData"/>
+							</xs:sequence>
+						</xs:complexType>
+						<xs:key name="RDCopy_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="ns1:referencedRD"/>
+							<xs:field xpath="ns1:LocalRD/@ns1:space_sys_obj_name"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SetProcedureContextStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:BodyStatement">
+				<xs:sequence>
+					<xs:choice>
+						<xs:annotation>
+							<xs:documentation>new context</xs:documentation>
+						</xs:annotation>
+						<xs:element name="SystemElement" type="xs:IDREF"/>
+						<xs:element name="ReportingData" type="xs:IDREF"/>
+					</xs:choice>
+					<xs:element name="ProcedureBodyContext">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="procStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:keyref name="procBodyContxtStamentContainer_fk" refer="ns1:procBodyContext_pk">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:unique name="procStmntOrder_uk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="ns1:ProcedureStatement/@ns1:order"/>
+						</xs:unique>
+						<xs:key name="procBodyContext_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SetStepContextStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:choice>
+						<xs:annotation>
+							<xs:documentation>new context</xs:documentation>
+						</xs:annotation>
+						<xs:element name="SystemElement" type="xs:IDREF"/>
+						<xs:element name="ReportingData" type="xs:IDREF"/>
+					</xs:choice>
+					<xs:element name="StepContextBody">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement">
+											<xs:key name="stepStament_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="stepContBodyProcStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:keyref name="StpContxBodyStatementContainer_FK" refer="ns1:stepContxtBody_pk">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="StpContxBodyProcStatementContainer_FK" refer="ns1:stepContxtBody_pk">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:unique name="StpContxBodyStamentOrder_UK">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@ns1:order"/>
+						</xs:unique>
+						<xs:key name="stepContxtBody_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SimpleActivityArgument">
+		<xs:complexContent>
+			<xs:extension base="ns1:Act_ArgType">
+				<xs:choice>
+					<xs:element name="Expression" type="ns1:Expression">
+						<xs:key name="simpleActArgExp_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ActivityCall" type="ns1:ActivityCall">
+						<xs:key name="simpleActArgActCall_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="ReportingData" type="xs:IDREF"/>
+					<xs:element name="SystemElement" type="xs:IDREF"/>
+					<xs:element name="Event" type="xs:IDREF"/>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SimpleFactorNode" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:attribute name="negated" type="xs:boolean" use="optional" default="false"/>
+				<xs:attribute name="sign" use="optional" default="+">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:enumeration value="+"/>
+							<xs:enumeration value="-"/>
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:attribute>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SpaceSystemObject">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence minOccurs="0" maxOccurs="unbounded">
+					<xs:element name="contextual_name">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:contextual_name">
+									<xs:sequence>
+										<xs:element name="space_system_obj_ref" type="xs:IDREF"/>
+									</xs:sequence>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+					</xs:element>
+				</xs:sequence>
+				<xs:attribute name="space_sys_obj_name" type="xs:NCName" use="required"/>
+				<xs:attribute name="space_sys_obj_type" type="ns1:spaceSystemObjectType"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="ssm">
+		<xs:annotation>
+			<xs:documentation>ssm tree structure</xs:documentation>
+		</xs:annotation>
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="SystemElement" type="ns1:SystemElement">
+				<xs:keyref name="parent_fk" refer="ns1:SE_pk1">
+					<xs:selector xpath="."/>
+					<xs:field xpath="ns1:parentSystemElement"/>
+				</xs:keyref>
+				<xs:key name="SE_pk1">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@ns1:SSM_element_id"/>
+				</xs:key>
+				<xs:unique name="act_UK1">
+					<xs:selector xpath="./ns1:Activity"/>
+					<xs:field xpath="@ns1:SSM_element_id"/>
+					<xs:field xpath="@space_sys_obj_name"/>
+				</xs:unique>
+				<xs:unique name="rd_UK1">
+					<xs:selector xpath="./ns1:ReportingData"/>
+					<xs:field xpath="@ns1:SSM_element_id"/>
+					<xs:field xpath="@ns1:space_sys_obj_name"/>
+				</xs:unique>
+				<xs:unique name="event_UK1">
+					<xs:selector xpath="./ns1:Event"/>
+					<xs:field xpath="@ns1:SSM_element_id"/>
+					<xs:field xpath="@ns1:space_sys_obj_name"/>
+				</xs:unique>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SSMElement">
+		<xs:sequence minOccurs="0">
+			<xs:element name="Annotation" type="ns1:Annotation">
+				<xs:key name="Ann_pk">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@ns1:SSM_element_id"/>
+				</xs:key>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="SSM_element_id" type="xs:ID"/>
+	</xs:complexType>
+	<xs:complexType name="StatementType" abstract="true">
+		<xs:sequence maxOccurs="2">
+			<xs:element name="statement_scope">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="procedure"/>
+						<xs:enumeration value="step"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="statement_category" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:whiteSpace value="replace" fixed="false"/>
+					<xs:enumeration value="inform user"/>
+					<xs:enumeration value="initiate and confirm activity"/>
+					<xs:enumeration value="set procedure context"/>
+					<xs:enumeration value="initiate in parallel"/>
+					<xs:enumeration value="initiate and confirm step"/>
+					<xs:enumeration value="initiate activity"/>
+					<xs:enumeration value="log"/>
+					<xs:enumeration value="object operation request"/>
+					<xs:enumeration value="flow control"/>
+					<xs:enumeration value="set step context"/>
+					<xs:enumeration value="wait statement"/>
+					<xs:enumeration value="assignment"/>
+					<xs:enumeration value="save context"/>
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="Step">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:sequence>
+					<xs:element name="ParentProcedure" type="xs:IDREF"/>
+					<xs:sequence>
+						<xs:element name="StepDeclarationBody">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:SSMElement">
+										<xs:choice maxOccurs="unbounded">
+											<xs:element name="StepLocalEvent" type="ns1:Event"/>
+											<xs:element name="Variable" type="ns1:Variable">
+												<xs:key name="variable_unique_key">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:space_sys_obj_name"/>
+												</xs:key>
+											</xs:element>
+											<xs:element name="LocalEnumeratedDataSet" type="ns1:EnumeratedSet">
+												<xs:unique name="enumerated_set_pk1">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:space_sys_obj_name"/>
+												</xs:unique>
+											</xs:element>
+										</xs:choice>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:unique name="ste_decl_unique_enum_set">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:LocalEnumeratedDataSet/@ns1:space_sys_obj_name"/>
+							</xs:unique>
+							<xs:unique name="step_decl_unique_event">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:StepLocalEvent/@ns1:space_sys_obj_name"/>
+							</xs:unique>
+							<xs:key name="stepDeclBody_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="PreconditionsBody" type="ns1:PreconditionsBody" minOccurs="0">
+							<xs:key name="precondBody_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="StepMainBody">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:Body">
+										<xs:choice maxOccurs="unbounded">
+											<xs:element name="StepStatement" type="ns1:StepStatement">
+												<xs:unique name="stepStmnt_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@container_body"/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:unique>
+												<xs:unique name="stpStmntOrder_uk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:unique>
+											</xs:element>
+											<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+												<xs:key name="stepMainBodProcStm_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@container_body"/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:key>
+											</xs:element>
+										</xs:choice>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:unique name="stepStmntOrder_uk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:StepStatement/@ns1:order"/>
+							</xs:unique>
+							<xs:keyref name="stepStamntContainer_fk" refer="ns1:stepMainBody_pk">
+								<xs:selector xpath="ns1:StepStatement"/>
+								<xs:field xpath="@container_body"/>
+							</xs:keyref>
+							<xs:key name="stepMainBody_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+							<xs:keyref name="stepProcStamntContainer_fk" refer="ns1:stepMainBody_pk">
+								<xs:selector xpath="ns1:ProcedureStatement"/>
+								<xs:field xpath="@container_body"/>
+							</xs:keyref>
+						</xs:element>
+						<xs:element name="ConfirmationsBody" type="ns1:ConfirmationBody" minOccurs="0">
+							<xs:key name="confirmBody_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="WatchdogBody" minOccurs="0">
+							<xs:complexType>
+								<xs:complexContent>
+									<xs:extension base="ns1:Body">
+										<xs:sequence maxOccurs="unbounded">
+											<xs:element name="InitiateAndConfirmStepStatement" type="ns1:InitiateAndConfirmStepStatement">
+												<xs:unique name="initiateAndConformStepUniqueOrder_uk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:unique>
+												<xs:key name="initAndConfStepStmnt_pk">
+													<xs:selector xpath="."/>
+													<xs:field xpath="@ns1:container_body"/>
+													<xs:field xpath="@ns1:order"/>
+												</xs:key>
+											</xs:element>
+										</xs:sequence>
+									</xs:extension>
+								</xs:complexContent>
+							</xs:complexType>
+							<xs:keyref name="initiateAndConfStepStmntContainer_fk" refer="ns1:stepWatchdogbody_pk">
+								<xs:selector xpath="ns1:InitiateAndConfirmStepStatement"/>
+								<xs:field xpath="@ns1:container_body"/>
+							</xs:keyref>
+							<xs:key name="stepWatchdogbody_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+					</xs:sequence>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="StepStatement" abstract="true">
+		<xs:complexContent>
+			<xs:extension base="ns1:BodyStatement"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="SystemElement">
+		<xs:complexContent>
+			<xs:extension base="n1:SpaceSystemObject">
+				<xs:sequence>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element name="Activity" type="n1:Activity">
+							<xs:key name="Activity_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+							<xs:unique name="Activity_UK1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:space_sys_obj_name"/>
+							</xs:unique>
+							<xs:unique name="ActArg_UK2">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@SSM_element_id"/>
+								<xs:field xpath="ns1:act_arg/@space_sys_obj_name"/>
+							</xs:unique>
+						</xs:element>
+						<xs:element name="Event" type="n1:Event">
+							<xs:key name="event_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="ReportingData" type="n1:ReportingData">
+							<xs:key name="RD_pk1">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+						<xs:element name="subSystemElement" type="n1:SystemElement">
+							<xs:unique name="subEvent_uniqueName">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:Event/@ns1:space_sys_obj_name"/>
+							</xs:unique>
+							<xs:unique name="subRD_uniqueName">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:ReportingData/@ns1:space_sys_obj_name"/>
+							</xs:unique>
+							<xs:unique name="subActivities_uniqueName">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:Activity/@space_sys_obj_name"/>
+							</xs:unique>
+							<xs:unique name="subelements_name_uk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="ns1:subSystemElement/@ns1:space_sys_obj_name"/>
+							</xs:unique>
+							<xs:keyref name="parentSubsystemElement_FK" refer="ns1:subSE_pk">
+								<xs:selector xpath="ns1:subSystemElement"/>
+								<xs:field xpath="ns1:parentSystemElement"/>
+							</xs:keyref>
+							<xs:key name="subSE_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="parentSystemElement" type="xs:IDREF" minOccurs="0"/>
+				</xs:sequence>
+				<xs:attribute name="sys_elmt_absolute_name" type="xs:NCName" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Telecommand">
+		<xs:complexContent>
+			<xs:extension base="ns1:Activity"/>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TermNode">
+		<xs:complexContent>
+			<xs:extension base="ns1:ASTNode">
+				<xs:choice>
+					<xs:element name="ProductNode" type="ns1:ProductNode">
+						<xs:key name="productNode_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="AdditionalOperatorNode">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:ASTNode">
+									<xs:sequence>
+										<xs:element name="ProductNode" type="ns1:ProductNode">
+											<xs:key name="addOp_productNode_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:SSM_element_id"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="TermNode" type="ns1:TermNode">
+											<xs:key name="addOpN_TermNode_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@ns1:SSM_element_id"/>
+											</xs:key>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="additionalOperator" use="required">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="-"/>
+												<xs:enumeration value="+"/>
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:attribute>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:key name="addOpNode_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+				</xs:choice>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="TimeoutType">
+		<xs:sequence>
+			<xs:element name="Expression" type="ns1:Expression">
+				<xs:key name="expr_id">
+					<xs:selector xpath="."/>
+					<xs:field xpath="@ns1:SSM_element_id"/>
+				</xs:key>
+			</xs:element>
+			<xs:element name="Event" type="xs:IDREF" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>raised if triggered</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ValueType">
+		<xs:complexContent>
+			<xs:extension base="ns1:SSMElement">
+				<xs:sequence>
+					<xs:element name="value_result" type="xs:string"/>
+					<xs:element name="value_type" type="ns1:predefinedDataTypes" minOccurs="0"/>
+					<xs:element name="value_units" type="xs:string" minOccurs="0"/>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Variable">
+		<xs:complexContent>
+			<xs:extension base="ns1:SpaceSystemObject">
+				<xs:attribute name="variable_type" type="ns1:predefinedDataTypes" use="required"/>
+				<xs:attribute name="variable_units" type="xs:string"/>
+				<xs:attribute name="variable_descr" type="xs:string"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="Wait_Statement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:choice>
+						<xs:annotation>
+							<xs:documentation>wait for</xs:documentation>
+						</xs:annotation>
+						<xs:element name="Event" type="xs:IDREF"/>
+						<xs:element name="Expression" type="ns1:Expression">
+							<xs:key name="waitStm_Expre_pk">
+								<xs:selector xpath="."/>
+								<xs:field xpath="@ns1:SSM_element_id"/>
+							</xs:key>
+						</xs:element>
+					</xs:choice>
+					<xs:element name="Timeout" type="ns1:TimeoutType" minOccurs="0"/>
+					<xs:element name="SaveContextStmnt" type="ns1:SaveContextStatement" minOccurs="0">
+						<xs:key name="saveContextStmnt_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:container_body"/>
+							<xs:field xpath="@ns1:order"/>
+						</xs:key>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:complexType name="WhileStatement">
+		<xs:complexContent>
+			<xs:extension base="ns1:StepStatement">
+				<xs:sequence>
+					<xs:element name="while_cond" type="ns1:Expression">
+						<xs:key name="whileCond_pk1">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+					</xs:element>
+					<xs:element name="timeout" type="ns1:TimeoutType" minOccurs="0"/>
+					<xs:element name="WhileBody">
+						<xs:complexType>
+							<xs:complexContent>
+								<xs:extension base="ns1:Body">
+									<xs:choice maxOccurs="unbounded">
+										<xs:element name="StepStatement" type="ns1:StepStatement">
+											<xs:key name="whileBodyStmnt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+										<xs:element name="ProcedureStatement" type="ns1:ProcedureStatement">
+											<xs:key name="whileProcSt_pk">
+												<xs:selector xpath="."/>
+												<xs:field xpath="@container_body"/>
+												<xs:field xpath="@ns1:order"/>
+											</xs:key>
+										</xs:element>
+									</xs:choice>
+								</xs:extension>
+							</xs:complexContent>
+						</xs:complexType>
+						<xs:unique name="whilebodystmntsOrder_uk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="ns1:StepStatement/@ns1:order"/>
+						</xs:unique>
+						<xs:key name="whileBody_pk">
+							<xs:selector xpath="."/>
+							<xs:field xpath="@ns1:SSM_element_id"/>
+						</xs:key>
+						<xs:keyref name="whileBodyStmntsCont_fk" refer="ns1:whileBody_pk">
+							<xs:selector xpath="ns1:StepStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+						<xs:keyref name="whileBodyProcStmntsCont_fk" refer="ns1:whileBody_pk">
+							<xs:selector xpath="ns1:ProcedureStatement"/>
+							<xs:field xpath="@container_body"/>
+						</xs:keyref>
+					</xs:element>
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="astNodeType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="term"/>
+			<xs:enumeration value="product"/>
+			<xs:enumeration value="booleanOperator"/>
+			<xs:enumeration value="Expression"/>
+			<xs:enumeration value="Factor"/>
+			<xs:enumeration value="AdditionOperator"/>
+			<xs:enumeration value="Power"/>
+			<xs:enumeration value="SimpleFactor"/>
+			<xs:enumeration value="RelationalExpression"/>
+			<xs:enumeration value="ComparativeExpression"/>
+			<xs:enumeration value="MultiplicationOperator"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="booleanOperator">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="AND"/>
+			<xs:enumeration value="OR"/>
+			<xs:enumeration value="XOR"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="condType">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="If_expr"/>
+			<xs:enumeration value="wait_cond"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="confirmationStatus">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="not available"/>
+			<xs:enumeration value="confirmed"/>
+			<xs:enumeration value="not confirmed"/>
+			<xs:enumeration value="aborted"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="predefinedDataTypes">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="SignedInteger"/>
+			<xs:enumeration value="Boolean"/>
+			<xs:enumeration value="EnumeratedSet"/>
+			<xs:enumeration value="UnsignedInteger"/>
+			<xs:enumeration value="Real"/>
+			<xs:enumeration value="String"/>
+			<xs:enumeration value="AbsoluteTime"/>
+			<xs:enumeration value="RelativeTime"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="spaceSystemObjectType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="variable"/>
+			<xs:enumeration value="reporting data"/>
+			<xs:enumeration value="system element"/>
+			<xs:enumeration value="event"/>
+			<xs:enumeration value="activity"/>
+			<xs:enumeration value="step"/>
+			<xs:enumeration value="activity argument"/>
+			<xs:enumeration value="enumerated set"/>
+			<xs:enumeration value="activity specification instance"/>
+			<xs:enumeration value="wait_cond"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="systemPhase">
+		<xs:restriction base="xs:NCName">
+			<xs:enumeration value="OnSwDev"/>
+			<xs:enumeration value="AIT"/>
+			<xs:enumeration value="Oper"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="eventType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="information"/>
+			<xs:enumeration value="anomaly report"/>
+			<xs:enumeration value="progress report"/>
+			<xs:enumeration value="software error"/>
+			<xs:enumeration value="scheduling event"/>
+		</xs:restriction>
+	</xs:simpleType>
+		<xs:simpleType name="eventSeverity">
+			<xs:restriction base="xs:string">
+				<xs:enumeration value="normal"/>
+				<xs:enumeration value="low"/>
+				<xs:enumeration value="medium"/>
+				<xs:enumeration value="high"/>
+			</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="reportingDataType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="parameter"/>
+			<xs:enumeration value="compound parameter"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
