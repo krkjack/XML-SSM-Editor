@@ -857,7 +857,7 @@ var docSpec = {
                 },
                 {
                     caption: "Append @value_type",
-                    action: Xonomy.newElementChild,
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: "<ns1:value_type xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:value_type");
@@ -865,7 +865,7 @@ var docSpec = {
                 },
                 {
                     caption: "Append @value_units",
-                    action: Xonomy.newElementChild,
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: "<ns1:value_units xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("ns1:value_units");
@@ -900,6 +900,7 @@ var docSpec = {
             hasText: true,
             oneliner: true,
             asker: Xonomy.askPicklist,
+            mustBeBefore: ["ns1:value_units","ns1:value_result"],
             askerParameter: [
                 { value: "SignedInteger" },
                 { value: "Boolean" },
@@ -922,6 +923,8 @@ var docSpec = {
             displayName: "value_units",
             hasText: true,
             oneliner: true,
+            mustBeAfter: ["ns1:value_type"],
+            mustBeBefore: ["ns1:value_result"],
             asker: Xonomy.askString,
             menu: [{
                 caption: "Delete this <value_units>",
@@ -935,12 +938,8 @@ var docSpec = {
             hasText: true,
             oneliner: true,
             required: true,
+            mustBeAfter: ["ns1:value_type","ns1:value_units"],
             asker: Xonomy.askString,
-            menu: [{
-                caption: "Delete this <value_result>",
-                action: Xonomy.deleteAttribute
-            }
-            ],
             canDropTo: ["ns1:def_value"],
         },
         "ns1:ReportingData": {
@@ -1242,11 +1241,6 @@ var docSpec = {
                         { value: "medium" },
                         { value: "high" }
                     ],
-                    menu: [{
-                        caption: "Delete this @event_severity",
-                        action: Xonomy.deleteAttribute
-                    }
-                    ]
                 },
                 "ns1:event_type": {
                     displayName: "event_type",
@@ -1259,11 +1253,6 @@ var docSpec = {
                         { value: "software error" },
                         { value: "scheduling event" }
                     ],
-                    menu: [{
-                        caption: "Delete this @event_type",
-                        action: Xonomy.deleteAttribute
-                    }
-                    ]
                 },
                 "ns1:space_sys_obj_type": {
                     displayName: "space_sys_obj_type",
