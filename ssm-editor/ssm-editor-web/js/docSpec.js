@@ -13,7 +13,8 @@ var SSMElements = {
     ActivityCall: "<ns1:ActivityCall "+ns+" ns1:SSM_element_id=''></ns1:ActivityCall>",
     ActivityIDREF: "<n1:Activity "+ns+"/>",
     EventIDREF: "<n1:Event "+ns+"/>",
-    ReportingDataIDREF: "<n1:ReportingData "+ns+"/>",
+    ReportingDataIDREF: "<n1:ReportingData "+ns+" ns1:SSM_element_id='' ns1:DirectiveName='' ns1:DirectiveValue='' ns1:ActivityType=''/>",
+    Directive: "<ns1:Directive "+ns+ "/>"
 };
 
 var docSpec = {
@@ -117,6 +118,105 @@ var docSpec = {
                     }
                 },
                 {
+                    caption: "Append <subSystemElement>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: "<ns1:subSystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:subSystemElement");
+                    }
+                },
+                {
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
+                    actionParameter: SSMElements.Annotation,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:Annotation");
+                    }
+                },
+                {
+                    caption: "Delete this <SystemElement>",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:ssm"],
+            attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id",
+                    asker: SSM.askNCName,
+                    required: true,
+                },
+                "ns1:space_sys_obj_name": {
+                    displayName: "space_sys_obj_name",
+                    asker: SSM.askNCName,
+                    required: true
+                },
+                "ns1:sys_elmt_absolute_name": {
+                    displayName: "sys_elmt_absolute_name",
+                    asker: Xonomy.askString,
+                    required: true
+                }
+            }
+        },
+        "ns1:subSystemElement": {
+            displayName: "subSystemElement",
+            menu: [
+                {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+                {
+                    caption: "Add @space_sys_obj_name",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:space_sys_obj_name",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:space_sys_obj_name");
+                    }
+                },
+                {
+                    caption: "Add @sys_elmt_absolute_name=",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:sys_elmt_absolute_name",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:sys_elmt_absolute_name");
+                    }
+                },
+                {
+                    caption: "Append <Activity>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.Activity
+                },
+                {
+                    caption: "Append <ReportingData>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.ReportingData
+                },
+                {
+                    caption: "Append <Event>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.Event
+                },
+                {
+                    caption: "Append <contextual_name>...",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.contextual_name,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:contextual_name");
+                    }
+                },
+                {
                     caption: "Append <parentSystemElement>",
                     action: Xonomy.newElementChild,
                     actionParameter: "<ns1:parentSystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
@@ -129,15 +229,15 @@ var docSpec = {
                     action: Xonomy.newElementChildPrepend,
                     actionParameter: SSMElements.Annotation,
                     hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:contextual_name");
+                        return jsElement.hasChildElement("ns1:Annotation");
                     }
                 },
                 {
-                    caption: "Delete this <SystemElement>",
+                    caption: "Delete this <subSystemElement>",
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:ssm", "ns1:SystemElement"],
+            canDropTo: ["ns1:SystemElement","ns1:subSystemElement"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
@@ -168,7 +268,7 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement"],
+            canDropTo: ["ns1:subSystemElement"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
@@ -187,7 +287,7 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement", "ns1:Activity", "ns1:act_arg", "ns1:Event", "ns1:ReportingData"]
+            canDropTo: ["ns1:SystemElement", "ns1:subSystemElement", "ns1:Activity", "ns1:act_arg", "ns1:Event", "ns1:ReportingData"]
         },
         "ns1:space_system_obj_ref": {
             displayName: "space_system_obj_ref",
@@ -251,7 +351,7 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement", "ns1:Activity", "ns1:act_arg", "ns1:Event", "ns1:ReportingData"],
+            canDropTo: ["ns1:SystemElement","ns1:subSystemElement", "ns1:Activity", "ns1:act_arg", "ns1:Event", "ns1:ReportingData"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
@@ -402,7 +502,7 @@ var docSpec = {
                     action: Xonomy.newElementChildPrepend,
                     actionParameter: SSMElements.Annotation,
                     hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:contextual_name");
+                        return jsElement.hasChildElement("ns1:Annotation");
                     }
                 },
                 {
@@ -410,7 +510,7 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement"],
+            canDropTo: ["ns1:SystemElement","ns1:subSystemElement"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
@@ -591,7 +691,7 @@ var docSpec = {
                 action: Xonomy.newElementChildPrepend,
                 actionParameter: SSMElements.Annotation,
                 hideIf: function (jsElement) {
-                    return jsElement.hasChildElement("ns1:contextual_name");
+                    return jsElement.hasChildElement("ns1:Annotation");
                 }
             },
             {
@@ -713,11 +813,16 @@ var docSpec = {
                     }
                 },
                 {
+                    caption: "Append <Directive>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.Directive,
+                },
+                {
                     caption: "Prepend <Annotation>",
                     action: Xonomy.newElementChildPrepend,
                     actionParameter: SSMElements.Annotation,
                     hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:contextual_name");
+                        return jsElement.hasChildElement("ns1:Annotation");
                     }
                 },
                 {
@@ -940,7 +1045,7 @@ var docSpec = {
                     action: Xonomy.newElementChildPrepend,
                     actionParameter: SSMElements.Annotation,
                     hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:contextual_name");
+                        return jsElement.hasChildElement("ns1:Annotation");
                     }
                 },
                 {
@@ -948,7 +1053,7 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement"],
+            canDropTo: ["ns1:SystemElement","ns1:subSystemElement"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
@@ -1114,7 +1219,7 @@ var docSpec = {
                     action: Xonomy.deleteElement
                 }
             ],
-            canDropTo: ["ns1:SystemElement"],
+            canDropTo: ["ns1:SystemElement","ns1:subSystemElement"],
             attributes: {
                 "ns1:SSM_element_id": {
                     displayName: "SSM_element_id",
@@ -1229,6 +1334,63 @@ var docSpec = {
                 }
             ],
             canDropTo: ["ns1:ActivityCall"],
+        },
+        "ns1:Directive": {
+            displayName: "Directive",
+            menu: [
+                {
+                    caption: "Add @SSM_element_id",
+                    action: Xonomy.newAttribute,
+                    actionParameter: {
+                        name: "ns1:SSM_element_id",
+                        value: ""
+                    },
+                    hideIf: function (jsElement) {
+                        return jsElement.hasAttribute("ns1:SSM_element_id");
+                    }
+                },
+
+                {
+                    caption: "Prepend <Annotation>",
+                    action: Xonomy.newElementChildPrepend,
+                    actionParameter: SSMElements.Annotation,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:Annotation");
+                    }
+                },
+                {
+                    caption: "Delete this <Directive>",
+                    action: Xonomy.deleteElement
+                }
+            ],
+            canDropTo: ["ns1:ActivityCall"],
+            attributes: {
+                "ns1:SSM_element_id": {
+                    displayName: "SSM_element_id",
+                    asker: SSM.askNCName,
+                    required: true,
+                },
+                "ns1:DirectiveName": {
+                    displayName: "DirectiveName",
+                    asker: SSM.askNCName,
+                    required: true,
+                },
+                "ns1:DirectiveValue": {
+                    displayName: "DirectiveValue",
+                    asker: Xonomy.askString,
+                    required: true,
+                },
+                "ns1:ActivityType": {
+                    displayName: "ActivityType",
+                    asker: Xonomy.askPicklist,
+                    askerParameter: [
+                        { value: "Procedure" },
+                        { value: "OSC" },
+                        { value: "Telecommand" }
+                    ],
+                    required: true,
+                },
+            }
         },
     }
 }
