@@ -9,5 +9,13 @@ Opracowanie edytora umożliwiającego tworzenie modelu danych wykorzystywanych d
 - Edytor powinien tworzyć plik XML zgodny ze standardem
 - Edytor powinien wizualizować tworzony plik w postaci graficznej np. diagram lub drzewo
 
+## Installation
+Use [Docker Compose](https://docs.docker.com/compose/) to create containers of:
+- XML-SSM Editor
+- XML Validator
+
+The validator is not needed for the XML-SSM Editor to work.
+
 ## Third Party
 - [Xonomy](https://github.com/michmech/xonomy)
+- [XML validator](https://github.com/ISAITB/xml-validator)
