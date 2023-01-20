@@ -3,6 +3,7 @@ var xmlTemplate = "<ns1:ssm"+ns+"></ns1:ssm>"
 
 var SSMElements = {
     SystemElement: "<ns1:SystemElement "+ns+" ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:sys_elmt_absolute_name='' />",
+    subSystemElement: "<ns1:subSystemElement "+ns+" ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:sys_elmt_absolute_name='' />",
     Activity: "<ns1:Activity "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:act_descr='' xsi:type=''><ns1:activity_phase>AIT</ns1:activity_phase></ns1:Activity>",
     ReportingData: "<ns1:ReportingData "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:rd_descr='' ns1:rd_dataType='' />",
     Event: "<ns1:Event "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:event_descr='' ns1:event_severity='' ns1:event_type=''/>",
@@ -13,8 +14,8 @@ var SSMElements = {
     ActivityCall: "<ns1:ActivityCall "+ns+" ns1:SSM_element_id=''></ns1:ActivityCall>",
     ActivityIDREF: "<n1:Activity "+ns+"/>",
     EventIDREF: "<n1:Event "+ns+"/>",
-    ReportingDataIDREF: "<n1:ReportingData "+ns+" ns1:SSM_element_id='' ns1:DirectiveName='' ns1:DirectiveValue='' ns1:ActivityType=''/>",
-    Directive: "<ns1:Directive "+ns+ "/>"
+    ReportingDataIDREF: "<n1:ReportingData "+ns+"/>",
+    Directive: "<ns1:Directive "+ns+ " ns1:SSM_element_id='' ns1:DirectiveName='' ns1:DirectiveValue='' ns1:ActivityType=''/>"
 };
 
 var docSpec = {
@@ -120,10 +121,7 @@ var docSpec = {
                 {
                     caption: "Append <subSystemElement>",
                     action: Xonomy.newElementChild,
-                    actionParameter: "<ns1:subSystemElement xmlns:ns1='ase5_SSM' xmlns:n1='ase5_SSM' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'/>",
-                    hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("ns1:subSystemElement");
-                    }
+                    actionParameter: SSMElements.subSystemElement
                 },
                 {
                     caption: "Prepend <Annotation>",
@@ -1198,6 +1196,30 @@ var docSpec = {
                     },
                     hideIf: function (jsElement) {
                         return jsElement.hasAttribute("ns1:event_descr");
+                    }
+                },
+                {
+                    caption: "Append <ActivityCall>",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.ActivityCall,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("ns1:ActivityCall");
+                    }
+                },
+                {
+                    caption: "Append <Event> IDREF",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.EventIDREF,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("n1:Event");
+                    }
+                },
+                {
+                    caption: "Append <ReportingData> IDREF",
+                    action: Xonomy.newElementChild,
+                    actionParameter: SSMElements.ReportingDataIDREF,
+                    hideIf: function (jsElement) {
+                        return jsElement.hasChildElement("n1:ReportingData");
                     }
                 },
                 {
