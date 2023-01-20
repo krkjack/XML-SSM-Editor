@@ -15,7 +15,7 @@ var SSMElements = {
     ActivityIDREF: "<n1:Activity "+ns+"/>",
     EventIDREF: "<n1:Event "+ns+"/>",
     ReportingDataIDREF: "<n1:ReportingData "+ns+"/>",
-    Directive: "<ns1:Directive "+ns+ " ns1:SSM_element_id='' ns1:DirectiveName='' ns1:DirectiveValue='' ns1:ActivityType=''/>"
+    Directive: "<ns1:Directive "+ns+ " ns1:DirectiveName='' ns1:DirectiveValue='' ns1:ActivityType=''/>"
 };
 
 var docSpec = {
@@ -787,14 +787,11 @@ var docSpec = {
                     }
                 },
                 {
-                    caption: "Append <Activity> IDREF",
-                    action: Xonomy.newElementChild,
+                    caption: "Prepend <Activity> IDREF",
+                    action: Xonomy.newElementChildPrepend,
                     actionParameter: SSMElements.ActivityIDREF,
-                    hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("n1:Activity");
-                    }
                 },
-                {
+/*                 {
                     caption: "Append <Event> IDREF",
                     action: Xonomy.newElementChild,
                     actionParameter: SSMElements.EventIDREF,
@@ -809,7 +806,7 @@ var docSpec = {
                     hideIf: function (jsElement) {
                         return jsElement.hasChildElement("n1:ReportingData");
                     }
-                },
+                }, */
                 {
                     caption: "Append <Directive>",
                     action: Xonomy.newElementChild,
@@ -1210,17 +1207,11 @@ var docSpec = {
                     caption: "Append <Event> IDREF",
                     action: Xonomy.newElementChild,
                     actionParameter: SSMElements.EventIDREF,
-                    hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("n1:Event");
-                    }
                 },
                 {
                     caption: "Append <ReportingData> IDREF",
                     action: Xonomy.newElementChild,
                     actionParameter: SSMElements.ReportingDataIDREF,
-                    hideIf: function (jsElement) {
-                        return jsElement.hasChildElement("n1:ReportingData");
-                    }
                 },
                 {
                     caption: "Append <contextual_name>...",
@@ -1309,6 +1300,7 @@ var docSpec = {
             hasText: true,
             oneliner: true,
             asker: Xonomy.askNCName,
+            mustbeBefore: "ns1:Directive",
             backgroundColour: "#f2f2f2",
             menu: [
                 {
@@ -1348,19 +1340,8 @@ var docSpec = {
         },
         "ns1:Directive": {
             displayName: "Directive",
+            mustbeAfter: "n1:Activity",
             menu: [
-                {
-                    caption: "Add @SSM_element_id",
-                    action: Xonomy.newAttribute,
-                    actionParameter: {
-                        name: "ns1:SSM_element_id",
-                        value: ""
-                    },
-                    hideIf: function (jsElement) {
-                        return jsElement.hasAttribute("ns1:SSM_element_id");
-                    }
-                },
-
                 {
                     caption: "Prepend <Annotation>",
                     action: Xonomy.newElementChildPrepend,
