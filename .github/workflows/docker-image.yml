@@ -1,0 +1,39 @@
+name: Docker Images Build and Push
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        name: Check out code
+    
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build & push Docker image - SSM Editor
+        with:
+          image: krkjack/xml-ssm-editor
+          tags: latest
+          registry: registry.hub.docker.com
+          directory: ssm-editor
+          dockerfile: ssm-editor/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          
+      - uses: mr-smithers-excellent/docker-build-push@v5
+        name: Build & push Docker image - XML Validator
+        with:
+          image: krkjack/xml-ssm-validator
+          tags: latest
+          registry: registry.hub.docker.com
+          directory: xsd-ssm-validator
+          dockerfile: xsd-ssm-validator/Dockerfile
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
