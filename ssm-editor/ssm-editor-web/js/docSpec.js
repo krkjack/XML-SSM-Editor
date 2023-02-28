@@ -9,7 +9,7 @@ var SSMElements = {
     Event: "<ns1:Event "+ns+"ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:event_descr='' ns1:event_severity='' ns1:event_type=''/>",
     def_value: "<ns1:def_value "+ns+"ns1:SSM_element_id=''><ns1:value_result></ns1:value_result></ns1:def_value>",
     Annotation: "<ns1:Annotation "+ns+"ns1:SSM_element_id=''></ns1:Annotation>",
-    contextual_name: "<ns1:contextual_name "+ns+"'><ns1:space_system_obj_ref "+ns+"'/></ns1:contextual_name>",
+    contextual_name: "<ns1:contextual_name "+ns+"><ns1:space_system_obj_ref "+ns+"/></ns1:contextual_name>",
     act_arg: "<ns1:act_arg "+ns+" ns1:SSM_element_id='' ns1:space_sys_obj_name='' ns1:act_arg_descr='' ns1:act_arg_dataType='' xsi:type='' />",
     ActivityCall: "<ns1:ActivityCall "+ns+" ns1:SSM_element_id=''></ns1:ActivityCall>",
     ActivityIDREF: "<n1:Activity "+ns+"/>",
