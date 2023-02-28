@@ -1,6 +1,10 @@
 # XML-SSM-Editor
 Web-based application for creating and editing XML files using System Space Model (SSM)
 
+<p align="center">
+   <img src=".github/usage.jpg">
+</p>
+
 ## Description (in Polish)
 Opracowanie edytora umożliwiającego tworzenie modelu danych wykorzystywanych do komunikacji z systemem satelitarnym - SSM (Space System Model).
 
