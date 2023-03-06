@@ -1,4 +1,4 @@
-# XML-SSM-Editor
+# XML-SSM-Editor [(Demo)](https://krkjack.github.io/XML-SSM-Editor/)
 Web-based application for creating and editing XML files using System Space Model (SSM)
 
 <p align="center">
